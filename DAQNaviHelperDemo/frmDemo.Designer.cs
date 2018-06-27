@@ -188,6 +188,7 @@
             this.chkDoList.Name = "chkDoList";
             this.chkDoList.Size = new System.Drawing.Size(92, 132);
             this.chkDoList.TabIndex = 1;
+            this.chkDoList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chkDoList_ItemCheck);
             // 
             // btnDoSwitch
             // 

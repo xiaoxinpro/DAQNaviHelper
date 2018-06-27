@@ -117,6 +117,7 @@ namespace DAQNaviHelperDemo
         {
             this.Invoke(new Action(() =>
             {
+                Console.WriteLine("改变数字输入状态：DI" + bit + " = " + Convert.ToBoolean(data));
                 chkDiList.SetItemChecked(bit, Convert.ToBoolean(data));
             }));
         }
@@ -125,14 +126,18 @@ namespace DAQNaviHelperDemo
         {
             if (btnDoSwitch.Text == "开启")
             {
-                btnDoSwitch.Text = "关闭";
-                byte[] arrBitData = USB4704.IDevice.StartDiMode(USB4704_DiEventChange);
-                chkDiList.Items.Clear();
-                if (arrBitData != null)
+
+                if(USB4704.IDevice.GetDoMode(out byte[] arrBitData))
                 {
-                    for (int i = 0; i < arrBitData.Length; i++)
+                    btnDoSwitch.Text = "关闭";
+                    chkDoList.Enabled = true;
+                    chkDoList.Items.Clear();
+                    if (arrBitData != null)
                     {
-                        chkDiList.Items.Add("DI" + i, Convert.ToBoolean(arrBitData[i]));
+                        for (int i = 0; i < arrBitData.Length; i++)
+                        {
+                            chkDoList.Items.Add("DO" + i, Convert.ToBoolean(arrBitData[i]));
+                        }
                     }
                 }
             }
@@ -140,8 +145,15 @@ namespace DAQNaviHelperDemo
             {
                 btnDoSwitch.Text = "开启";
                 USB4704.IDevice.StopDiMode();
-                chkDiList.Items.Clear();
+                chkDoList.Items.Clear();
+                chkDoList.Enabled = false;
             }
+        }
+
+        private void chkDoList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            Console.WriteLine("改变数字输出状态：" + chkDoList.Items[e.Index].ToString() + " = " + !chkDoList.GetItemChecked(e.Index));
+            USB4704.IDevice.SetDoModeBit(e.Index, Convert.ToByte(!chkDoList.GetItemChecked(e.Index)));
         }
     }
 }

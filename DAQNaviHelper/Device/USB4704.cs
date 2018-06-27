@@ -388,6 +388,33 @@ namespace DAQNaviHelper.Device
             return true;
         }
 
+        public bool GetDoMode(out byte[] arrByteData)
+        {
+            arrByteData = new byte[8];
+            ErrorCode err = instantDoCtrlUsb4704.Read(0, out byte portData);
+            if (err != ErrorCode.Success)
+            {
+                ActiveEventError("获取数字输出失败：" + err.ToString());
+                return false;
+            }
+            for (int i = 0; i < arrByteData.Length; i++)
+            {
+                arrByteData[i] = Convert.ToByte((portData >> i) & 0x01);
+            }
+            return true;
+        }
+
+        public bool GetDoModeBit(int bit, out byte bitData)
+        {
+            ErrorCode err = instantDoCtrlUsb4704.ReadBit(0, bit, out bitData);
+            if (err != ErrorCode.Success)
+            {
+                ActiveEventError("获取数字输出失败：" + err.ToString());
+                return false;
+            }
+            return true;
+        }
+
         private void InitInstantDoCtrlUsb4704()
         {
             ErrorCode err = instantDoCtrlUsb4704.Write(0, 0xFF);

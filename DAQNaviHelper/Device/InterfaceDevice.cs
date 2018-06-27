@@ -32,6 +32,8 @@ namespace DAQNaviHelper.Device
         #region 数字输出
         bool SetDoMode(byte byteData);
         bool SetDoModeBit(int bit, byte data);
+        bool GetDoMode(out byte[] arrByteData);
+        bool GetDoModeBit(int bit, out byte bitData);
         #endregion
 
         void Test(object e);
