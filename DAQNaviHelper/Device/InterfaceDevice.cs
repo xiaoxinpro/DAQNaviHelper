@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DAQNaviHelper.Device
+namespace DAQNavi.Device
 {
     public interface InterfaceDevice
     {
@@ -26,14 +26,14 @@ namespace DAQNaviHelper.Device
         byte[] StartDiMode(DAQNaviHelper.DelegateDiChangeEvent e);
         void StopDiMode();
         bool GetDiMode(out byte[] arrPortData);
-        bool GetDiModeBit(int bit, byte portData);
+        bool GetDiModeBit(int bit, byte data);
         #endregion
 
         #region 数字输出
-        bool SetDoMode(byte byteData);
+        bool SetDoMode(byte[] arrPortData);
         bool SetDoModeBit(int bit, byte data);
-        bool GetDoMode(out byte[] arrByteData);
-        bool GetDoModeBit(int bit, out byte bitData);
+        bool GetDoMode(out byte[] arrPortData);
+        bool GetDoModeBit(int bit, out byte data);
         #endregion
 
         void Test(object e);

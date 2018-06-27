@@ -1,5 +1,5 @@
 ﻿using Automation.BDaq;
-using DAQNaviHelper.Device;
+using DAQNavi.Device;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 
-namespace DAQNaviHelper
+namespace DAQNavi
 {
     public class DAQNaviHelper
     {

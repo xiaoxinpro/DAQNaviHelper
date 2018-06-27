@@ -36,15 +36,23 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtAiData = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnDiSwitch = new System.Windows.Forms.Button();
             this.chkDiList = new System.Windows.Forms.CheckedListBox();
+            this.btnDiSwitch = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.chkDoList = new System.Windows.Forms.CheckedListBox();
             this.btnDoSwitch = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtCnt = new System.Windows.Forms.TextBox();
+            this.btnCntStop = new System.Windows.Forms.Button();
+            this.btnCntStart = new System.Windows.Forms.Button();
+            this.labelCnt = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAiInterval)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnTest
@@ -59,7 +67,8 @@
             // 
             // btnGetAiData
             // 
-            this.btnGetAiData.Location = new System.Drawing.Point(185, 19);
+            this.btnGetAiData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnGetAiData.Location = new System.Drawing.Point(261, 19);
             this.btnGetAiData.Name = "btnGetAiData";
             this.btnGetAiData.Size = new System.Drawing.Size(77, 23);
             this.btnGetAiData.TabIndex = 1;
@@ -76,14 +85,15 @@
             this.groupBox1.Controls.Add(this.btnGetAiData);
             this.groupBox1.Location = new System.Drawing.Point(12, 41);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(318, 168);
+            this.groupBox1.Size = new System.Drawing.Size(394, 168);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模拟输入";
             // 
             // btnAiStop
             // 
-            this.btnAiStop.Location = new System.Drawing.Point(268, 19);
+            this.btnAiStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAiStop.Location = new System.Drawing.Point(344, 19);
             this.btnAiStop.Name = "btnAiStop";
             this.btnAiStop.Size = new System.Drawing.Size(44, 23);
             this.btnAiStop.TabIndex = 5;
@@ -93,6 +103,8 @@
             // 
             // txtAiInterval
             // 
+            this.txtAiInterval.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAiInterval.DecimalPlaces = 1;
             this.txtAiInterval.Increment = new decimal(new int[] {
             1,
@@ -106,7 +118,7 @@
             0,
             65536});
             this.txtAiInterval.Name = "txtAiInterval";
-            this.txtAiInterval.Size = new System.Drawing.Size(60, 21);
+            this.txtAiInterval.Size = new System.Drawing.Size(136, 21);
             this.txtAiInterval.TabIndex = 4;
             this.txtAiInterval.Value = new decimal(new int[] {
             5,
@@ -125,10 +137,13 @@
             // 
             // txtAiData
             // 
+            this.txtAiData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtAiData.Location = new System.Drawing.Point(6, 48);
             this.txtAiData.Multiline = true;
             this.txtAiData.Name = "txtAiData";
-            this.txtAiData.Size = new System.Drawing.Size(306, 108);
+            this.txtAiData.Size = new System.Drawing.Size(382, 108);
             this.txtAiData.TabIndex = 2;
             // 
             // groupBox2
@@ -142,18 +157,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数字输入";
             // 
-            // btnDiSwitch
-            // 
-            this.btnDiSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDiSwitch.Location = new System.Drawing.Point(6, 18);
-            this.btnDiSwitch.Name = "btnDiSwitch";
-            this.btnDiSwitch.Size = new System.Drawing.Size(93, 23);
-            this.btnDiSwitch.TabIndex = 0;
-            this.btnDiSwitch.Text = "开启";
-            this.btnDiSwitch.UseVisualStyleBackColor = true;
-            this.btnDiSwitch.Click += new System.EventHandler(this.btnDiSwitch_Click);
-            // 
             // chkDiList
             // 
             this.chkDiList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -165,6 +168,18 @@
             this.chkDiList.Name = "chkDiList";
             this.chkDiList.Size = new System.Drawing.Size(92, 132);
             this.chkDiList.TabIndex = 1;
+            // 
+            // btnDiSwitch
+            // 
+            this.btnDiSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDiSwitch.Location = new System.Drawing.Point(6, 18);
+            this.btnDiSwitch.Name = "btnDiSwitch";
+            this.btnDiSwitch.Size = new System.Drawing.Size(93, 23);
+            this.btnDiSwitch.TabIndex = 0;
+            this.btnDiSwitch.Text = "开启";
+            this.btnDiSwitch.UseVisualStyleBackColor = true;
+            this.btnDiSwitch.Click += new System.EventHandler(this.btnDiSwitch_Click);
             // 
             // groupBox3
             // 
@@ -202,23 +217,101 @@
             this.btnDoSwitch.UseVisualStyleBackColor = true;
             this.btnDoSwitch.Click += new System.EventHandler(this.btnDoSwitch_Click);
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.label2);
+            this.groupBox4.Controls.Add(this.txtCnt);
+            this.groupBox4.Controls.Add(this.btnCntStop);
+            this.groupBox4.Controls.Add(this.btnCntStart);
+            this.groupBox4.Controls.Add(this.labelCnt);
+            this.groupBox4.Controls.Add(this.label3);
+            this.groupBox4.Location = new System.Drawing.Point(234, 215);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(172, 190);
+            this.groupBox4.TabIndex = 7;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "计时器";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "采样：";
+            // 
+            // txtCnt
+            // 
+            this.txtCnt.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.txtCnt.Location = new System.Drawing.Point(56, 20);
+            this.txtCnt.Name = "txtCnt";
+            this.txtCnt.Size = new System.Drawing.Size(106, 26);
+            this.txtCnt.TabIndex = 5;
+            this.txtCnt.Text = "100";
+            // 
+            // btnCntStop
+            // 
+            this.btnCntStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCntStop.Enabled = false;
+            this.btnCntStop.Location = new System.Drawing.Point(91, 157);
+            this.btnCntStop.Name = "btnCntStop";
+            this.btnCntStop.Size = new System.Drawing.Size(54, 23);
+            this.btnCntStop.TabIndex = 4;
+            this.btnCntStop.Text = "停止";
+            this.btnCntStop.UseVisualStyleBackColor = true;
+            // 
+            // btnCntStart
+            // 
+            this.btnCntStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCntStart.Location = new System.Drawing.Point(23, 157);
+            this.btnCntStart.Name = "btnCntStart";
+            this.btnCntStart.Size = new System.Drawing.Size(54, 23);
+            this.btnCntStart.TabIndex = 3;
+            this.btnCntStart.Text = "启动";
+            this.btnCntStart.UseVisualStyleBackColor = true;
+            // 
+            // labelCnt
+            // 
+            this.labelCnt.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelCnt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelCnt.Location = new System.Drawing.Point(56, 51);
+            this.labelCnt.Name = "labelCnt";
+            this.labelCnt.Size = new System.Drawing.Size(106, 22);
+            this.labelCnt.TabIndex = 0;
+            this.labelCnt.Text = "0";
+            this.labelCnt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(8, 58);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "计数器：";
+            // 
             // frmDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(419, 450);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnTest);
             this.Name = "frmDemo";
-            this.Text = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "DAQNavi Helper Demo";
             this.Load += new System.EventHandler(this.frmDemo_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAiInterval)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -238,6 +331,13 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.CheckedListBox chkDoList;
         private System.Windows.Forms.Button btnDoSwitch;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtCnt;
+        private System.Windows.Forms.Button btnCntStop;
+        private System.Windows.Forms.Button btnCntStart;
+        private System.Windows.Forms.Label labelCnt;
+        private System.Windows.Forms.Label label3;
     }
 }
 

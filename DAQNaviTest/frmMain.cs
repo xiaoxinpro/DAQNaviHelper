@@ -1,5 +1,5 @@
 ﻿using Automation.BDaq;
-using DAQNaviHelper;
+using DAQNavi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +10,7 @@ using System.Text;
 using System.Timers;
 using System.Windows.Forms;
 
-namespace DAQNaviHelper
+namespace DAQNavi
 {
     public partial class frmMain : Form
     {

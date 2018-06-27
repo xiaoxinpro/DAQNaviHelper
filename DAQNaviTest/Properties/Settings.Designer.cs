@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAQNaviHelper.Properties
+namespace DAQNavi.Properties
 {
 
 

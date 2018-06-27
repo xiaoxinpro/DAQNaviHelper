@@ -1,4 +1,4 @@
-﻿using DAQNaviHelper;
+﻿using DAQNavi;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,7 +12,7 @@ namespace DAQNaviHelperDemo
 {
     public partial class frmDemo : Form
     {
-        DAQNaviHelper.DAQNaviHelper USB4704;
+        DAQNaviHelper USB4704;
 
         public frmDemo()
         {
@@ -22,14 +22,14 @@ namespace DAQNaviHelperDemo
         private void frmDemo_Load(object sender, EventArgs e)
         {
             //初始化设备
-            USB4704 = new DAQNaviHelper.DAQNaviHelper("USB-4704,BID#0");
+            USB4704 = new DAQNaviHelper("USB-4704,BID#0");
             if (!USB4704.InitDevice(out string message))
             {
                 initError(message, "USB-4704初始化失败");
             }
 
             //绑定异常发生事件
-            USB4704.BindErrorEvent(new DAQNaviHelper.DAQNaviHelper.DelegateErrorEvent(USB4704_EventError));
+            USB4704.BindErrorEvent(new DAQNaviHelper.DelegateErrorEvent(USB4704_EventError));
 
         }
 
@@ -59,7 +59,7 @@ namespace DAQNaviHelperDemo
         private void btnGetAiData_Click(object sender, EventArgs e)
         {
             double interval = Convert.ToDouble(txtAiInterval.Value);
-            USB4704.IDevice.StartAiMode(new DAQNaviHelper.DAQNaviHelper.DelegateAiEvent(USB4704_AiEvent), interval);
+            USB4704.IDevice.StartAiMode(new DAQNavi.DAQNaviHelper.DelegateAiEvent(USB4704_AiEvent), interval);
             txtAiData.Clear();
         }
 

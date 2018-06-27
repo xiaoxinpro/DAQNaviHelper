@@ -1,5 +1,5 @@
 ﻿using Automation.BDaq;
-using DAQNaviHelper;
+using DAQNavi;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 
-namespace DAQNaviHelper.Device
+namespace DAQNavi.Device
 {
     public class USB4704 : InterfaceDevice
     {
@@ -366,8 +366,13 @@ namespace DAQNaviHelper.Device
         #endregion
 
         #region 数字输出
-        public bool SetDoMode(byte byteData)
+        public bool SetDoMode(byte[] arrPortData)
         {
+            byte byteData = 0x00;
+            for (int i = 0; i < arrPortData.Length; i++)
+            {
+                byteData |= Convert.ToByte(arrPortData[i] << i);
+            }
             ErrorCode err = instantDoCtrlUsb4704.Write(0, byteData);
             if (err != ErrorCode.Success)
             {

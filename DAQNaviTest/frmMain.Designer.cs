@@ -1,4 +1,4 @@
-﻿namespace DAQNaviHelper
+﻿namespace DAQNavi
 {
     partial class frmMain
     {
