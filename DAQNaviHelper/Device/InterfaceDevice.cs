@@ -23,7 +23,10 @@ namespace DAQNaviHelper.Device
         #endregion
 
         #region 数字输入
-
+        byte[] StartDiMode(DAQNaviHelper.DelegateDiChangeEvent e);
+        void StopDiMode();
+        bool GetDiMode(out byte[] arrPortData);
+        bool GetDiModeBit(int bit, byte portData);
         #endregion
 
         #region 数字输出

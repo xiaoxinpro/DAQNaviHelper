@@ -31,12 +31,20 @@
             this.btnTest = new System.Windows.Forms.Button();
             this.btnGetAiData = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtAiData = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtAiInterval = new System.Windows.Forms.NumericUpDown();
             this.btnAiStop = new System.Windows.Forms.Button();
+            this.txtAiInterval = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtAiData = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnDiSwitch = new System.Windows.Forms.Button();
+            this.chkDiList = new System.Windows.Forms.CheckedListBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkDoList = new System.Windows.Forms.CheckedListBox();
+            this.btnDoSwitch = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAiInterval)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnTest
@@ -73,22 +81,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模拟输入";
             // 
-            // txtAiData
+            // btnAiStop
             // 
-            this.txtAiData.Location = new System.Drawing.Point(6, 48);
-            this.txtAiData.Multiline = true;
-            this.txtAiData.Name = "txtAiData";
-            this.txtAiData.Size = new System.Drawing.Size(306, 108);
-            this.txtAiData.TabIndex = 2;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(4, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 12);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "采样时间（秒）：";
+            this.btnAiStop.Location = new System.Drawing.Point(268, 19);
+            this.btnAiStop.Name = "btnAiStop";
+            this.btnAiStop.Size = new System.Drawing.Size(44, 23);
+            this.btnAiStop.TabIndex = 5;
+            this.btnAiStop.Text = "停止";
+            this.btnAiStop.UseVisualStyleBackColor = true;
+            this.btnAiStop.Click += new System.EventHandler(this.btnAiStop_Click);
             // 
             // txtAiInterval
             // 
@@ -113,21 +114,100 @@
             0,
             65536});
             // 
-            // btnAiStop
+            // label1
             // 
-            this.btnAiStop.Location = new System.Drawing.Point(268, 19);
-            this.btnAiStop.Name = "btnAiStop";
-            this.btnAiStop.Size = new System.Drawing.Size(44, 23);
-            this.btnAiStop.TabIndex = 5;
-            this.btnAiStop.Text = "停止";
-            this.btnAiStop.UseVisualStyleBackColor = true;
-            this.btnAiStop.Click += new System.EventHandler(this.btnAiStop_Click);
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(4, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "采样时间（秒）：";
+            // 
+            // txtAiData
+            // 
+            this.txtAiData.Location = new System.Drawing.Point(6, 48);
+            this.txtAiData.Multiline = true;
+            this.txtAiData.Name = "txtAiData";
+            this.txtAiData.Size = new System.Drawing.Size(306, 108);
+            this.txtAiData.TabIndex = 2;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.chkDiList);
+            this.groupBox2.Controls.Add(this.btnDiSwitch);
+            this.groupBox2.Location = new System.Drawing.Point(12, 215);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(105, 190);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "数字输入";
+            // 
+            // btnDiSwitch
+            // 
+            this.btnDiSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDiSwitch.Location = new System.Drawing.Point(6, 18);
+            this.btnDiSwitch.Name = "btnDiSwitch";
+            this.btnDiSwitch.Size = new System.Drawing.Size(93, 23);
+            this.btnDiSwitch.TabIndex = 0;
+            this.btnDiSwitch.Text = "开启";
+            this.btnDiSwitch.UseVisualStyleBackColor = true;
+            this.btnDiSwitch.Click += new System.EventHandler(this.btnDiSwitch_Click);
+            // 
+            // chkDiList
+            // 
+            this.chkDiList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkDiList.Enabled = false;
+            this.chkDiList.FormattingEnabled = true;
+            this.chkDiList.Location = new System.Drawing.Point(7, 48);
+            this.chkDiList.Name = "chkDiList";
+            this.chkDiList.Size = new System.Drawing.Size(92, 132);
+            this.chkDiList.TabIndex = 1;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.chkDoList);
+            this.groupBox3.Controls.Add(this.btnDoSwitch);
+            this.groupBox3.Location = new System.Drawing.Point(123, 215);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(105, 190);
+            this.groupBox3.TabIndex = 4;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "数字输出";
+            // 
+            // chkDoList
+            // 
+            this.chkDoList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkDoList.Enabled = false;
+            this.chkDoList.FormattingEnabled = true;
+            this.chkDoList.Location = new System.Drawing.Point(7, 48);
+            this.chkDoList.Name = "chkDoList";
+            this.chkDoList.Size = new System.Drawing.Size(92, 132);
+            this.chkDoList.TabIndex = 1;
+            // 
+            // btnDoSwitch
+            // 
+            this.btnDoSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDoSwitch.Location = new System.Drawing.Point(6, 18);
+            this.btnDoSwitch.Name = "btnDoSwitch";
+            this.btnDoSwitch.Size = new System.Drawing.Size(93, 23);
+            this.btnDoSwitch.TabIndex = 0;
+            this.btnDoSwitch.Text = "开启";
+            this.btnDoSwitch.UseVisualStyleBackColor = true;
+            this.btnDoSwitch.Click += new System.EventHandler(this.btnDoSwitch_Click);
             // 
             // frmDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnTest);
             this.Name = "frmDemo";
@@ -136,6 +216,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAiInterval)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -149,6 +231,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown txtAiInterval;
         private System.Windows.Forms.Button btnAiStop;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckedListBox chkDiList;
+        private System.Windows.Forms.Button btnDiSwitch;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckedListBox chkDoList;
+        private System.Windows.Forms.Button btnDoSwitch;
     }
 }
 

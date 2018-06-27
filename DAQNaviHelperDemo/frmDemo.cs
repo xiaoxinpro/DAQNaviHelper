@@ -89,5 +89,59 @@ namespace DAQNaviHelperDemo
             }));
         }
 
+        private void btnDiSwitch_Click(object sender, EventArgs e)
+        {
+            if (btnDiSwitch.Text == "开启")
+            {
+                btnDiSwitch.Text = "关闭";
+                byte[] arrBitData = USB4704.IDevice.StartDiMode(USB4704_DiEventChange);
+                chkDiList.Items.Clear();
+                if (arrBitData != null)
+                {
+                    for (int i = 0; i < arrBitData.Length; i++)
+                    {
+                        chkDiList.Items.Add("DI" + i, Convert.ToBoolean(arrBitData[i]));
+                    }
+                }
+            }
+            else
+            {
+                btnDiSwitch.Text = "开启";
+                USB4704.IDevice.StopDiMode();
+                chkDiList.Items.Clear();
+            }
+            
+        }
+
+        private void USB4704_DiEventChange(int bit,byte data)
+        {
+            this.Invoke(new Action(() =>
+            {
+                chkDiList.SetItemChecked(bit, Convert.ToBoolean(data));
+            }));
+        }
+
+        private void btnDoSwitch_Click(object sender, EventArgs e)
+        {
+            if (btnDoSwitch.Text == "开启")
+            {
+                btnDoSwitch.Text = "关闭";
+                byte[] arrBitData = USB4704.IDevice.StartDiMode(USB4704_DiEventChange);
+                chkDiList.Items.Clear();
+                if (arrBitData != null)
+                {
+                    for (int i = 0; i < arrBitData.Length; i++)
+                    {
+                        chkDiList.Items.Add("DI" + i, Convert.ToBoolean(arrBitData[i]));
+                    }
+                }
+            }
+            else
+            {
+                btnDoSwitch.Text = "开启";
+                USB4704.IDevice.StopDiMode();
+                chkDiList.Items.Clear();
+            }
+        }
     }
 }

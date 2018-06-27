@@ -285,7 +285,7 @@ namespace DAQNaviHelper.Device
         #endregion
 
         #region 数字输入
-        public byte[] StartDiMode()
+        public byte[] StartDiMode(DAQNaviHelper.DelegateDiChangeEvent e)
         {
             ErrorCode err = instantDiCtrlUsb4704.Read(0, out byte portData);
             if (err != ErrorCode.Success)
@@ -293,6 +293,7 @@ namespace DAQNaviHelper.Device
                 ActiveEventError("开启数字输入失败：" + err.ToString());
                 return arrDiData;
             }
+            EventDiChange = e;
             timerDi.Enabled = true;
             arrDiData = new byte[8];
             for (int i = 0; i < arrDiData.Length; i++)
@@ -305,6 +306,35 @@ namespace DAQNaviHelper.Device
         public void StopDiMode()
         {
             timerDi.Enabled = false;
+        }
+
+        public bool GetDiMode(out byte[] arrPortData)
+        {
+            arrPortData = new byte[8];
+            ErrorCode err = instantDiCtrlUsb4704.Read(0, out byte portData);
+            if (err != ErrorCode.Success)
+            {
+                ActiveEventError("获取数字输入失败：" + err.ToString());
+                return false;
+            }
+            for (int i = 0; i < arrPortData.Length; i++)
+            {
+                arrPortData[i] = Convert.ToByte((portData >> i) & 0x01);
+            }
+            return true;
+        }
+
+        public bool GetDiModeBit(int bit, byte portData)
+        {
+            portData = new byte();
+            ErrorCode err =  instantDiCtrlUsb4704.ReadBit(0, bit, out byte data);
+            if (err != ErrorCode.Success)
+            {
+                ActiveEventError("获取数字输入失败：" + err.ToString());
+                return false;
+            }
+            portData = data;
+            return true;
         }
 
         private void InitInstantDiCtrlUsb4704()
