@@ -48,6 +48,7 @@
     <Compile Include="DAQNaviHelper.cs" />
     <Compile Include="Device\InterfaceDevice.cs" />
     <Compile Include="Device\USB4704.cs" />
+    <Compile Include="MarkTimeHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
