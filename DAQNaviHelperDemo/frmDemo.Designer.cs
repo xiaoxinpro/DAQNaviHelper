@@ -48,6 +48,8 @@
             this.btnCntStart = new System.Windows.Forms.Button();
             this.labelCnt = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAiInterval)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -219,6 +221,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label5);
+            this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.txtCnt);
             this.groupBox4.Controls.Add(this.btnCntStop);
@@ -246,9 +250,10 @@
             this.txtCnt.Font = new System.Drawing.Font("微软雅黑", 10.5F);
             this.txtCnt.Location = new System.Drawing.Point(56, 20);
             this.txtCnt.Name = "txtCnt";
-            this.txtCnt.Size = new System.Drawing.Size(106, 26);
+            this.txtCnt.Size = new System.Drawing.Size(76, 26);
             this.txtCnt.TabIndex = 5;
-            this.txtCnt.Text = "100";
+            this.txtCnt.Text = "1";
+            this.txtCnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnCntStop
             // 
@@ -260,6 +265,7 @@
             this.btnCntStop.TabIndex = 4;
             this.btnCntStop.Text = "停止";
             this.btnCntStop.UseVisualStyleBackColor = true;
+            this.btnCntStop.Click += new System.EventHandler(this.btnCntStop_Click);
             // 
             // btnCntStart
             // 
@@ -270,6 +276,7 @@
             this.btnCntStart.TabIndex = 3;
             this.btnCntStart.Text = "启动";
             this.btnCntStart.UseVisualStyleBackColor = true;
+            this.btnCntStart.Click += new System.EventHandler(this.btnCntStart_Click);
             // 
             // labelCnt
             // 
@@ -277,7 +284,7 @@
             this.labelCnt.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelCnt.Location = new System.Drawing.Point(56, 51);
             this.labelCnt.Name = "labelCnt";
-            this.labelCnt.Size = new System.Drawing.Size(106, 22);
+            this.labelCnt.Size = new System.Drawing.Size(76, 22);
             this.labelCnt.TabIndex = 0;
             this.labelCnt.Text = "0";
             this.labelCnt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -290,6 +297,24 @@
             this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 1;
             this.label3.Text = "频率：";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(138, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 12);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "秒";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(138, 58);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 12);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Hz";
             // 
             // frmDemo
             // 
@@ -338,6 +363,8 @@
         private System.Windows.Forms.Button btnCntStart;
         private System.Windows.Forms.Label labelCnt;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
     }
 }
 

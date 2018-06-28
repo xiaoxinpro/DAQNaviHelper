@@ -97,6 +97,26 @@ namespace DAQNavi
             }
         }
 
+        /// <summary>
+        /// 脉冲计数委托
+        /// </summary>
+        /// <param name="channel">通道号</param>
+        /// <param name="freq">频率（Hz）</param>
+        public delegate void DelegateCntEvent(int channel, int freq);
+
+        /// <summary>
+        /// 绑定脉冲计数事件
+        /// </summary>
+        /// <param name="e"></param>
+        public void BindCntEvent(DelegateCntEvent e)
+        {
+            if (DeviceType != DAQNaviDecvice.None && IDevice != null)
+            {
+                IDevice.EventCnt += e;
+            }
+        }
+
+
         #endregion
 
         #region 公共函数

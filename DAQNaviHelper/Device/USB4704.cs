@@ -28,6 +28,10 @@ namespace DAQNavi.Device
         //数字输入字段
         private byte[] arrDiData;
         private System.Timers.Timer timerDi;
+
+        //脉冲计数器字段
+        private System.Timers.Timer timerCnt;
+
         #endregion
 
         #region 构造函数
@@ -56,6 +60,7 @@ namespace DAQNavi.Device
                 InitWaveformAiCtrlUsb4704();
                 InitInstantDiCtrlUsb4704();
                 InitInstantDoCtrlUsb4704();
+                InitEventCounterCtrlUsb4704();
 
             }
             catch (Exception error)
@@ -89,6 +94,15 @@ namespace DAQNavi.Device
         }
 
         /// <summary>
+        /// 脉冲计数事件
+        /// </summary>
+        public event DAQNaviHelper.DelegateCntEvent EventCnt;
+        public void ActiveEventCnt(int channel, int freq)
+        {
+            EventCnt?.Invoke(channel, freq);
+        }
+
+        /// <summary>
         /// 异常事件
         /// </summary>
         public event DAQNaviHelper.DelegateErrorEvent EventError;
@@ -104,9 +118,9 @@ namespace DAQNavi.Device
         /// <summary>
         /// 设置模拟输入模式
         /// </summary>
-        /// <param name="mode">模式</param>
         /// <param name="e">事件入口</param>
         /// <param name="timers">检测时间（秒）</param>
+        /// <param name="isAutoReset">是否循环获取</param>
         public void StartAiMode(DAQNaviHelper.DelegateAiEvent e, double timers = 1, bool isAutoReset = false)
         {
             try
@@ -428,6 +442,83 @@ namespace DAQNavi.Device
                 ActiveEventError("初始化数字输出失败：" + err.ToString());
             }
 
+        }
+        #endregion
+
+        #region 脉冲计数器
+        /// <summary>
+        /// 开启脉冲计数模式
+        /// </summary>
+        /// <param name="e">事件入口</param>
+        /// <param name="timers">采样周期（秒）</param>
+        public void StartCntMode(DAQNaviHelper.DelegateCntEvent e, double timers = 1)
+        {
+            try
+            {
+                EventCnt = e;
+                timerCnt.Interval = (timers > 0.1 ? timers : 0.1) * 1000;
+                eventCounterCtrlUsb4704.Enabled = true;
+                timerCnt.Enabled = true;
+            }
+            catch (Exception error)
+            {
+                ActiveEventError("开启脉冲计数失败：" + error.Message);
+            }
+        }
+
+        /// <summary>
+        /// 关闭脉冲计数模式
+        /// </summary>
+        public void StopCntMode()
+        {
+            try
+            {
+                timerCnt.Enabled = false;
+                eventCounterCtrlUsb4704.Enabled = false;
+            }
+            catch (Exception error)
+            {
+                ActiveEventError("关闭脉冲计数失败：" + error.Message);
+            }
+        }
+
+        /// <summary>
+        /// 初始化脉冲计数
+        /// </summary>
+        private void InitEventCounterCtrlUsb4704()
+        {
+            eventCounterCtrlUsb4704.ChannelStart = 0;
+            eventCounterCtrlUsb4704.ChannelCount = 1;
+            eventCounterCtrlUsb4704.Enabled = false;
+
+            timerCnt = new System.Timers.Timer(1000);
+            timerCnt.Elapsed += new ElapsedEventHandler(TimerCnt_TimerEvent);
+            timerCnt.AutoReset = true;
+            timerCnt.Enabled = false;
+        }
+
+        /// <summary>
+        /// 脉冲计数定时器
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TimerCnt_TimerEvent(object sender, ElapsedEventArgs e)
+        {
+            ErrorCode err = eventCounterCtrlUsb4704.Read(out int cntData);
+            eventCounterCtrlUsb4704.Enabled = false;
+            TimeSpan timeSpan = MarkTimeHelper.MarkTime(MarkTimeStatus.End, err + "计数定时器", cntData.ToString());
+            eventCounterCtrlUsb4704.Enabled = true;
+            MarkTimeHelper.MarkTime(MarkTimeStatus.Start, "计数定时器");
+            if (err != ErrorCode.Success)
+            {
+                ActiveEventError("采集脉冲数失败：" + err.ToString());
+                return;
+            }
+
+            if ((timeSpan.TotalSeconds * 1000) < (timerCnt.Interval + 50))
+            {
+                ActiveEventCnt(0, Convert.ToInt32(cntData / timeSpan.TotalSeconds));
+            }
         }
         #endregion
 

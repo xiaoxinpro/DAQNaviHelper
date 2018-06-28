@@ -15,6 +15,7 @@ namespace DAQNavi.Device
         event DAQNaviHelper.DelegateErrorEvent EventError;
         event DAQNaviHelper.DelegateAiEvent EventAi;
         event DAQNaviHelper.DelegateDiChangeEvent EventDiChange;
+        event DAQNaviHelper.DelegateCntEvent EventCnt;
         #endregion
 
         #region 模拟输入
@@ -34,6 +35,11 @@ namespace DAQNavi.Device
         bool SetDoModeBit(int bit, byte data);
         bool GetDoMode(out byte[] arrPortData);
         bool GetDoModeBit(int bit, out byte data);
+        #endregion
+
+        #region 脉冲计数
+        void StartCntMode(DAQNaviHelper.DelegateCntEvent e, double timers = 1);
+        void StopCntMode();
         #endregion
 
         void Test(object e);

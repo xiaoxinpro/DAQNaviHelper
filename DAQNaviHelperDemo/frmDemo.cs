@@ -155,5 +155,30 @@ namespace DAQNaviHelperDemo
             Console.WriteLine("改变数字输出状态：" + chkDoList.Items[e.Index].ToString() + " = " + !chkDoList.GetItemChecked(e.Index));
             USB4704.IDevice.SetDoModeBit(e.Index, Convert.ToByte(!chkDoList.GetItemChecked(e.Index)));
         }
+
+        private void btnCntStart_Click(object sender, EventArgs e)
+        {
+            USB4704.IDevice.StartCntMode(USB4704_CntEvent, Convert.ToDouble(txtCnt.Text));
+            btnCntStart.Enabled = false;
+            btnCntStop.Enabled = true;
+        }
+
+        private void btnCntStop_Click(object sender, EventArgs e)
+        {
+            USB4704.IDevice.StopCntMode();
+            btnCntStart.Enabled = true;
+            btnCntStop.Enabled = false;
+        }
+
+        private void USB4704_CntEvent(int channel, int freq)
+        {
+            if (channel == 0)
+            {
+                this.Invoke(new Action(() =>
+                {
+                    labelCnt.Text = freq.ToString();
+                }));
+            }
+        }
     }
 }
