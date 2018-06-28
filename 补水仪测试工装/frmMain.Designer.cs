@@ -36,6 +36,7 @@
             this.progressBarStatus = new System.Windows.Forms.ProgressBar();
             this.listViewStatus = new System.Windows.Forms.ListView();
             this.imageListStatus = new System.Windows.Forms.ImageList(this.components);
+            this.timerTest = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnInitSwitch
@@ -103,6 +104,10 @@
             this.imageListStatus.Images.SetKeyName(3, "TestTool_Status_3.png");
             this.imageListStatus.Images.SetKeyName(4, "TestTool_Status_4.png");
             // 
+            // timerTest
+            // 
+            this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
@@ -114,7 +119,7 @@
             this.Controls.Add(this.btnRunSwitch);
             this.Controls.Add(this.btnInitSwitch);
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "补水仪测试工装";
@@ -131,6 +136,7 @@
         private System.Windows.Forms.ProgressBar progressBarStatus;
         private System.Windows.Forms.ListView listViewStatus;
         private System.Windows.Forms.ImageList imageListStatus;
+        private System.Windows.Forms.Timer timerTest;
     }
 }
 

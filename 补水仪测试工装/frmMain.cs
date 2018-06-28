@@ -30,11 +30,40 @@ namespace 补水仪测试工装
             "检查喷雾峰值电压和雾化片工作频率",     //喷雾测试
             "检查USB分压电阻电平"      //USB电平检查
         };
+
+        //输出IO
+        private const int DO_K1 = 0;
+        private const int DO_K2 = 1;
+        private const int DO_K3 = 2;
+        private const int DO_K4 = 3;
+        private const int DO_K5 = 4;
+        private const int DO_K6 = 5;
+        private const int DO_K7 = 6;
+        private const int DO_K8 = 7;
+
+        //输入IO
+        private const int DI_P2 = 0;
+
+        //输入Cnt
+        private const int CNT_P1 = 0;
+
+        //输入AI
+        private const int AI_AD1 = 0;
+        private const int AI_AD2 = 1;
+        private const int AI_AD3 = 2;
+        private const int AI_AD4 = 3;
+        private const int AI_AD5 = 4;
+        private const int AI_AD6 = 5;
+        private const int AI_AD7 = 6;
+        private const int AI_AD8 = 7;
         #endregion
 
         #region 字段
         private int nowTestItem = 0;
+        private bool isTestRun = false;
         private DAQNaviHelper USB4704;
+        private AiModeType AdData;
+        private int CntTimes = 0;
         #endregion
 
         #region 初始化
@@ -209,6 +238,9 @@ namespace 补水仪测试工装
             //绑定异常发生事件
             USB4704.BindErrorEvent(new DAQNaviHelper.DelegateErrorEvent(USB4704_EventError));
 
+            //初始化功能模块
+            InitFunc();
+
         }
 
         /// <summary>
@@ -238,6 +270,100 @@ namespace 补水仪测试工装
             MessageBox.Show(message);
         }
         #endregion
+
+        #region 功能模块
+        /// <summary>
+        /// 初始化功能模块
+        /// </summary>
+        private void InitFunc()
+        {
+            nowTestItem = 0;
+            isTestRun = false;
+            CntTimes = 0;
+
+            //初始化数值输出
+            byte[] portData = new byte[8];
+            portData[DO_K1] = 1;
+            portData[DO_K2] = 1;
+            portData[DO_K3] = 1;
+            portData[DO_K4] = 1;
+            portData[DO_K5] = 1;
+            portData[DO_K6] = 1;
+            portData[DO_K7] = 1;
+            portData[DO_K8] = 0;
+            USB4704.IDevice.SetDoMode(portData);
+
+            //初始化模拟输入
+            //USB4704.IDevice.StartAiMode(USB4704_AiEvent, 0.3, true);
+
+            //初始化数值输入
+            USB4704.IDevice.StartDiMode(USB4704_DiChangeEvent);
+
+            //初始化脉冲计数器
+            //USB4704.IDevice.StartCntMode(USB4704_CntEvent, 1);
+        }
+
+
+        /// <summary>
+        /// 数字输入改变事件
+        /// </summary>
+        /// <param name="bit"></param>
+        /// <param name="data"></param>
+        private void USB4704_DiChangeEvent(int bit, byte data)
+        {
+            if (DI_P2 == bit)
+            {
+                this.Invoke(new Action(() =>
+                {
+                    Console.WriteLine("DI_P2 = " + Convert.ToBoolean(data));
+                    if (!Convert.ToBoolean(data) && isTestRun == false)
+                    {
+                        StartTest();
+                    }
+                }));
+            }
+        }
+
+        /// <summary>
+        /// 模拟输入获取事件
+        /// </summary>
+        /// <param name="aiModeData"></param>
+        private void USB4704_AiEvent(AiModeType aiModeData)
+        {
+            AdData = aiModeData;
+        }
+
+        /// <summary>
+        /// 脉冲计数器事件
+        /// </summary>
+        /// <param name="channel"></param>
+        /// <param name="freq"></param>
+        private void USB4704_CntEvent(int channel, int freq)
+        {
+            if (channel == 0)
+            {
+                Console.WriteLine("脉冲频率 = " + freq);
+            }
+        }
+
+        #endregion
+
+        #region 测试流程
+        private void StartTest()
+        {
+            isTestRun = true;
+            nowTestItem = 0;
+            CntTimes = 0;
+            timerTest.Interval = 100;
+            timerTest.Enabled = true;
+        }
+
+        private void timerTest_Tick(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
+
     }
 
     #region 枚举类型
