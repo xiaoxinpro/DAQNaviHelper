@@ -28,20 +28,109 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            this.btnInitSwitch = new System.Windows.Forms.Button();
+            this.btnRunSwitch = new System.Windows.Forms.Button();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.progressBarStatus = new System.Windows.Forms.ProgressBar();
+            this.listViewStatus = new System.Windows.Forms.ListView();
+            this.imageListStatus = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
+            // 
+            // btnInitSwitch
+            // 
+            this.btnInitSwitch.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.btnInitSwitch.Location = new System.Drawing.Point(118, 12);
+            this.btnInitSwitch.Name = "btnInitSwitch";
+            this.btnInitSwitch.Size = new System.Drawing.Size(134, 56);
+            this.btnInitSwitch.TabIndex = 0;
+            this.btnInitSwitch.Text = "开启";
+            this.btnInitSwitch.UseVisualStyleBackColor = true;
+            // 
+            // btnRunSwitch
+            // 
+            this.btnRunSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRunSwitch.Enabled = false;
+            this.btnRunSwitch.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.btnRunSwitch.Location = new System.Drawing.Point(409, 12);
+            this.btnRunSwitch.Name = "btnRunSwitch";
+            this.btnRunSwitch.Size = new System.Drawing.Size(134, 56);
+            this.btnRunSwitch.TabIndex = 0;
+            this.btnRunSwitch.Text = "暂停";
+            this.btnRunSwitch.UseVisualStyleBackColor = true;
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelStatus.Font = new System.Drawing.Font("微软雅黑", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelStatus.Location = new System.Drawing.Point(13, 80);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(635, 66);
+            this.labelStatus.TabIndex = 1;
+            this.labelStatus.Text = "测试状态";
+            this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // progressBarStatus
+            // 
+            this.progressBarStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.progressBarStatus.Location = new System.Drawing.Point(13, 150);
+            this.progressBarStatus.Name = "progressBarStatus";
+            this.progressBarStatus.Size = new System.Drawing.Size(635, 23);
+            this.progressBarStatus.TabIndex = 2;
+            // 
+            // listViewStatus
+            // 
+            this.listViewStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewStatus.Location = new System.Drawing.Point(13, 179);
+            this.listViewStatus.Name = "listViewStatus";
+            this.listViewStatus.Size = new System.Drawing.Size(635, 427);
+            this.listViewStatus.TabIndex = 3;
+            this.listViewStatus.UseCompatibleStateImageBehavior = false;
+            // 
+            // imageListStatus
+            // 
+            this.imageListStatus.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListStatus.ImageStream")));
+            this.imageListStatus.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListStatus.Images.SetKeyName(0, "TestTool_Status_0.png");
+            this.imageListStatus.Images.SetKeyName(1, "TestTool_Status_1.png");
+            this.imageListStatus.Images.SetKeyName(2, "TestTool_Status_2.png");
+            this.imageListStatus.Images.SetKeyName(3, "TestTool_Status_3.png");
+            this.imageListStatus.Images.SetKeyName(4, "TestTool_Status_4.png");
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(660, 618);
+            this.Controls.Add(this.listViewStatus);
+            this.Controls.Add(this.progressBarStatus);
+            this.Controls.Add(this.labelStatus);
+            this.Controls.Add(this.btnRunSwitch);
+            this.Controls.Add(this.btnInitSwitch);
+            this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "补水仪测试工装";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Button btnInitSwitch;
+        private System.Windows.Forms.Button btnRunSwitch;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.ProgressBar progressBarStatus;
+        private System.Windows.Forms.ListView listViewStatus;
+        private System.Windows.Forms.ImageList imageListStatus;
     }
 }
 
