@@ -287,9 +287,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(8, 58);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 12);
+            this.label3.Size = new System.Drawing.Size(41, 12);
             this.label3.TabIndex = 1;
-            this.label3.Text = "计数器：";
+            this.label3.Text = "频率：";
             // 
             // frmDemo
             // 

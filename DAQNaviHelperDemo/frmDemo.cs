@@ -59,7 +59,7 @@ namespace DAQNaviHelperDemo
         private void btnGetAiData_Click(object sender, EventArgs e)
         {
             double interval = Convert.ToDouble(txtAiInterval.Value);
-            USB4704.IDevice.StartAiMode(new DAQNavi.DAQNaviHelper.DelegateAiEvent(USB4704_AiEvent), interval);
+            USB4704.IDevice.StartAiMode(new DAQNaviHelper.DelegateAiEvent(USB4704_AiEvent), interval);
             txtAiData.Clear();
         }
 
