@@ -551,6 +551,24 @@ namespace 补水仪测试工装
                     }
                     break;
                 case 1:
+                    if (CntTimes++ == 0)
+                    {
+                        timerTest.Interval = 350;
+                        SetInitStatus(nowTestItem);
+                        SelectPower(enumTestPower.Charging);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
+                        USB4704.IDevice.StartAiMode(TestCheckOut5V, 0.3, true);
+                    }
+                    else if (CntTimes > 10)
+                    {
+                        USB4704.IDevice.StopAiMode();
+                        SetFailStatus(nowTestItem);
+                        NextTest();
+                    }
+                    else
+                    {
+                        SetRunStatus(nowTestItem);
+                    }
                     break;
                 case 2:
                     break;
@@ -590,13 +608,22 @@ namespace 补水仪测试工装
             }));
         }
 
-        private bool TestCheckRedLight()
+        private void TestCheckOut5V(AiModeType aiModeData)
         {
-            if (CntTimes > 9)
+            double vol = aiModeData.Avg[AI_AD3];
+            Console.WriteLine("手机充电电压AD3 = " + vol);
+            this.Invoke(new Action(() =>
             {
-                return true;
-            }
-            return false;
+                if (GetListViewItemStatus(listViewStatus, 1) == enumTestStatus.Run)
+                {
+                    if (vol < 5.25 && vol > 4.75)
+                    {
+                        USB4704.IDevice.StopAiMode();
+                        SetSuccessStatus(nowTestItem);
+                        NextTest();
+                    }
+                }
+            }));
         }
         #endregion
 
