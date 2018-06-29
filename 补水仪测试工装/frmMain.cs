@@ -318,7 +318,7 @@ namespace 补水仪测试工装
                     Console.WriteLine("DI_P2 = " + Convert.ToBoolean(data));
                     if (!Convert.ToBoolean(data) && isTestRun == false)
                     {
-                        StartTest();
+                        InitTest();
                     }
                 }));
             }
@@ -346,21 +346,149 @@ namespace 补水仪测试工装
             }
         }
 
+        /// <summary>
+        /// 选择电源（充电控制，放电控制）
+        /// </summary>
+        /// <param name="e"></param>
+        private void SelectPower(enumTestPower e)
+        {
+            USB4704.IDevice.SetDoModeBit(DO_K8, Convert.ToByte(e));
+        }
+
+        /// <summary>
+        /// 选择电压
+        /// </summary>
+        /// <param name="e"></param>
+        private void SelectBatteryVoltage(enumTestBatteryVoltage e)
+        {
+            switch (e)
+            {
+                case enumTestBatteryVoltage.Vol4_0:
+                    USB4704.IDevice.SetDoModeBit(DO_K2, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K3, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K1, 0);
+                    break;
+                case enumTestBatteryVoltage.Vol3_7:
+                    USB4704.IDevice.SetDoModeBit(DO_K1, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K3, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K2, 0);
+                    break;
+                case enumTestBatteryVoltage.Vol3_1:
+                    USB4704.IDevice.SetDoModeBit(DO_K1, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K2, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K3, 0);
+                    break;
+                case enumTestBatteryVoltage.Vol4_4:
+                    USB4704.IDevice.SetDoModeBit(DO_K1, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K2, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K3, 1);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 选择充电电流
+        /// </summary>
+        /// <param name="e"></param>
+        private void SelectChargingCurrent(enumTestChargingCurrent e)
+        {
+            switch (e)
+            {
+                case enumTestChargingCurrent.Cur_0A:
+                    USB4704.IDevice.SetDoModeBit(DO_K4, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K5, 1);
+                    break;
+                case enumTestChargingCurrent.Cur_1A:
+                    USB4704.IDevice.SetDoModeBit(DO_K5, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K4, 0);
+                    break;
+                case enumTestChargingCurrent.Cur_4A:
+                    USB4704.IDevice.SetDoModeBit(DO_K4, 0);
+                    USB4704.IDevice.SetDoModeBit(DO_K5, 0);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// 选择放电电流
+        /// </summary>
+        /// <param name="e"></param>
+        private void SelectDichargingCurrent(enumTestDischargingCurrent e)
+        {
+            USB4704.IDevice.SetDoModeBit(DO_K7, Convert.ToByte(e));
+        }
+
+        /// <summary>
+        /// 选择喷雾
+        /// </summary>
+        /// <param name="isOpen">是否开启喷雾</param>
+        private void SelectSpray(bool isOpen)
+        {
+            USB4704.IDevice.SetDoModeBit(DO_K6, Convert.ToByte(!isOpen));
+        }
         #endregion
 
         #region 测试流程
-        private void StartTest()
+        private void InitTest()
         {
-            isTestRun = true;
             nowTestItem = 0;
             CntTimes = 0;
             timerTest.Interval = 100;
+            StartTest();
+        }
+
+        private void StartTest()
+        {
+            isTestRun = true;
             timerTest.Enabled = true;
+        }
+
+        private void StopTest()
+        {
+            isTestRun = false;
+            timerTest.Enabled = false;
         }
 
         private void timerTest_Tick(object sender, EventArgs e)
         {
+            switch (nowTestItem)
+            {
+                case 0:
+                    if (TestCheckRedLight())
+                    {
+                        nowTestItem++;
+                    }
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 7:
+                    break;
+                case 8:
+                    break;
+                default:
+                    StopTest();
+                    break;
+            }
+        }
 
+        private bool TestCheckRedLight()
+        {
+
+            return false;
         }
         #endregion
 
@@ -377,6 +505,45 @@ namespace 补水仪测试工装
         Pause = 2,
         Success = 3,
         Fail = 4
+    }
+
+    /// <summary>
+    /// 测试充放电枚举
+    /// </summary>
+    public enum enumTestPower
+    {
+        Charging = 0,
+        Discharging = 1
+    }
+
+    /// <summary>
+    /// 测试电池电压枚举
+    /// </summary>
+    public enum enumTestBatteryVoltage
+    {
+        Vol4_0,
+        Vol3_7,
+        Vol3_1,
+        Vol4_4
+    }
+
+    /// <summary>
+    /// 测试充电电流枚举
+    /// </summary>
+    public enum enumTestChargingCurrent
+    {
+        Cur_0A,
+        Cur_1A,
+        Cur_4A
+    }
+
+    /// <summary>
+    /// 测试放电电流枚举
+    /// </summary>
+    public enum enumTestDischargingCurrent
+    {
+        Cur_1A = 0,
+        Cur_0A = 1
     }
     #endregion
 }
