@@ -136,7 +136,7 @@ namespace 补水仪测试工装
         /// <param name="progress">进度条控件</param>
         private void InitProgressStatus(ProgressBar progress)
         {
-            progress.Maximum = STR_TEST_NAME.Length;
+            progress.Maximum = STR_TEST_NAME.Length * 10;
             progress.Minimum = 0;
             progress.Value = progress.Minimum;
         }
@@ -159,7 +159,7 @@ namespace 补水仪测试工装
         /// </summary>
         private void SetProgressStatus()
         {
-            SetProgressStatus(progressBarStatus, nowTestItem);
+            SetProgressStatus(progressBarStatus, nowTestItem * 10);
         }
         #endregion
 
@@ -218,6 +218,70 @@ namespace 补水仪测试工装
             if (listView.Items.Count > item)
             {
                 SetListViewItemStatus(listView.Items[item], e);
+            }
+        }
+
+        /// <summary>
+        /// 获取状态列表中的某项状态
+        /// </summary>
+        /// <param name="listView">状态列表控件</param>
+        /// <param name="item">行号</param>
+        /// <returns>状态枚举</returns>
+        private enumTestStatus GetListViewItemStatus(ListView listView, int item)
+        {
+            if (listView.Items.Count > item)
+            {
+                return (enumTestStatus)listView.Items[item].ImageIndex;
+            }
+            return enumTestStatus.Fail;
+        }
+        #endregion
+
+        #region 状态公共函数
+        /// <summary>
+        /// 设置初始化状态
+        /// </summary>
+        /// <param name="num">测试号</param>
+        private void SetInitStatus(int num)
+        {
+            if (STR_TEST_NAME.Length > num)
+            {
+                SetLabelStatus(labelStatus, "初始化【" + STR_TEST_NAME[num] + "】测试", enumTestStatus.Run);
+                SetListViewItemStatus(listViewStatus, num, enumTestStatus.Run);
+                SetProgressStatus(progressBarStatus, num * 10);
+            }
+        }
+
+        private void SetRunStatus(int num)
+        {
+            if (STR_TEST_NAME.Length > num)
+            {
+                SetLabelStatus(labelStatus, "项目【" + STR_TEST_NAME[num] + "】测试中", enumTestStatus.Run);
+                SetListViewItemStatus(listViewStatus, num, enumTestStatus.Run);
+                if (progressBarStatus.Value < ((num + 1) * 10))
+                {
+                    SetProgressStatus(progressBarStatus, progressBarStatus.Value + 1);
+                }
+            }
+        }
+
+        private void SetSuccessStatus(int num)
+        {
+            if (STR_TEST_NAME.Length > num)
+            {
+                SetLabelStatus(labelStatus, "项目【" + STR_TEST_NAME[num] + "】测试通过", enumTestStatus.Success);
+                SetListViewItemStatus(listViewStatus, num, enumTestStatus.Success);
+                SetProgressStatus(progressBarStatus, (num + 1) * 10);
+            }
+        }
+
+        private void SetFailStatus(int num)
+        {
+            if (STR_TEST_NAME.Length > num)
+            {
+                SetLabelStatus(labelStatus, "项目【" + STR_TEST_NAME[num] + "】测试失败", enumTestStatus.Fail);
+                SetListViewItemStatus(listViewStatus, num, enumTestStatus.Fail);
+                SetProgressStatus(progressBarStatus, (num + 1) * 10);
             }
         }
         #endregion
@@ -437,7 +501,7 @@ namespace 补水仪测试工装
         {
             nowTestItem = 0;
             CntTimes = 0;
-            timerTest.Interval = 100;
+            timerTest.Interval = 300;
             StartTest();
         }
 
@@ -453,14 +517,37 @@ namespace 补水仪测试工装
             timerTest.Enabled = false;
         }
 
+        private void NextTest()
+        {
+            nowTestItem++;
+            CntTimes = 0;
+            timerTest.Interval = 400;
+        }
+
         private void timerTest_Tick(object sender, EventArgs e)
         {
+            MarkTimeHelper.MarkTime(MarkTimeStatus.End, "测试定时");
+            MarkTimeHelper.MarkTime(MarkTimeStatus.Start, "测试定时");
             switch (nowTestItem)
             {
                 case 0:
-                    if (TestCheckRedLight())
+                    if (CntTimes++ == 0)
                     {
-                        nowTestItem++;
+                        timerTest.Interval = 350;
+                        SetInitStatus(nowTestItem);
+                        SelectPower(enumTestPower.Charging);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_0);
+                        USB4704.IDevice.StartAiMode(TestCheckRedLight, 0.3, true);
+                    }
+                    else if (CntTimes > 10)
+                    {
+                        USB4704.IDevice.StopAiMode();
+                        SetFailStatus(nowTestItem);
+                        NextTest();
+                    }
+                    else
+                    {
+                        SetRunStatus(nowTestItem);
                     }
                     break;
                 case 1:
@@ -485,13 +572,69 @@ namespace 补水仪测试工装
             }
         }
 
+        private void TestCheckRedLight(AiModeType aiModeData)
+        {
+            double vol = aiModeData.Avg[AI_AD1];
+            Console.WriteLine("红灯电压AD1 = " + vol);
+            this.Invoke(new Action(() =>
+            {
+                if (GetListViewItemStatus(listViewStatus,0) == enumTestStatus.Run)
+                {
+                    if (vol < 2.5 &&　vol > 1.2)
+                    {
+                        USB4704.IDevice.StopAiMode();
+                        SetSuccessStatus(nowTestItem);
+                        NextTest();
+                    }
+                }
+            }));
+        }
+
         private bool TestCheckRedLight()
         {
-
+            if (CntTimes > 9)
+            {
+                return true;
+            }
             return false;
         }
         #endregion
 
+        #region 按钮事件
+
+        /// <summary>
+        /// 启动按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnInitSwitch_Click(object sender, EventArgs e)
+        {
+            InitTest();
+            btnInitSwitch.Text = "重启";
+            btnRunSwitch.Text = "暂停";
+            btnRunSwitch.Enabled = true;
+        }
+
+        /// <summary>
+        /// 暂停继续按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnRunSwitch_Click(object sender, EventArgs e)
+        {
+            if (btnRunSwitch.Text == "暂停")
+            {
+                btnRunSwitch.Text = "继续";
+                StopTest();
+            }
+            else
+            {
+                btnRunSwitch.Text = "暂停";
+                StartTest();
+            }
+        }
+
+        #endregion
     }
 
     #region 枚举类型

@@ -48,6 +48,7 @@
             this.btnInitSwitch.TabIndex = 0;
             this.btnInitSwitch.Text = "开启";
             this.btnInitSwitch.UseVisualStyleBackColor = true;
+            this.btnInitSwitch.Click += new System.EventHandler(this.btnInitSwitch_Click);
             // 
             // btnRunSwitch
             // 
@@ -60,6 +61,7 @@
             this.btnRunSwitch.TabIndex = 0;
             this.btnRunSwitch.Text = "暂停";
             this.btnRunSwitch.UseVisualStyleBackColor = true;
+            this.btnRunSwitch.Click += new System.EventHandler(this.btnRunSwitch_Click);
             // 
             // labelStatus
             // 
