@@ -269,7 +269,7 @@ namespace 补水仪测试工装
         {
             if (STR_TEST_NAME.Length > num)
             {
-                SetLabelStatus(labelStatus, "项目【" + STR_TEST_NAME[num] + "】测试通过", enumTestStatus.Success);
+                SetLabelStatus(labelStatus, "项目【" + STR_TEST_NAME[num] + "】测试通过", enumTestStatus.Run);
                 SetListViewItemStatus(listViewStatus, num, enumTestStatus.Success);
                 SetProgressStatus(progressBarStatus, (num + 1) * 10);
             }
@@ -279,7 +279,7 @@ namespace 补水仪测试工装
         {
             if (STR_TEST_NAME.Length > num)
             {
-                SetLabelStatus(labelStatus, "项目【" + STR_TEST_NAME[num] + "】测试失败", enumTestStatus.Fail);
+                SetLabelStatus(labelStatus, "项目【" + STR_TEST_NAME[num] + "】测试失败", enumTestStatus.Run);
                 SetListViewItemStatus(listViewStatus, num, enumTestStatus.Fail);
                 SetProgressStatus(progressBarStatus, (num + 1) * 10);
             }
