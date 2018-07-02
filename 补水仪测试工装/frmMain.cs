@@ -331,7 +331,16 @@ namespace 补水仪测试工装
         /// <param name="message">信息</param>
         private void USB4704_EventError(string message)
         {
-            MessageBox.Show(message);
+            if (message.Contains("ErrorDeviceNotExist") || message.Contains("ErrorFuncNotInited") || message.Contains("ErrorUndefined")) //该设备不可用
+            {
+                USB4704.IDevice.CloseDevice();
+                MessageBox.Show("测试设备无法访问，请检查测试工装是否断开连接，或是否被其他程序占用。", message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
+            }
+            else
+            {
+                MessageBox.Show(message);
+            }
         }
         #endregion
 
