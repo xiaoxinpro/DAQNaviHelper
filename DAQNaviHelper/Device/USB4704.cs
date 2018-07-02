@@ -72,6 +72,20 @@ namespace DAQNavi.Device
             return true;
         }
 
+        /// <summary>
+        /// 关闭驱动
+        /// </summary>
+        public void CloseDevice()
+        {
+            timerAi.Enabled = false;
+            timerDi.Enabled = false;
+            timerCnt.Enabled = false;
+            waveformAiCtrlUsb4704.Dispose();
+            instantDiCtrlUsb4704.Dispose();
+            instantDoCtrlUsb4704.Dispose();
+            eventCounterCtrlUsb4704.Dispose();
+        }
+
         #endregion
 
         #region 事件
