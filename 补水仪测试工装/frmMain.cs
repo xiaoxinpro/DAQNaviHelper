@@ -694,6 +694,16 @@ namespace 补水仪测试工装
                     break;
                 case 8:
                     break;
+                case 9:
+                    if (TestCheckUSBVoltage)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                    break;
                 default:
                     StopTest();
                     break;
