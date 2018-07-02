@@ -10,6 +10,7 @@ namespace DAQNavi.Device
     {
         //初始化驱动
         bool InitDevice(DeviceInformation deviceInformation, out string message);
+        void CloseDevice();
 
         #region 事件
         event DAQNaviHelper.DelegateErrorEvent EventError;
