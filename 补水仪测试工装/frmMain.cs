@@ -547,6 +547,7 @@ namespace 补水仪测试工装
                         SetInitStatus(nowTestItem);
                         SelectPower(enumTestPower.Charging);
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_0);
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StartAiMode(TestCheckRedLight, 0.3, true);
                     }
                     else if (CntTimes > 10)
@@ -567,6 +568,7 @@ namespace 补水仪测试工装
                         SetInitStatus(nowTestItem);
                         SelectPower(enumTestPower.Charging);
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StartAiMode(TestCheckOut5V, 0.3, true);
                     }
                     else if (CntTimes > 10)
@@ -581,14 +583,112 @@ namespace 补水仪测试工装
                     }
                     break;
                 case 2:
+                    if (CntTimes++ == 0)
+                    {
+                        timerTest.Interval = 350;
+                        SetInitStatus(nowTestItem);
+                        SelectPower(enumTestPower.Charging);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_1);
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
+                        USB4704.IDevice.StartAiMode(TestCheckOut0V, 0.3, true);
+                    }
+                    else if (CntTimes > 10)
+                    {
+                        USB4704.IDevice.StopAiMode();
+                        SetFailStatus(nowTestItem);
+                        NextTest();
+                    }
+                    else
+                    {
+                        SetRunStatus(nowTestItem);
+                    }
                     break;
                 case 3:
+                    if (CntTimes++ == 0)
+                    {
+                        timerTest.Interval = 350;
+                        SetInitStatus(nowTestItem);
+                        SelectPower(enumTestPower.Charging);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_4);
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
+                        USB4704.IDevice.StartAiMode(TestCheckGreenLight, 0.3, true);
+                    }
+                    else if (CntTimes > 10)
+                    {
+                        USB4704.IDevice.StopAiMode();
+                        SetFailStatus(nowTestItem);
+                        NextTest();
+                    }
+                    else
+                    {
+                        SetRunStatus(nowTestItem);
+                    }
                     break;
                 case 4:
+                    if (CntTimes++ == 0)
+                    {
+                        timerTest.Interval = 350;
+                        SetInitStatus(nowTestItem);
+                        SelectPower(enumTestPower.Charging);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_1A);
+                        USB4704.IDevice.StartAiMode(TestCheck1ABatteryVoltage, 0.3, true);
+                    }
+                    else if (CntTimes > 10)
+                    {
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
+                        USB4704.IDevice.StopAiMode();
+                        SetFailStatus(nowTestItem);
+                        NextTest();
+                    }
+                    else
+                    {
+                        SetRunStatus(nowTestItem);
+                    }
                     break;
                 case 5:
+                    if (CntTimes++ == 0)
+                    {
+                        timerTest.Interval = 350;
+                        SetInitStatus(nowTestItem);
+                        SelectPower(enumTestPower.Charging);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_4A);
+                        USB4704.IDevice.StartAiMode(TestCheck4AOutVoltage, 0.3, true);
+                    }
+                    else if (CntTimes > 10)
+                    {
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
+                        USB4704.IDevice.StopAiMode();
+                        SetFailStatus(nowTestItem);
+                        NextTest();
+                    }
+                    else
+                    {
+                        SetRunStatus(nowTestItem);
+                    }
                     break;
                 case 6:
+                    if (CntTimes++ == 0)
+                    {
+                        timerTest.Interval = 350;
+                        SetInitStatus(nowTestItem);
+                        SelectPower(enumTestPower.Discharging);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
+                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
+                        USB4704.IDevice.StartAiMode(TestCheck0AOutVoltage, 0.3, true);
+                    }
+                    else if (CntTimes > 10)
+                    {
+                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
+                        USB4704.IDevice.StopAiMode();
+                        SetFailStatus(nowTestItem);
+                        NextTest();
+                    }
+                    else
+                    {
+                        SetRunStatus(nowTestItem);
+                    }
                     break;
                 case 7:
                     break;
@@ -604,9 +704,10 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Avg[AI_AD1];
             Console.WriteLine("红灯电压AD1 = " + vol);
+            int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
-                if (GetListViewItemStatus(listViewStatus,0) == enumTestStatus.Run)
+                if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
                     if (vol < 2.5 &&　vol > 1.2)
                     {
@@ -622,9 +723,10 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Avg[AI_AD3];
             Console.WriteLine("手机充电电压AD3 = " + vol);
+            int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
-                if (GetListViewItemStatus(listViewStatus, 1) == enumTestStatus.Run)
+                if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
                     if (vol < 5.25 && vol > 4.75)
                     {
@@ -635,6 +737,135 @@ namespace 补水仪测试工装
                 }
             }));
         }
+
+        private void TestCheckOut0V(AiModeType aiModeData)
+        {
+            double vol = aiModeData.Avg[AI_AD3];
+            Console.WriteLine("手机充电电压AD3 = " + vol);
+            int index = nowTestItem;
+            this.Invoke(new Action(() =>
+            {
+                if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
+                {
+                    if (vol < 0.75)
+                    {
+                        USB4704.IDevice.StopAiMode();
+                        SetSuccessStatus(nowTestItem);
+                        NextTest();
+                    }
+                }
+            }));
+        }
+
+        private void TestCheckGreenLight(AiModeType aiModeData)
+        {
+            double vol = aiModeData.Avg[AI_AD1];
+            Console.WriteLine("绿灯电压AD1 = " + vol);
+            int index = nowTestItem;
+            this.Invoke(new Action(() =>
+            {
+                if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
+                {
+                    if (vol < 3.5 && vol > 2.2)
+                    {
+                        USB4704.IDevice.StopAiMode();
+                        SetSuccessStatus(nowTestItem);
+                        NextTest();
+                    }
+                }
+            }));
+        }
+
+        private void TestCheck1ABatteryVoltage(AiModeType aiModeData)
+        {
+            double vol = aiModeData.Avg[AI_AD7];
+            Console.WriteLine("电池电压AD7 = " + vol);
+            int index = nowTestItem;
+            this.Invoke(new Action(() =>
+            {
+                if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
+                {
+                    if (vol < 3.8 && vol > 3.5)
+                    {
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
+                        USB4704.IDevice.StopAiMode();
+                        SetSuccessStatus(nowTestItem);
+                        NextTest();
+                    }
+                }
+            }));
+        }
+
+        private void TestCheck4AOutVoltage(AiModeType aiModeData)
+        {
+            double vol = aiModeData.Avg[AI_AD3];
+            Console.WriteLine("5V输出电压AD3 = " + vol);
+            int index = nowTestItem;
+            this.Invoke(new Action(() =>
+            {
+                if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
+                {
+                    if (vol < 0.75)
+                    {
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
+                        USB4704.IDevice.StopAiMode();
+                        SetSuccessStatus(nowTestItem);
+                        NextTest();
+                    }
+                }
+            }));
+        }
+
+        private bool TestCheckUSBVoltage = false;
+        private void TestCheck0AOutVoltage(AiModeType aiModeData)
+        {
+            double vol = aiModeData.Avg[AI_AD3];
+            double vol2 = aiModeData.Avg[AI_AD4];
+            double vol3 = aiModeData.Avg[AI_AD5];
+            Console.WriteLine("5V输出电压AD3 = " + vol);
+            int index = nowTestItem;
+            this.Invoke(new Action(() =>
+            {
+                if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
+                {
+                    if (vol < 5.25 && vol > 4.75)
+                    {
+                        USB4704.IDevice.StopAiMode();
+                        SetSuccessStatus(nowTestItem);
+                        NextTest();
+                        if (vol2 < 2.75 && vol2 > 2.55 && vol3 < 2.05 && vol3 > 1.85)
+                        {
+                            TestCheckUSBVoltage = true;
+                        }
+                        else
+                        {
+                            TestCheckUSBVoltage = false;
+                        }
+                    }
+                }
+            }));
+        }
+
+        private void TestCheck1AOutVoltage(AiModeType aiModeData)
+        {
+            double vol = aiModeData.Avg[AI_AD3];
+            Console.WriteLine("5V输出电压AD3 = " + vol);
+            int index = nowTestItem;
+            this.Invoke(new Action(() =>
+            {
+                if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
+                {
+                    if (vol < 5.25 && vol > 4.75)
+                    {
+                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
+                        USB4704.IDevice.StopAiMode();
+                        SetSuccessStatus(nowTestItem);
+                        NextTest();
+                    }
+                }
+            }));
+        }
+
         #endregion
 
         #region 按钮事件
