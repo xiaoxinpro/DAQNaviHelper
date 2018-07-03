@@ -127,6 +127,26 @@ namespace 补水仪测试工装
             }
         }
 
+        /// <summary>
+        /// 检测完成并输出状态栏显示
+        /// </summary>
+        /// <param name="label">状态栏控件</param>
+        /// <param name="listView">测试列表控件</param>
+        /// <returns></returns>
+        private bool DetectDoneLabelStatus(Label label, ListView listView)
+        {
+            for (int i = 0; i < listView.Items.Count; i++)
+            {
+                if (listView.Items[i].ImageIndex == (int)enumTestStatus.Fail)
+                {
+                    SetLabelStatus(labelStatus, "FAIL", enumTestStatus.Fail);
+                    return false;
+                }
+            }
+            SetLabelStatus(labelStatus, "PASS", enumTestStatus.Success);
+            return true;
+        }
+
         #endregion
 
         #region 状态进度条
@@ -729,6 +749,7 @@ namespace 补水仪测试工装
                     break;
                 default:
                     StopTest();
+                    DetectDoneLabelStatus(labelStatus, listViewStatus);
                     break;
             }
         }
