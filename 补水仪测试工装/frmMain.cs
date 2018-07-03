@@ -691,18 +691,41 @@ namespace 补水仪测试工装
                     }
                     break;
                 case 7:
-                    break;
-                case 8:
-                    break;
-                case 9:
-                    if (TestCheckUSBVoltage)
+                    if (CntTimes++ == 0)
                     {
-
+                        timerTest.Interval = 350;
+                        SetInitStatus(nowTestItem);
+                        SelectPower(enumTestPower.Discharging);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
+                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_1A);
+                        USB4704.IDevice.StartAiMode(TestCheck1AOutVoltage, 0.3, true);
+                    }
+                    else if (CntTimes > 10)
+                    {
+                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
+                        USB4704.IDevice.StopAiMode();
+                        SetFailStatus(nowTestItem);
+                        NextTest();
                     }
                     else
                     {
-
+                        SetRunStatus(nowTestItem);
                     }
+                    break;
+                case 8:
+                    NextTest();
+                    break;
+                case 9:
+                    timerTest.Interval = 500;
+                    if (TestCheckUSBVoltage)
+                    {
+                        SetSuccessStatus(nowTestItem);
+                    }
+                    else
+                    {
+                        SetFailStatus(nowTestItem);
+                    }
+                    NextTest();
                     break;
                 default:
                     StopTest();
