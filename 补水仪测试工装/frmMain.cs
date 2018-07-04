@@ -538,6 +538,9 @@ namespace 补水仪测试工装
         #endregion
 
         #region 测试流程
+        /// <summary>
+        /// 初始化测试
+        /// </summary>
         private void InitTest()
         {
             nowTestItem = 0;
@@ -546,18 +549,27 @@ namespace 补水仪测试工装
             StartTest();
         }
 
+        /// <summary>
+        /// 开始测试
+        /// </summary>
         private void StartTest()
         {
             isTestRun = true;
             timerTest.Enabled = true;
         }
 
+        /// <summary>
+        /// 暂停/停止测试
+        /// </summary>
         private void StopTest()
         {
             isTestRun = false;
             timerTest.Enabled = false;
         }
 
+        /// <summary>
+        /// 测试下一项
+        /// </summary>
         private void NextTest()
         {
             nowTestItem++;
@@ -565,6 +577,11 @@ namespace 补水仪测试工装
             timerTest.Interval = 400;
         }
 
+        /// <summary>
+        /// 测试定时器中断
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerTest_Tick(object sender, EventArgs e)
         {
             MarkTimeHelper.MarkTime(MarkTimeStatus.End, "测试定时");
@@ -765,6 +782,10 @@ namespace 补水仪测试工装
             }
         }
 
+        /// <summary>
+        /// 充电电池4V，检测红灯亮（AD1）
+        /// </summary>
+        /// <param name="aiModeData"></param>
         private void TestCheckRedLight(AiModeType aiModeData)
         {
             double vol = aiModeData.Avg[AI_AD1];
@@ -784,6 +805,10 @@ namespace 补水仪测试工装
             }));
         }
 
+        /// <summary>
+        /// 充电电池3.7V，检测输出换手机充电电压5V（AD3）
+        /// </summary>
+        /// <param name="aiModeData"></param>
         private void TestCheckOut5V(AiModeType aiModeData)
         {
             double vol = aiModeData.Avg[AI_AD3];
@@ -803,6 +828,10 @@ namespace 补水仪测试工装
             }));
         }
 
+        /// <summary>
+        /// 充电电池3.1V，检测输出手机充电电压0V
+        /// </summary>
+        /// <param name="aiModeData"></param>
         private void TestCheckOut0V(AiModeType aiModeData)
         {
             double vol = aiModeData.Avg[AI_AD3];
@@ -822,6 +851,10 @@ namespace 补水仪测试工装
             }));
         }
 
+        /// <summary>
+        /// 充电电池4.4V，检测充满绿灯亮（AD1）
+        /// </summary>
+        /// <param name="aiModeData"></param>
         private void TestCheckGreenLight(AiModeType aiModeData)
         {
             double vol = aiModeData.Avg[AI_AD1];
@@ -841,6 +874,10 @@ namespace 补水仪测试工装
             }));
         }
 
+        /// <summary>
+        /// 充电电池3.7V，检测1A负载下的电池电压3.7V（AD7）
+        /// </summary>
+        /// <param name="aiModeData"></param>
         private void TestCheck1ABatteryVoltage(AiModeType aiModeData)
         {
             double vol = aiModeData.Avg[AI_AD7];
@@ -861,6 +898,10 @@ namespace 补水仪测试工装
             }));
         }
 
+        /// <summary>
+        /// 充电电池3.7V，检测4A负载下的短路保护情况（AD3）
+        /// </summary>
+        /// <param name="aiModeData"></param>
         private void TestCheck4AOutVoltage(AiModeType aiModeData)
         {
             double vol = aiModeData.Avg[AI_AD3];
@@ -881,7 +922,15 @@ namespace 补水仪测试工装
             }));
         }
 
+        /// <summary>
+        /// 检测USB分压电阻是否正确的标志位
+        /// </summary>
         private bool TestCheckUSBVoltage = false;
+
+        /// <summary>
+        /// 放电电池3.7V，检测手机充电端空载电压5V(AD3)
+        /// </summary>
+        /// <param name="aiModeData"></param>
         private void TestCheck0AOutVoltage(AiModeType aiModeData)
         {
             double vol = aiModeData.Avg[AI_AD3];
@@ -911,6 +960,10 @@ namespace 补水仪测试工装
             }));
         }
 
+        /// <summary>
+        /// 放电电池3.7V，手机放电1A，检测手机充电电压5V
+        /// </summary>
+        /// <param name="aiModeData"></param>
         private void TestCheck1AOutVoltage(AiModeType aiModeData)
         {
             double vol = aiModeData.Avg[AI_AD3];
