@@ -223,8 +223,12 @@ namespace 补水仪测试工装
         /// <param name="e">状态</param>
         private void SetListViewItemStatus(ListViewItem listViewItem, enumTestStatus e)
         {
-            listViewItem.ImageIndex = Convert.ToInt32(e);
-            listViewItem.Text = " " + STR_TEST_STATUS[listViewItem.ImageIndex];
+            int index = Convert.ToInt32(e);
+            if (listViewItem.ImageIndex != index)
+            {
+                listViewItem.ImageIndex = Convert.ToInt32(e);
+                listViewItem.Text = " " + STR_TEST_STATUS[index];
+            }
         }
 
         /// <summary>
