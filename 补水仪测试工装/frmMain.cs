@@ -761,7 +761,38 @@ namespace 补水仪测试工装
                     }
                     break;
                 case 8:
-                    NextTest();
+                    if (CntTimes++ == 0)
+                    {
+                        timerTest.Interval = 550;
+                        SetInitStatus(nowTestItem);
+                        SelectPower(enumTestPower.Discharging);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
+                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
+                        SelectSpray(true);
+                        isTestCheckSprayVoltage = false;
+                        isTestCheckSprayCoun = false;
+                        USB4704.IDevice.StartCntMode(TestCheckSprayCount, 2);
+                        USB4704.IDevice.StartAiMode(TestCheckSprayVoltage, 0.5, true);
+                    }
+                    else if (isTestCheckSprayVoltage && isTestCheckSprayCoun)
+                    {
+                        SelectSpray(false);
+                        USB4704.IDevice.StopCntMode();
+                        USB4704.IDevice.StopAiMode();
+                        SetSuccessStatus(nowTestItem);
+                        NextTest();
+                    }
+                    else if (CntTimes > 10)
+                    {
+                        SelectSpray(false);
+                        USB4704.IDevice.StopAiMode();
+                        SetFailStatus(nowTestItem);
+                        NextTest();
+                    }
+                    else
+                    {
+                        SetRunStatus(nowTestItem);
+                    }
                     break;
                 case 9:
                     timerTest.Interval = 500;
@@ -982,6 +1013,47 @@ namespace 补水仪测试工装
                     }
                 }
             }));
+        }
+
+        /// <summary>
+        /// 判断喷雾峰值电压是否合格
+        /// </summary>
+        private bool isTestCheckSprayVoltage = false;
+
+        /// <summary>
+        /// 检测喷雾峰值电压（AD6）
+        /// </summary>
+        /// <param name="aiModeData"></param>
+        private void TestCheckSprayVoltage(AiModeType aiModeData)
+        {
+            double vol = aiModeData.Max[AI_AD6] * 11;
+            Console.WriteLine("喷雾峰值电压AD6 = " + vol);
+            if (vol < 70 && vol > 50)
+            {
+                isTestCheckSprayVoltage = true;
+            }
+        }
+
+        /// <summary>
+        /// 判断喷雾频率是否合格
+        /// </summary>
+        private bool isTestCheckSprayCoun = false;
+
+        /// <summary>
+        /// 检测喷雾频率（P1）
+        /// </summary>
+        /// <param name="channel"></param>
+        /// <param name="freq"></param>
+        private void TestCheckSprayCount(int channel, int freq)
+        {
+            if (channel == 0)
+            {
+                Console.WriteLine("喷雾频率P1 = " + freq);
+                if (freq < 120000 && freq > 100000)
+                {
+                    isTestCheckSprayCoun = true;
+                }
+            }
         }
 
         #endregion
