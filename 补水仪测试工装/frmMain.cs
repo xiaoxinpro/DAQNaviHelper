@@ -785,6 +785,7 @@ namespace 补水仪测试工装
                     else if (CntTimes > 10)
                     {
                         SelectSpray(false);
+                        USB4704.IDevice.StopCntMode();
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
                         NextTest();
