@@ -246,6 +246,20 @@ namespace 补水仪测试工装
         }
 
         /// <summary>
+        /// 复位列表状态
+        /// </summary>
+        /// <param name="listView">列表控件</param>
+        private void ResetListViewItemStatus(ListView listView)
+        {
+            listView.BeginUpdate();
+            foreach (ListViewItem item in listView.Items)
+            {
+                SetListViewItemStatus(item, enumTestStatus.Wait);
+            }
+            listView.EndUpdate();
+        }
+
+        /// <summary>
         /// 获取状态列表中的某项状态
         /// </summary>
         /// <param name="listView">状态列表控件</param>
@@ -546,6 +560,7 @@ namespace 补水仪测试工装
             nowTestItem = 0;
             CntTimes = 0;
             timerTest.Interval = 300;
+            ResetListViewItemStatus(listViewStatus);
             StartTest();
         }
 
