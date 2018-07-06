@@ -29,15 +29,16 @@ namespace 补水仪测试工装
         static LogHelper()
         {
             FilePath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "Log\\";
-            WriteThread = new Thread(WriteMsg);
             MsgQueue = new Queue<string>();
+            WriteThread = new Thread(WriteMsg);
+            WriteThread.IsBackground = true;
             WriteThread.Start();
         }
 
         public static void LogInfo(string msg)
         {
             Monitor.Enter(MsgQueue);
-            MsgQueue.Enqueue(string.Format("{0} {1} {2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:sss"), "Info", msg));
+            MsgQueue.Enqueue(string.Format("{0}\t{1}\t{2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:sss"), "Info", msg));
             Monitor.Exit(MsgQueue);
             if (autoResetEventFlag)
             {
@@ -47,7 +48,7 @@ namespace 补水仪测试工装
         public static void LogError(string msg)
         {
             Monitor.Enter(MsgQueue);
-            MsgQueue.Enqueue(string.Format("{0} {1} {2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:sss"), "Error", msg));
+            MsgQueue.Enqueue(string.Format("{0}\t{1}\t{2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:sss"), "Error", msg));
             Monitor.Exit(MsgQueue);
             if (autoResetEventFlag)
             {
@@ -57,7 +58,7 @@ namespace 补水仪测试工装
         public static void LogWarn(string msg)
         {
             Monitor.Enter(MsgQueue);
-            MsgQueue.Enqueue(string.Format("{0} {1} {2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:sss"), "Warn", msg));
+            MsgQueue.Enqueue(string.Format("{0}\t{1}\t{2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:sss"), "Warn", msg));
             Monitor.Exit(MsgQueue);
             if (autoResetEventFlag)
             {
