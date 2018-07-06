@@ -135,16 +135,28 @@ namespace 补水仪测试工装
         /// <returns></returns>
         private bool DetectDoneLabelStatus(Label label, ListView listView)
         {
+            bool isSuccess = true;
+            string message = "测试结果：";
             for (int i = 0; i < listView.Items.Count; i++)
             {
                 if (listView.Items[i].ImageIndex == (int)enumTestStatus.Fail)
                 {
-                    SetLabelStatus(labelStatus, "FAIL", enumTestStatus.Fail);
-                    return false;
+                    isSuccess = false;
+                    message += listView.Items[i].SubItems[1].Text + "【不合格】，";
                 }
             }
-            SetLabelStatus(labelStatus, "PASS", enumTestStatus.Success);
-            return true;
+
+            if (isSuccess)
+            {
+                SetLabelStatus(labelStatus, "PASS", enumTestStatus.Success);
+                LogHelper.LogInfo(message + "合格");
+            }
+            else
+            {
+                SetLabelStatus(labelStatus, "FAIL", enumTestStatus.Fail);
+                LogHelper.LogInfo(message);
+            }
+            return isSuccess;
         }
 
         #endregion
@@ -352,6 +364,8 @@ namespace 补水仪测试工装
         /// <param name="title">标题</param>
         private void initError(string message, string title)
         {
+            LogHelper.LogError(title + message);
+
             if (message.Contains("The device is not available")) //该设备不可用
             {
                 MessageBox.Show("该设备不可用，请检查测试工装是否连接，或是否被其他程序占用。", title, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -360,6 +374,7 @@ namespace 补水仪测试工装
             {
                 MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
             Application.Exit();
         }
 
@@ -371,6 +386,7 @@ namespace 补水仪测试工装
         {
             if (message.Contains("ErrorDeviceNotExist") || message.Contains("ErrorFuncNotInited") || message.Contains("ErrorUndefined")) //该设备不可用
             {
+                LogHelper.LogError("设备不可用，" + message);
                 try
                 {
                     timerTest.Enabled = false;
@@ -385,6 +401,7 @@ namespace 补水仪测试工装
             }
             else
             {
+                LogHelper.LogWarn(message);
                 MessageBox.Show(message);
             }
         }
@@ -420,6 +437,8 @@ namespace 补水仪测试工装
 
             //初始化脉冲计数器
             //USB4704.IDevice.StartCntMode(USB4704_CntEvent, 1);
+
+            LogHelper.LogInfo("功能模块初始化完成");
         }
 
 
@@ -571,6 +590,7 @@ namespace 补水仪测试工装
         {
             isTestRun = true;
             timerTest.Enabled = true;
+            LogHelper.LogInfo("开始测试");
         }
 
         /// <summary>
@@ -580,6 +600,7 @@ namespace 补水仪测试工装
         {
             isTestRun = false;
             timerTest.Enabled = false;
+            LogHelper.LogInfo("停止测试");
         }
 
         /// <summary>
@@ -823,8 +844,8 @@ namespace 补水仪测试工装
                     NextTest();
                     break;
                 default:
-                    StopTest();
                     DetectDoneLabelStatus(labelStatus, listViewStatus);
+                    StopTest();
                     break;
             }
         }
