@@ -633,6 +633,7 @@ namespace 补水仪测试工装
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_0);
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StartAiMode(TestCheckRedLight, 0.3, true);
+                        LogHelper.LogInfo("开始测试1\t选择电池4V，充电 检查红灯亮。");
                     }
                     else if (CntTimes > 10)
                     {
@@ -654,6 +655,7 @@ namespace 补水仪测试工装
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StartAiMode(TestCheckOut5V, 0.3, true);
+                        LogHelper.LogInfo("开始测试2\t选择电池3.7V，输出手机充电电压5V。");
                     }
                     else if (CntTimes > 10)
                     {
@@ -675,6 +677,7 @@ namespace 补水仪测试工装
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_1);
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StartAiMode(TestCheckOut0V, 0.3, true);
+                        LogHelper.LogInfo("开始测试3\t选择电3.1V，检查输出手机充电电压0V。");
                     }
                     else if (CntTimes > 10)
                     {
@@ -696,6 +699,7 @@ namespace 补水仪测试工装
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_4);
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StartAiMode(TestCheckGreenLight, 0.3, true);
+                        LogHelper.LogInfo("开始测试4\t选择电池4.4V，充满 检查绿灯亮。");
                     }
                     else if (CntTimes > 10)
                     {
@@ -717,6 +721,7 @@ namespace 补水仪测试工装
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_1A);
                         USB4704.IDevice.StartAiMode(TestCheck1ABatteryVoltage, 0.3, true);
+                        LogHelper.LogInfo("开始测试5\t选择电池3.7V，电流1A，检查电压3.7V。");
                     }
                     else if (CntTimes > 10)
                     {
@@ -739,6 +744,7 @@ namespace 补水仪测试工装
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_4A);
                         USB4704.IDevice.StartAiMode(TestCheck4AOutVoltage, 0.3, true);
+                        LogHelper.LogInfo("开始测试6\t选择电池3.7V，电流4A，模拟短路，检查手机输出电压0V。");
                     }
                     else if (CntTimes > 10)
                     {
@@ -761,6 +767,7 @@ namespace 补水仪测试工装
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
                         USB4704.IDevice.StartAiMode(TestCheck0AOutVoltage, 0.3, true);
+                        LogHelper.LogInfo("开始测试7\t选择放电电池3.7V，检查输出手机充电空载电压5V。");
                     }
                     else if (CntTimes > 10)
                     {
@@ -783,6 +790,7 @@ namespace 补水仪测试工装
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_7);
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_1A);
                         USB4704.IDevice.StartAiMode(TestCheck1AOutVoltage, 0.3, true);
+                        LogHelper.LogInfo("开始测试8\t选择放电电池3.7V，手机放电电流1A，检查输出手机充电电压5V。");
                     }
                     else if (CntTimes > 10)
                     {
@@ -809,6 +817,7 @@ namespace 补水仪测试工装
                         isTestCheckSprayCoun = false;
                         USB4704.IDevice.StartCntMode(TestCheckSprayCount, 2);
                         USB4704.IDevice.StartAiMode(TestCheckSprayVoltage, 0.5, true);
+                        LogHelper.LogInfo("开始测试9\t喷雾检查，喷雾峰值电压与喷雾频率。");
                     }
                     else if (isTestCheckSprayVoltage && isTestCheckSprayCoun)
                     {
