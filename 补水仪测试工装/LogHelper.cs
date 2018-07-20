@@ -106,8 +106,8 @@ namespace 补水仪测试工装
                             logStreamWriter = new StreamWriter(fileName, true);
                         }
                         //下面用于DbgView.exe工具进行在线调试
-                        System.Diagnostics.Debug.WriteLine("BS_Debug:" + msg);
-                        System.Diagnostics.Trace.WriteLine("BS_Release:" + msg);
+                        //System.Diagnostics.Debug.WriteLine("Log_Debug:" + msg);
+                        //System.Diagnostics.Trace.WriteLine("Log_Release:" + msg);
                     }
                     logStreamWriter.Flush();
                     logStreamWriter.Close();
