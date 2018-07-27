@@ -600,7 +600,7 @@ namespace 补水仪测试工装
         {
             isTestRun = false;
             timerTest.Enabled = false;
-            LogHelper.LogInfo("停止测试");
+            LogHelper.LogInfo("停止测试\r\n");
         }
 
         /// <summary>
