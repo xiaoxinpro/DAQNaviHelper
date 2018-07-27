@@ -867,6 +867,7 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Avg[AI_AD1];
             Console.WriteLine("红灯电压AD1 = " + vol);
+            LogHelper.LogInfo("\t\t红灯电压AD1 = " + vol);
             int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
@@ -890,6 +891,7 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Avg[AI_AD3];
             Console.WriteLine("手机充电电压AD3 = " + vol);
+            LogHelper.LogInfo("\t\t手机充电电压AD3 = " + vol);
             int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
@@ -913,6 +915,7 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Avg[AI_AD3];
             Console.WriteLine("手机充电电压AD3 = " + vol);
+            LogHelper.LogInfo("\t\t手机充电电压AD3 = " + vol);
             int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
@@ -936,6 +939,7 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Avg[AI_AD1];
             Console.WriteLine("绿灯电压AD1 = " + vol);
+            LogHelper.LogInfo("\t\t绿灯电压AD1 = " + vol);
             int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
@@ -959,6 +963,7 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Avg[AI_AD7];
             Console.WriteLine("电池电压AD7 = " + vol);
+            LogHelper.LogInfo("\t\t电池电压AD7 = " + vol);
             int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
@@ -983,6 +988,7 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Avg[AI_AD3];
             Console.WriteLine("5V输出电压AD3 = " + vol);
+            LogHelper.LogInfo("\t\t5V输出电压AD3 = " + vol);
             int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
@@ -1027,11 +1033,17 @@ namespace 补水仪测试工装
                         if (vol2 < 2.75 && vol2 > 2.55 && vol3 < 2.05 && vol3 > 1.85)
                         {
                             TestCheckUSBVoltage = true;
+                            LogHelper.LogInfo(string.Format("\t\t手机充电端口电压检测合格\t{0}\t{1}\t{2}", vol, vol2, vol3));
                         }
                         else
                         {
                             TestCheckUSBVoltage = false;
+                            LogHelper.LogWarn(string.Format("\t\t手机充电端口电压检测不合格\t{0}\t{1}\t{2}", vol, vol2, vol3));
                         }
+                    }
+                    else
+                    {
+                        LogHelper.LogWarn("\t\t5V输出电压AD3 = " + vol);
                     }
                 }
             }));
@@ -1045,6 +1057,7 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Avg[AI_AD3];
             Console.WriteLine("5V输出电压AD3 = " + vol);
+            LogHelper.LogInfo("\t\t5V输出电压AD3 = " + vol);
             int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
@@ -1074,9 +1087,11 @@ namespace 补水仪测试工装
         {
             double vol = aiModeData.Max[AI_AD6] * 11;
             Console.WriteLine("喷雾峰值电压AD6 = " + vol);
+            LogHelper.LogInfo("\t\t喷雾峰值电压AD6 = " + vol);
             if (vol < 70 && vol > 50)
             {
                 isTestCheckSprayVoltage = true;
+                LogHelper.LogInfo("喷雾峰值电压检测合格：" + vol);
             }
         }
 
@@ -1095,9 +1110,11 @@ namespace 补水仪测试工装
             if (channel == 0)
             {
                 Console.WriteLine("喷雾频率P1 = " + freq);
+                LogHelper.LogInfo("\t\t喷雾频率P1 = " + freq);
                 if (freq < 120000 && freq > 100000)
                 {
                     isTestCheckSprayCoun = true;
+                    LogHelper.LogInfo("喷雾频率检测合格：" + freq);
                 }
             }
         }
