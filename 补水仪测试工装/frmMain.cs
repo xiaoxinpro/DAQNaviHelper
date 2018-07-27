@@ -590,7 +590,7 @@ namespace 补水仪测试工装
         {
             isTestRun = true;
             timerTest.Enabled = true;
-            LogHelper.LogInfo("开始测试");
+            LogHelper.LogInfo("测试开始...");
         }
 
         /// <summary>
@@ -639,6 +639,7 @@ namespace 补水仪测试工装
                     {
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogWarn("结束测试1\t测试超时。");
                         NextTest();
                     }
                     else
@@ -661,6 +662,7 @@ namespace 补水仪测试工装
                     {
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogWarn("结束测试2\t测试超时。");
                         NextTest();
                     }
                     else
@@ -683,6 +685,7 @@ namespace 补水仪测试工装
                     {
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogWarn("结束测试3\t测试超时。");
                         NextTest();
                     }
                     else
@@ -705,6 +708,7 @@ namespace 补水仪测试工装
                     {
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogWarn("结束测试4\t测试超时。");
                         NextTest();
                     }
                     else
@@ -728,6 +732,7 @@ namespace 补水仪测试工装
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogWarn("结束测试5\t测试超时。");
                         NextTest();
                     }
                     else
@@ -751,6 +756,7 @@ namespace 补水仪测试工装
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogWarn("结束测试6\t测试超时。");
                         NextTest();
                     }
                     else
@@ -774,6 +780,7 @@ namespace 补水仪测试工装
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogWarn("结束测试7\t测试超时。");
                         NextTest();
                     }
                     else
@@ -797,6 +804,7 @@ namespace 补水仪测试工装
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogWarn("结束测试8\t测试超时。");
                         NextTest();
                     }
                     else
@@ -825,6 +833,7 @@ namespace 补水仪测试工装
                         USB4704.IDevice.StopCntMode();
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
+                        
                         NextTest();
                     }
                     else if (CntTimes > 10)
@@ -833,6 +842,7 @@ namespace 补水仪测试工装
                         USB4704.IDevice.StopCntMode();
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogWarn("结束测试9\t测试超时。");
                         NextTest();
                     }
                     else
