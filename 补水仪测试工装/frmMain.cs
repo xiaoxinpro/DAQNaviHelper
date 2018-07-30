@@ -457,7 +457,7 @@ namespace 补水仪测试工装
                     if (!Convert.ToBoolean(data) && isTestRun == false)
                     {
                         LogHelper.LogInfo("外部按钮触发");
-                        InitTest();
+                        Common.CallOnClick(btnInitSwitch);
                     }
                 }));
             }
