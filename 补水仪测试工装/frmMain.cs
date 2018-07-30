@@ -386,7 +386,7 @@ namespace 补水仪测试工装
         {
             if (message.Contains("ErrorDeviceNotExist") || message.Contains("ErrorFuncNotInited") || message.Contains("ErrorUndefined")) //该设备不可用
             {
-                LogHelper.LogError("设备不可用，" + message);
+                LogHelper.LogError("设备出错\t" + message);
                 try
                 {
                     timerTest.Enabled = false;
@@ -401,7 +401,7 @@ namespace 补水仪测试工装
             }
             else
             {
-                LogHelper.LogWarn(message);
+                LogHelper.LogWarn("设备异常\t" + message);
                 MessageBox.Show(message);
             }
         }
@@ -456,6 +456,7 @@ namespace 补水仪测试工装
                     Console.WriteLine("DI_P2 = " + Convert.ToBoolean(data));
                     if (!Convert.ToBoolean(data) && isTestRun == false)
                     {
+                        LogHelper.LogInfo("外部按钮触发");
                         InitTest();
                     }
                 }));
@@ -833,7 +834,7 @@ namespace 补水仪测试工装
                         USB4704.IDevice.StopCntMode();
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
-                        
+                        LogHelper.LogInfo("结束测试9\t通过。");
                         NextTest();
                     }
                     else if (CntTimes > 10)
@@ -855,10 +856,12 @@ namespace 补水仪测试工装
                     if (TestCheckUSBVoltage)
                     {
                         SetSuccessStatus(nowTestItem);
+                        LogHelper.LogInfo("结束测试10\t通过。");
                     }
                     else
                     {
                         SetFailStatus(nowTestItem);
+                        LogHelper.LogInfo("结束测试10\t失败。");
                     }
                     NextTest();
                     break;
@@ -887,6 +890,7 @@ namespace 补水仪测试工装
                     {
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
+                        LogHelper.LogInfo("结束测试" +(index + 1) + "\t通过。");
                         NextTest();
                     }
                 }
@@ -911,6 +915,7 @@ namespace 补水仪测试工装
                     {
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
+                        LogHelper.LogInfo("结束测试" + (index + 1) + "\t通过。");
                         NextTest();
                     }
                 }
@@ -935,6 +940,7 @@ namespace 补水仪测试工装
                     {
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
+                        LogHelper.LogInfo("结束测试" + (index + 1) + "\t通过。");
                         NextTest();
                     }
                 }
@@ -959,6 +965,7 @@ namespace 补水仪测试工装
                     {
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
+                        LogHelper.LogInfo("结束测试" + (index + 1) + "\t通过。");
                         NextTest();
                     }
                 }
@@ -984,6 +991,7 @@ namespace 补水仪测试工装
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
+                        LogHelper.LogInfo("结束测试" + (index + 1) + "\t通过。");
                         NextTest();
                     }
                 }
@@ -1009,6 +1017,7 @@ namespace 补水仪测试工装
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
+                        LogHelper.LogInfo("结束测试" + (index + 1) + "\t通过。");
                         NextTest();
                     }
                 }
@@ -1078,6 +1087,7 @@ namespace 补水仪测试工装
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
+                        LogHelper.LogInfo("结束测试" + (index + 1) + "\t通过。");
                         NextTest();
                     }
                 }
