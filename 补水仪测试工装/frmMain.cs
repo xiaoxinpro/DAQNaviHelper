@@ -153,7 +153,7 @@ namespace 补水仪测试工装
             }
             else
             {
-                SetLabelStatus(labelStatus, "FAIL", enumTestStatus.Fail);
+                SetLabelStatus(labelStatus, "NG", enumTestStatus.Fail);
                 LogHelper.LogInfo(message);
             }
             return isSuccess;
