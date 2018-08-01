@@ -48,14 +48,14 @@ namespace 补水仪测试工装
         private const int CNT_P1 = 0;
 
         //输入AI
-        private const int AI_AD1 = 0;
-        private const int AI_AD2 = 1;
-        private const int AI_AD3 = 2;
-        private const int AI_AD4 = 3;
-        private const int AI_AD5 = 4;
-        private const int AI_AD6 = 5;
-        private const int AI_AD7 = 6;
-        private const int AI_AD8 = 7;
+        private const int AI_AD0 = 0;
+        private const int AI_AD1 = 1;
+        private const int AI_AD2 = 2;
+        private const int AI_AD3 = 3;
+        private const int AI_AD4 = 4;
+        private const int AI_AD5 = 5;
+        private const int AI_AD6 = 6;
+        private const int AI_AD7 = 7;
         #endregion
 
         #region 字段
@@ -426,7 +426,7 @@ namespace 补水仪测试工装
             portData[DO_K5] = 1;
             portData[DO_K6] = 1;
             portData[DO_K7] = 1;
-            portData[DO_K8] = 0;
+            portData[DO_K8] = 1;
             USB4704.IDevice.SetDoMode(portData);
 
             //初始化模拟输入
@@ -537,15 +537,15 @@ namespace 补水仪测试工装
             {
                 case enumTestChargingCurrent.Cur_0A:
                     USB4704.IDevice.SetDoModeBit(DO_K4, 1);
-                    USB4704.IDevice.SetDoModeBit(DO_K5, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K5, 0);
                     break;
                 case enumTestChargingCurrent.Cur_1A:
-                    USB4704.IDevice.SetDoModeBit(DO_K5, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K5, 0);
                     USB4704.IDevice.SetDoModeBit(DO_K4, 0);
                     break;
                 case enumTestChargingCurrent.Cur_4A:
                     USB4704.IDevice.SetDoModeBit(DO_K4, 0);
-                    USB4704.IDevice.SetDoModeBit(DO_K5, 0);
+                    USB4704.IDevice.SetDoModeBit(DO_K5, 1);
                     break;
                 default:
                     break;
@@ -973,14 +973,14 @@ namespace 补水仪测试工装
         }
 
         /// <summary>
-        /// 充电电池3.7V，检测1A负载下的电池电压3.7V（AD7）
+        /// 充电电池3.7V，检测1A负载下的电池电压3.7V（AD0 - AD7）
         /// </summary>
         /// <param name="aiModeData"></param>
         private void TestCheck1ABatteryVoltage(AiModeType aiModeData)
         {
-            double vol = aiModeData.Avg[AI_AD7];
-            Console.WriteLine("电池电压AD7 = " + vol);
-            LogHelper.LogInfo("\t\t电池电压AD7 = " + vol);
+            double vol = aiModeData.Avg[AI_AD0] - aiModeData.Avg[AI_AD7];
+            Console.WriteLine("电池电压AD0 - AD7 = " + vol);
+            LogHelper.LogInfo("\t\t电池电压AD0 - AD7 = " + vol);
             int index = nowTestItem;
             this.Invoke(new Action(() =>
             {
@@ -1196,8 +1196,8 @@ namespace 补水仪测试工装
     /// </summary>
     public enum enumTestPower
     {
-        Charging = 0,
-        Discharging = 1
+        Charging = 1,
+        Discharging = 0
     }
 
     /// <summary>
@@ -1226,8 +1226,8 @@ namespace 补水仪测试工装
     /// </summary>
     public enum enumTestDischargingCurrent
     {
-        Cur_1A = 0,
-        Cur_0A = 1
+        Cur_1A = 1,
+        Cur_0A = 0
     }
     #endregion
 }
