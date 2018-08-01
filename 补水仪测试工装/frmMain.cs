@@ -419,14 +419,14 @@ namespace 补水仪测试工装
 
             //初始化数值输出
             byte[] portData = new byte[8];
-            portData[DO_K1] = 1;
-            portData[DO_K2] = 1;
-            portData[DO_K3] = 1;
-            portData[DO_K4] = 1;
-            portData[DO_K5] = 1;
+            portData[DO_K1] = 0;
+            portData[DO_K2] = 0;
+            portData[DO_K3] = 0;
+            portData[DO_K4] = 0;
+            portData[DO_K5] = 0;
             portData[DO_K6] = 1;
             portData[DO_K7] = 1;
-            portData[DO_K8] = 1;
+            portData[DO_K8] = 0;
             USB4704.IDevice.SetDoMode(portData);
 
             //初始化模拟输入
@@ -536,15 +536,15 @@ namespace 补水仪测试工装
             switch (e)
             {
                 case enumTestChargingCurrent.Cur_0A:
-                    USB4704.IDevice.SetDoModeBit(DO_K4, 1);
+                    USB4704.IDevice.SetDoModeBit(DO_K7, 1);
                     USB4704.IDevice.SetDoModeBit(DO_K5, 0);
                     break;
                 case enumTestChargingCurrent.Cur_1A:
                     USB4704.IDevice.SetDoModeBit(DO_K5, 0);
-                    USB4704.IDevice.SetDoModeBit(DO_K4, 0);
+                    USB4704.IDevice.SetDoModeBit(DO_K7, 0);
                     break;
                 case enumTestChargingCurrent.Cur_4A:
-                    USB4704.IDevice.SetDoModeBit(DO_K4, 0);
+                    USB4704.IDevice.SetDoModeBit(DO_K7, 0);
                     USB4704.IDevice.SetDoModeBit(DO_K5, 1);
                     break;
                 default:
@@ -558,7 +558,7 @@ namespace 补水仪测试工装
         /// <param name="e"></param>
         private void SelectDichargingCurrent(enumTestDischargingCurrent e)
         {
-            USB4704.IDevice.SetDoModeBit(DO_K7, Convert.ToByte(e));
+            USB4704.IDevice.SetDoModeBit(DO_K4, Convert.ToByte(e));
         }
 
         /// <summary>
