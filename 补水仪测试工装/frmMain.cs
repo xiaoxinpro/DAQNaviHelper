@@ -621,8 +621,6 @@ namespace 补水仪测试工装
         /// <param name="e"></param>
         private void timerTest_Tick(object sender, EventArgs e)
         {
-            MarkTimeHelper.MarkTime(MarkTimeStatus.End, "测试定时");
-            MarkTimeHelper.MarkTime(MarkTimeStatus.Start, "测试定时");
             switch (nowTestItem)
             {
                 case 0:
@@ -632,12 +630,13 @@ namespace 补水仪测试工装
                         SetInitStatus(nowTestItem);
                         SelectPower(enumTestPower.Charging);
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_0);
-                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_1A);
                         USB4704.IDevice.StartAiMode(TestCheckRedLight, 0.3, true);
                         LogHelper.LogInfo("开始测试1\t选择电池4V，充电 检查红灯亮。");
                     }
                     else if (CntTimes > 10)
                     {
+                        SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
                         LogHelper.LogWarn("结束测试1\t测试超时。");
@@ -837,7 +836,7 @@ namespace 补水仪测试工装
                         LogHelper.LogInfo("结束测试9\t通过。");
                         NextTest();
                     }
-                    else if (CntTimes > 10)
+                    else if (CntTimes > 20)
                     {
                         SelectSpray(false);
                         USB4704.IDevice.StopCntMode();
@@ -886,7 +885,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (vol < 2.5 &&　vol > 1.2)
+                    if (vol < 2.5 &&　vol > 1.9)
                     {
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
@@ -936,7 +935,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (vol < 0.75)
+                    if (vol < 1.5)
                     {
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
@@ -961,7 +960,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (vol < 3.5 && vol > 2.2)
+                    if (vol < 3.3 && vol > 2.9)
                     {
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
@@ -986,7 +985,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (vol < 3.8 && vol > 3.5)
+                    if (vol < 3.9 && vol > 3.5)
                     {
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
@@ -1012,7 +1011,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (vol < 0.75)
+                    if (vol < 1.5)
                     {
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
@@ -1108,7 +1107,7 @@ namespace 补水仪测试工装
             double vol = aiModeData.Max[AI_AD6] * 11;
             Console.WriteLine("喷雾峰值电压AD6 = " + vol);
             LogHelper.LogInfo("\t\t喷雾峰值电压AD6 = " + vol);
-            if (vol < 70 && vol > 50)
+            if (vol < 60 && vol > 30)
             {
                 isTestCheckSprayVoltage = true;
                 LogHelper.LogInfo("喷雾峰值电压检测合格：" + vol);
