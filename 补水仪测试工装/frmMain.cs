@@ -1006,7 +1006,7 @@ namespace 补水仪测试工装
                 string log = string.Format("喷雾峰值电压AD6*11 = {0:0.000}\t蓝灯电压AD2 = {1:0.000}", vol, blue);
                 Console.WriteLine(log);
                 LogHelper.LogInfo("\t\t" + log);
-                if ((vol < 40 && vol > 30) && (blue < 2.3 && blue > 2.0)) 
+                if ((vol < 42 && vol > 32) && (blue < 2.3 && blue > 2.0)) 
                 {
                     isTestCheckSprayVoltage = true;
                 }
