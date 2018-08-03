@@ -764,6 +764,7 @@ namespace 补水仪测试工装
                     {
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StartAiMode(TestCheckGreenLignt, 0.3, true);
+                        SetRunStatus(nowTestItem);
                     }
                     else if (CntTimes > 10)
                     {
