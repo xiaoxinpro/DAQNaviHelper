@@ -999,12 +999,14 @@ namespace 补水仪测试工装
         private void TestCheckSprayVoltage(AiModeType aiModeData)
         {
             double vol = aiModeData.Max[AI_AD6] * 11;
-            Console.WriteLine("喷雾峰值电压AD6 = " + vol);
-            LogHelper.LogInfo("\t\t喷雾峰值电压AD6 = " + vol);
-            if (vol < 60 && vol > 30)
+            double blue = aiModeData.Avg[AI_AD2];
+            string log = string.Format("喷雾峰值电压AD6*11 = {0:0.000}\t蓝灯电压AD2 = {1:0.000}", vol, blue);
+            Console.WriteLine(log);
+            LogHelper.LogInfo("\t\t" + log);
+            if ((vol < 40 && vol > 30) && (blue < 2.3 && blue > 2.0)) 
             {
                 isTestCheckSprayVoltage = true;
-                LogHelper.LogInfo("喷雾峰值电压检测合格：" + vol);
+                LogHelper.LogInfo(string.Format("喷雾峰值电压检测合格：{0:0.000}\t蓝灯电压：{1:0.000}", vol, blue));
             }
         }
 
