@@ -186,7 +186,7 @@ namespace DAQNavi.Device
         /// </summary>
         private void InitWaveformAiCtrlUsb4704()
         {
-            waveformAiCtrlUsb4704.Conversion.ClockRate = 40960; //AD转换频率（32-47619）
+            waveformAiCtrlUsb4704.Conversion.ClockRate = 38400; //AD转换频率（32-47619）
             waveformAiCtrlUsb4704.Record.SectionLength = 512;    //采样缓存区大小（保证通信间隔大于100us）
             waveformAiCtrlUsb4704.Conversion.ChannelStart = 0;  //采样起始通道
             waveformAiCtrlUsb4704.Conversion.ChannelCount = 8;  //采样通道数
