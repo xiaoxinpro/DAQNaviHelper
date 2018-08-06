@@ -209,8 +209,8 @@ namespace 补水仪测试工装
 
             //创建列表头
             listView.Columns.Add("状态", 75, HorizontalAlignment.Center);
-            listView.Columns.Add("测试内容", 150, HorizontalAlignment.Center);
-            listView.Columns.Add("备注", 375, HorizontalAlignment.Left);
+            listView.Columns.Add("测试项目", 150, HorizontalAlignment.Center);
+            listView.Columns.Add("测试内容", 375, HorizontalAlignment.Left);
 
             //添加数据
             listView.BeginUpdate();
