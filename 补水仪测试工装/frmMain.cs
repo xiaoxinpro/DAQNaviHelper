@@ -800,7 +800,7 @@ namespace 补水仪测试工装
                         isTestCheckSprayVoltage = false;
                         isTestCheckSprayCoun = false;
                         USB4704.IDevice.StartCntMode(TestCheckSprayCount, 2);
-                        USB4704.IDevice.StartAiMode(TestCheckSprayVoltage, 1, true);
+                        USB4704.IDevice.StartAiMode(TestCheckSprayVoltage, 2, true);
                         LogHelper.LogInfo("开始测试7\t喷雾检查，喷雾峰值电压与喷雾频率。");
                     }
                     else if (isTestCheckSprayVoltage && isTestCheckSprayCoun)
@@ -848,7 +848,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (vol < 3.0)
+                    if (vol < 1.5)
                     {
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
@@ -877,7 +877,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if ((vol > 4.9 && vol < 5.2) && (vol1 > 2.1 && vol1 < 2.3) && (vol2 > 1.5 && vol2 < 1.7)) 
+                    if ((vol > 5.0 && vol < 5.2) && (vol1 > 2.1 && vol1 < 2.3) && (vol2 > 1.5 && vol2 < 1.7)) 
                     {
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
@@ -903,7 +903,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (vol > 4.8 && vol < 5.2) 
+                    if (vol > 4.9) 
                     {
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
@@ -930,7 +930,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (vol < 3.0)
+                    if (vol < 1.5)
                     {
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
@@ -985,7 +985,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (green > 3.0 && green < 3.3)
+                    if (green > 3.1 && green < 3.3)
                     {
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
@@ -1015,7 +1015,7 @@ namespace 补水仪测试工装
                 string log = string.Format("喷雾峰值电压AD6*11 = {0:0.000}\t蓝灯电压AD2 = {1:0.000}", vol, blue);
                 Console.WriteLine(log);
                 LogHelper.LogInfo("\t\t" + log);
-                if ((vol < 42 && vol > 32) && (blue < 2.3 && blue > 2.0)) 
+                if ((vol < 45 && vol > 35) && (blue < 2.3 && blue > 2.0)) 
                 {
                     isTestCheckSprayVoltage = true;
                 }
@@ -1038,10 +1038,10 @@ namespace 补水仪测试工装
             {
                 Console.WriteLine("喷雾频率P1 = " + freq);
                 LogHelper.LogInfo("\t\t喷雾频率P1 = " + freq);
-                if (freq < 120000 && freq > 100000)
+                if (freq < 116000 && freq > 109000)
                 {
                     isTestCheckSprayCoun = true;
-                    LogHelper.LogInfo("喷雾频率检测合格：" + freq);
+                    LogHelper.LogInfo("\t\t喷雾频率检测合格：" + freq);
                 }
             }
         }
