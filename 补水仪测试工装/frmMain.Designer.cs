@@ -37,12 +37,13 @@
             this.listViewStatus = new System.Windows.Forms.ListView();
             this.imageListStatus = new System.Windows.Forms.ImageList(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
+            this.btnTestStop = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnInitSwitch
             // 
             this.btnInitSwitch.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btnInitSwitch.Location = new System.Drawing.Point(118, 12);
+            this.btnInitSwitch.Location = new System.Drawing.Point(108, 550);
             this.btnInitSwitch.Name = "btnInitSwitch";
             this.btnInitSwitch.Size = new System.Drawing.Size(134, 56);
             this.btnInitSwitch.TabIndex = 0;
@@ -55,7 +56,7 @@
             this.btnRunSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRunSwitch.Enabled = false;
             this.btnRunSwitch.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btnRunSwitch.Location = new System.Drawing.Point(409, 12);
+            this.btnRunSwitch.Location = new System.Drawing.Point(399, 550);
             this.btnRunSwitch.Name = "btnRunSwitch";
             this.btnRunSwitch.Size = new System.Drawing.Size(134, 56);
             this.btnRunSwitch.TabIndex = 0;
@@ -90,9 +91,9 @@
             this.listViewStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listViewStatus.Location = new System.Drawing.Point(13, 179);
+            this.listViewStatus.Location = new System.Drawing.Point(13, 180);
             this.listViewStatus.Name = "listViewStatus";
-            this.listViewStatus.Size = new System.Drawing.Size(635, 427);
+            this.listViewStatus.Size = new System.Drawing.Size(635, 353);
             this.listViewStatus.TabIndex = 3;
             this.listViewStatus.UseCompatibleStateImageBehavior = false;
             // 
@@ -110,11 +111,25 @@
             // 
             this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
+            // btnTestStop
+            // 
+            this.btnTestStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTestStop.Font = new System.Drawing.Font("微软雅黑", 16F);
+            this.btnTestStop.Location = new System.Drawing.Point(13, 12);
+            this.btnTestStop.Name = "btnTestStop";
+            this.btnTestStop.Size = new System.Drawing.Size(635, 65);
+            this.btnTestStop.TabIndex = 4;
+            this.btnTestStop.Text = "强制停止";
+            this.btnTestStop.UseVisualStyleBackColor = true;
+            this.btnTestStop.Click += new System.EventHandler(this.btnTestStop_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 618);
+            this.ClientSize = new System.Drawing.Size(660, 543);
+            this.Controls.Add(this.btnTestStop);
             this.Controls.Add(this.listViewStatus);
             this.Controls.Add(this.progressBarStatus);
             this.Controls.Add(this.labelStatus);
@@ -139,6 +154,7 @@
         private System.Windows.Forms.ListView listViewStatus;
         private System.Windows.Forms.ImageList imageListStatus;
         private System.Windows.Forms.Timer timerTest;
+        private System.Windows.Forms.Button btnTestStop;
     }
 }
 
