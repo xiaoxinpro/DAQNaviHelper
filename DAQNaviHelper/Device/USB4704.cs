@@ -473,6 +473,7 @@ namespace DAQNavi.Device
                 timerCnt.Interval = (timers > 0.1 ? timers : 0.1) * 1000;
                 eventCounterCtrlUsb4704.Enabled = true;
                 timerCnt.Enabled = true;
+                MarkTimeHelper.MarkTime(MarkTimeStatus.Start, "计数定时器");
             }
             catch (Exception error)
             {
