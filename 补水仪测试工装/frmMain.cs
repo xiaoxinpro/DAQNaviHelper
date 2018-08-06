@@ -340,10 +340,19 @@ namespace 补水仪测试工装
         private void InitUsb4704()
         {
             //初始化设备
-            USB4704 = new DAQNaviHelper("USB-4704,BID#0");
-            if (!USB4704.InitDevice(out string message))
+            DialogResult dialogResult = DialogResult.Retry;
+            while(dialogResult == DialogResult.Retry)
             {
-                initError(message, "USB-4704初始化失败");
+                dialogResult = DialogResult.OK;
+                USB4704 = new DAQNaviHelper("USB-4704,BID#0");
+                if (!USB4704.InitDevice(out string message))
+                {
+                    dialogResult = initError(message, "USB-4704初始化失败");
+                    if(dialogResult == DialogResult.Cancel)
+                    {
+                        Application.Exit();
+                    }
+                }
             }
 
             //绑定异常发生事件
@@ -359,20 +368,18 @@ namespace 补水仪测试工装
         /// </summary>
         /// <param name="message">信息</param>
         /// <param name="title">标题</param>
-        private void initError(string message, string title)
+        private DialogResult initError(string message, string title)
         {
             LogHelper.LogError(title + message);
-
             if (message.Contains("The device is not available")) //该设备不可用
             {
-                MessageBox.Show("该设备不可用，请检查测试工装是否连接，或是否被其他程序占用。", title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return MessageBox.Show("该设备不可用，请检查测试工装是否连接，或是否被其他程序占用。", title, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
             }
             else
             {
-                MessageBox.Show(message, title, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return MessageBox.Show(message, title, MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
             }
-
-            Application.Exit();
+            //Application.Exit();
         }
 
         /// <summary>
@@ -610,6 +617,8 @@ namespace 补水仪测试工装
         {
             isTestRun = false;
             timerTest.Enabled = false;
+            USB4704.IDevice.StopCntMode();
+            USB4704.IDevice.StopAiMode();
             LogHelper.LogInfo("停止测试\r\n");
         }
 
@@ -1071,6 +1080,21 @@ namespace 补水仪测试工装
                 btnRunSwitch.Text = "暂停";
                 StartTest();
             }
+        }
+
+        /// <summary>
+        /// 强制停止按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnTestStop_Click(object sender, EventArgs e)
+        {
+            LogHelper.LogInfo("触发强制停止按钮");
+            StopTest();
+            InitIO();
+            InitLabelStatus(labelStatus);
+            InitProgressStatus(progressBarStatus);
+            InitListViewStatus(listViewStatus);
         }
 
         #endregion
