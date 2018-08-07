@@ -74,6 +74,19 @@ namespace 补水仪测试工装
             flag = false;
             aEvent.Set();//恢复线程执行
         }
+
+        /// <summary>
+        /// 打开日志文件目录
+        /// </summary>
+        public static void OpenLogFilePath()
+        {
+            string fileName = FilePath + DateTime.Now.ToString("yyyy-MM-dd") + ".log";
+            System.Diagnostics.Process.Start("Explorer", "/select," + fileName);
+        }
+
+        /// <summary>
+        /// 输出日志
+        /// </summary>
         private static void WriteMsg()
         {
             while (flag)
@@ -121,6 +134,12 @@ namespace 补水仪测试工装
                 }
             }
         }
+
+        /// <summary>
+        /// 获取文件大小
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         private static long GetFileSize(string fileName)
         {
             long strRe = 0;
@@ -132,6 +151,11 @@ namespace 补水仪测试工装
             }
             return strRe;
         }
+
+        /// <summary>
+        /// 复制备份文件
+        /// </summary>
+        /// <param name="sFileName"></param>
         private static void CopyToBak(string sFileName)
         {
             int fileCount = 0;
