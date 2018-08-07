@@ -94,7 +94,7 @@ namespace 补水仪测试工装
                         string msg = MsgQueue.Dequeue();
                         Monitor.Exit(MsgQueue);
                         logStreamWriter.WriteLine(msg);
-                        if (GetFileSize(fileName) > 1024 * 5)
+                        if (GetFileSize(fileName) > 1024 * 50)
                         {
                             logStreamWriter.Flush();
                             logStreamWriter.Close();
