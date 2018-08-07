@@ -61,6 +61,9 @@ namespace 补水仪测试工装
         private DAQNaviHelper USB4704;
         private AiModeType AdData;
         private int CntTimes = 0;
+
+        //定义AppConfig类
+        private AppConfig appConfig;
         #endregion
 
         #region 初始化
@@ -72,9 +75,15 @@ namespace 补水仪测试工装
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            //初始化配置
+            appConfig = new AppConfig();
+
+            //初始化界面
             InitLabelStatus(labelStatus);
             InitProgressStatus(progressBarStatus);
             InitListViewStatus(listViewStatus);
+
+            //初始化硬件驱动
             InitUsb4704();
         }
 
@@ -605,9 +614,11 @@ namespace 补水仪测试工装
         /// </summary>
         private void StartTest()
         {
+            string strTestNumber = GetTestNumber();
             isTestRun = true;
             timerTest.Enabled = true;
-            LogHelper.LogInfo("测试开始...");
+            LogHelper.LogInfo("测试开始\t测试编码：" + strTestNumber);
+            labelTestNumber.Text = strTestNumber;
         }
 
         /// <summary>
@@ -719,12 +730,13 @@ namespace 补水仪测试工装
                         SetInitStatus(nowTestItem);
                         SelectPower(enumTestPower.Discharging);
                         SelectBatteryVoltage(enumTestBatteryVoltage.Vol3_1);
-                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
+                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_1A);
                         USB4704.IDevice.StartAiMode(TestCheckLowUsbVoltage, 0.3, true);
                         LogHelper.LogInfo("开始测试4\t选择电池2.3V，检查低电压USB输出电压。");
                     }
                     else if (CntTimes > 10)
                     {
+                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
                         LogHelper.LogWarn("结束测试4\t测试超时。");
@@ -932,6 +944,7 @@ namespace 补水仪测试工装
                 {
                     if (vol < 1.5)
                     {
+                        SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
                         LogHelper.LogInfo("结束测试" + (index + 1) + "\t通过。");
@@ -1046,6 +1059,29 @@ namespace 补水仪测试工装
             }
         }
 
+        #endregion
+
+        #region 测试编码
+        /// <summary>
+        /// 获取测试编码
+        /// </summary>
+        /// <returns>返回测试编码</returns>
+        private string GetTestNumber()
+        {
+            string strNow = DateTime.Now.ToString("yyyyMMdd");
+            int num = 1;
+            if (appConfig.GetConfig("TestDate") == strNow)
+            {
+                string strNum = appConfig.GetConfig("TestNumber");
+                if (strNum != null)
+                {
+                    num = Convert.ToInt32(strNum) + 1;
+                }
+            }
+            appConfig.SetConfig("TestDate", strNow);
+            appConfig.SetConfig("TestNumber", num.ToString());
+            return string.Format("{0} - {1:0000}", strNow, num);
+        }
         #endregion
 
         #region 按钮事件

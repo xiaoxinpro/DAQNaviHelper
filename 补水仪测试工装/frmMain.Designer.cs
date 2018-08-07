@@ -38,6 +38,7 @@
             this.imageListStatus = new System.Windows.Forms.ImageList(this.components);
             this.timerTest = new System.Windows.Forms.Timer(this.components);
             this.btnTestStop = new System.Windows.Forms.Button();
+            this.labelTestNumber = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnInitSwitch
@@ -93,7 +94,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewStatus.Location = new System.Drawing.Point(13, 180);
             this.listViewStatus.Name = "listViewStatus";
-            this.listViewStatus.Size = new System.Drawing.Size(635, 353);
+            this.listViewStatus.Size = new System.Drawing.Size(635, 323);
             this.listViewStatus.TabIndex = 3;
             this.listViewStatus.UseCompatibleStateImageBehavior = false;
             // 
@@ -124,11 +125,26 @@
             this.btnTestStop.UseVisualStyleBackColor = true;
             this.btnTestStop.Click += new System.EventHandler(this.btnTestStop_Click);
             // 
+            // labelTestNumber
+            // 
+            this.labelTestNumber.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTestNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelTestNumber.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.labelTestNumber.ForeColor = System.Drawing.Color.Blue;
+            this.labelTestNumber.Location = new System.Drawing.Point(13, 506);
+            this.labelTestNumber.Name = "labelTestNumber";
+            this.labelTestNumber.Size = new System.Drawing.Size(635, 25);
+            this.labelTestNumber.TabIndex = 5;
+            this.labelTestNumber.Text = "测试编码";
+            this.labelTestNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(660, 543);
+            this.Controls.Add(this.labelTestNumber);
             this.Controls.Add(this.btnTestStop);
             this.Controls.Add(this.listViewStatus);
             this.Controls.Add(this.progressBarStatus);
@@ -156,6 +172,7 @@
         private System.Windows.Forms.ImageList imageListStatus;
         private System.Windows.Forms.Timer timerTest;
         private System.Windows.Forms.Button btnTestStop;
+        private System.Windows.Forms.Label labelTestNumber;
     }
 }
 
