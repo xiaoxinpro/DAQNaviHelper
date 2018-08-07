@@ -138,6 +138,7 @@
             this.labelTestNumber.TabIndex = 5;
             this.labelTestNumber.Text = "测试编码";
             this.labelTestNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelTestNumber.DoubleClick += new System.EventHandler(this.labelTestNumber_DoubleClick);
             // 
             // frmMain
             // 

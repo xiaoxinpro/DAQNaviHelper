@@ -308,6 +308,10 @@ namespace 补水仪测试工装
             }
         }
 
+        /// <summary>
+        /// 设置运行状态
+        /// </summary>
+        /// <param name="num">测试号</param>
         private void SetRunStatus(int num)
         {
             if (STR_TEST_NAME.Length > num)
@@ -321,6 +325,10 @@ namespace 补水仪测试工装
             }
         }
 
+        /// <summary>
+        /// 设置成功状态
+        /// </summary>
+        /// <param name="num">测试号</param>
         private void SetSuccessStatus(int num)
         {
             if (STR_TEST_NAME.Length > num)
@@ -331,6 +339,10 @@ namespace 补水仪测试工装
             }
         }
 
+        /// <summary>
+        /// 设置失败状态
+        /// </summary>
+        /// <param name="num">测试号</param>
         private void SetFailStatus(int num)
         {
             if (STR_TEST_NAME.Length > num)
@@ -1133,7 +1145,18 @@ namespace 补水仪测试工装
             InitListViewStatus(listViewStatus);
         }
 
+        /// <summary>
+        /// 打开测试日志文件目录
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void labelTestNumber_DoubleClick(object sender, EventArgs e)
+        {
+            LogHelper.OpenLogFilePath();
+        }
+
         #endregion
+
     }
 
     #region 枚举类型
