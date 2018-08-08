@@ -1044,7 +1044,7 @@ namespace 补水仪测试工装
                 string log = string.Format("喷雾峰值电压AD6*11 = {0:0.000}\t蓝灯电压AD2 = {1:0.000}\t电池电压AD0-AD7 = {2:0.000}", vol, blue, bat);
                 Console.WriteLine(log);
                 LogHelper.LogInfo("\t\t" + log);
-                if ((vol < 45 && vol > 35) && (blue < 2.3 && blue > 2.0)) 
+                if ((vol < 35 && vol > 30) && (blue < 2.3 && blue > 2.0)) 
                 {
                     isTestCheckSprayVoltage = true;
                 }
@@ -1067,10 +1067,9 @@ namespace 补水仪测试工装
             {
                 Console.WriteLine("喷雾频率P1 = " + freq);
                 LogHelper.LogInfo("\t\t喷雾频率P1 = " + freq);
-                if (freq < 116000 && freq > 109000)
+                if (freq < 118000 && freq > 109000)
                 {
                     isTestCheckSprayCoun = true;
-                    LogHelper.LogInfo("\t\t喷雾频率检测合格：" + freq);
                 }
             }
         }
