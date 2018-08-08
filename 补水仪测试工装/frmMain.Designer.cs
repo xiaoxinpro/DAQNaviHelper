@@ -57,7 +57,7 @@
             this.btnRunSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRunSwitch.Enabled = false;
             this.btnRunSwitch.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btnRunSwitch.Location = new System.Drawing.Point(399, 550);
+            this.btnRunSwitch.Location = new System.Drawing.Point(465, 550);
             this.btnRunSwitch.Name = "btnRunSwitch";
             this.btnRunSwitch.Size = new System.Drawing.Size(134, 56);
             this.btnRunSwitch.TabIndex = 0;
@@ -73,7 +73,7 @@
             this.labelStatus.Font = new System.Drawing.Font("微软雅黑", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelStatus.Location = new System.Drawing.Point(13, 80);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(635, 66);
+            this.labelStatus.Size = new System.Drawing.Size(701, 66);
             this.labelStatus.TabIndex = 1;
             this.labelStatus.Text = "测试状态";
             this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -84,7 +84,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBarStatus.Location = new System.Drawing.Point(13, 150);
             this.progressBarStatus.Name = "progressBarStatus";
-            this.progressBarStatus.Size = new System.Drawing.Size(635, 23);
+            this.progressBarStatus.Size = new System.Drawing.Size(701, 23);
             this.progressBarStatus.TabIndex = 2;
             // 
             // listViewStatus
@@ -94,7 +94,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewStatus.Location = new System.Drawing.Point(13, 180);
             this.listViewStatus.Name = "listViewStatus";
-            this.listViewStatus.Size = new System.Drawing.Size(635, 323);
+            this.listViewStatus.Size = new System.Drawing.Size(701, 323);
             this.listViewStatus.TabIndex = 3;
             this.listViewStatus.UseCompatibleStateImageBehavior = false;
             // 
@@ -119,7 +119,7 @@
             this.btnTestStop.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnTestStop.Location = new System.Drawing.Point(13, 12);
             this.btnTestStop.Name = "btnTestStop";
-            this.btnTestStop.Size = new System.Drawing.Size(635, 65);
+            this.btnTestStop.Size = new System.Drawing.Size(701, 65);
             this.btnTestStop.TabIndex = 4;
             this.btnTestStop.Text = "强制停止";
             this.btnTestStop.UseVisualStyleBackColor = true;
@@ -134,7 +134,7 @@
             this.labelTestNumber.ForeColor = System.Drawing.Color.Blue;
             this.labelTestNumber.Location = new System.Drawing.Point(13, 506);
             this.labelTestNumber.Name = "labelTestNumber";
-            this.labelTestNumber.Size = new System.Drawing.Size(635, 25);
+            this.labelTestNumber.Size = new System.Drawing.Size(701, 25);
             this.labelTestNumber.TabIndex = 5;
             this.labelTestNumber.Text = "测试编码";
             this.labelTestNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -144,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 543);
+            this.ClientSize = new System.Drawing.Size(726, 543);
             this.Controls.Add(this.labelTestNumber);
             this.Controls.Add(this.btnTestStop);
             this.Controls.Add(this.listViewStatus);

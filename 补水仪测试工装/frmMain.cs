@@ -217,7 +217,7 @@ namespace 补水仪测试工装
             listView.SmallImageList = imageListStatus;
 
             //创建列表头
-            listView.Columns.Add("状态", 75, HorizontalAlignment.Center);
+            listView.Columns.Add("状态     ", 75, HorizontalAlignment.Center);
             listView.Columns.Add("测试项目", 150, HorizontalAlignment.Center);
             listView.Columns.Add("测试内容", 375, HorizontalAlignment.Left);
 
@@ -232,6 +232,9 @@ namespace 补水仪测试工装
                 listView.Items.Add(listViewItem);
             }
             listView.EndUpdate();
+
+            //自适应宽度
+            foreach (ColumnHeader ch in listView.Columns) { ch.Width = -2; }
         }
 
         /// <summary>
@@ -1037,7 +1040,8 @@ namespace 补水仪测试工装
             {
                 double vol = aiModeData.Max[AI_AD6] * 11;
                 double blue = aiModeData.Avg[AI_AD2];
-                string log = string.Format("喷雾峰值电压AD6*11 = {0:0.000}\t蓝灯电压AD2 = {1:0.000}", vol, blue);
+                double bat = aiModeData.Avg[AI_AD0] - aiModeData.Avg[AI_AD7];
+                string log = string.Format("喷雾峰值电压AD6*11 = {0:0.000}\t蓝灯电压AD2 = {1:0.000}\t电池电压AD0-AD7 = {2:0.000}", vol, blue, bat);
                 Console.WriteLine(log);
                 LogHelper.LogInfo("\t\t" + log);
                 if ((vol < 45 && vol > 35) && (blue < 2.3 && blue > 2.0)) 
