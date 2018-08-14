@@ -98,7 +98,7 @@ namespace 补水仪测试工装
         {
             label.BackColor = Color.White;
             label.ForeColor = Color.Black;
-            label.Text = "待开启测试";
+            label.Text = "准备就绪";
         }
 
         /// <summary>
