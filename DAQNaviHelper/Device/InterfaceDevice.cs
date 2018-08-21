@@ -43,6 +43,10 @@ namespace DAQNavi.Device
         void StopCntMode();
         #endregion
 
+        #region 模拟输出
+        bool SetAoMode(int ch, double data);
+        #endregion
+
         void Test(object e);
 
     }

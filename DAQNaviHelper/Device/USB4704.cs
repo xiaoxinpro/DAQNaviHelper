@@ -17,6 +17,7 @@ namespace DAQNavi.Device
         private InstantDiCtrl instantDiCtrlUsb4704 = new InstantDiCtrl();
         private InstantDoCtrl instantDoCtrlUsb4704 = new InstantDoCtrl();
         private EventCounterCtrl eventCounterCtrlUsb4704 = new EventCounterCtrl();
+        private InstantAoCtrl instantAoCtrlUsb4704 = new InstantAoCtrl();
 
         //模拟输入字段
         private double[] arrAiData;
@@ -55,6 +56,7 @@ namespace DAQNavi.Device
                 instantDiCtrlUsb4704.SelectedDevice = deviceInformation;
                 instantDoCtrlUsb4704.SelectedDevice = deviceInformation;
                 eventCounterCtrlUsb4704.SelectedDevice = deviceInformation;
+                instantAoCtrlUsb4704.SelectedDevice = deviceInformation;
 
                 //初始化
                 InitWaveformAiCtrlUsb4704();
@@ -84,6 +86,7 @@ namespace DAQNavi.Device
             instantDiCtrlUsb4704.Dispose();
             instantDoCtrlUsb4704.Dispose();
             eventCounterCtrlUsb4704.Dispose();
+            instantAoCtrlUsb4704.Dispose();
         }
 
         #endregion
@@ -534,6 +537,19 @@ namespace DAQNavi.Device
             {
                 ActiveEventCnt(0, Convert.ToInt32(cntData / timeSpan.TotalSeconds));
             }
+        }
+        #endregion
+
+        #region 模拟输出
+        public bool SetAoMode(int ch, double data)
+        {
+            ErrorCode err = instantAoCtrlUsb4704.Write(ch, data);
+            if (err != ErrorCode.Success)
+            {
+                ActiveEventError("设置模拟输出失败：" + err.ToString());
+                return false;
+            }
+            return true;
         }
         #endregion
 
