@@ -376,6 +376,8 @@
             this.numAoVol0.Name = "numAoVol0";
             this.numAoVol0.Size = new System.Drawing.Size(60, 21);
             this.numAoVol0.TabIndex = 7;
+            this.numAoVol0.Tag = "0";
+            this.numAoVol0.ValueChanged += new System.EventHandler(this.numAoVol_ValueChanged);
             // 
             // numAoVol1
             // 
@@ -394,6 +396,8 @@
             this.numAoVol1.Name = "numAoVol1";
             this.numAoVol1.Size = new System.Drawing.Size(60, 21);
             this.numAoVol1.TabIndex = 7;
+            this.numAoVol1.Tag = "1";
+            this.numAoVol1.ValueChanged += new System.EventHandler(this.numAoVol_ValueChanged);
             // 
             // btnAoSite
             // 

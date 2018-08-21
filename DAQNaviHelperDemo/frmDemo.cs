@@ -186,5 +186,14 @@ namespace DAQNaviHelperDemo
             USB4704.IDevice.SetAoMode(0, Convert.ToDouble(numAoVol0.Value));
             USB4704.IDevice.SetAoMode(1, Convert.ToDouble(numAoVol1.Value));
         }
+
+        private void numAoVol_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown num = (NumericUpDown)sender;
+            int ch = Convert.ToInt32(num.Tag);
+            double data = Convert.ToDouble(num.Value);
+            USB4704.IDevice.SetAoMode(ch, data);
+        }
+
     }
 }
