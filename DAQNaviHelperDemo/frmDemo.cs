@@ -180,5 +180,11 @@ namespace DAQNaviHelperDemo
                 }));
             }
         }
+
+        private void btnAoSite_Click(object sender, EventArgs e)
+        {
+            USB4704.IDevice.SetAoMode(0, Convert.ToDouble(numAoVol0.Value));
+            USB4704.IDevice.SetAoMode(1, Convert.ToDouble(numAoVol1.Value));
+        }
     }
 }

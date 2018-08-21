@@ -42,19 +42,28 @@
             this.chkDoList = new System.Windows.Forms.CheckedListBox();
             this.btnDoSwitch = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCnt = new System.Windows.Forms.TextBox();
             this.btnCntStop = new System.Windows.Forms.Button();
             this.btnCntStart = new System.Windows.Forms.Button();
             this.labelCnt = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numAoVol0 = new System.Windows.Forms.NumericUpDown();
+            this.numAoVol1 = new System.Windows.Forms.NumericUpDown();
+            this.btnAoSite = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAiInterval)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAoVol0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAoVol1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnTest
@@ -154,7 +163,7 @@
             this.groupBox2.Controls.Add(this.btnDiSwitch);
             this.groupBox2.Location = new System.Drawing.Point(12, 215);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(105, 190);
+            this.groupBox2.Size = new System.Drawing.Size(105, 209);
             this.groupBox2.TabIndex = 3;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "数字输入";
@@ -168,7 +177,7 @@
             this.chkDiList.FormattingEnabled = true;
             this.chkDiList.Location = new System.Drawing.Point(7, 48);
             this.chkDiList.Name = "chkDiList";
-            this.chkDiList.Size = new System.Drawing.Size(92, 132);
+            this.chkDiList.Size = new System.Drawing.Size(92, 148);
             this.chkDiList.TabIndex = 1;
             // 
             // btnDiSwitch
@@ -189,7 +198,7 @@
             this.groupBox3.Controls.Add(this.btnDoSwitch);
             this.groupBox3.Location = new System.Drawing.Point(123, 215);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(105, 190);
+            this.groupBox3.Size = new System.Drawing.Size(105, 209);
             this.groupBox3.TabIndex = 4;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "数字输出";
@@ -203,7 +212,7 @@
             this.chkDoList.FormattingEnabled = true;
             this.chkDoList.Location = new System.Drawing.Point(7, 48);
             this.chkDoList.Name = "chkDoList";
-            this.chkDoList.Size = new System.Drawing.Size(92, 132);
+            this.chkDoList.Size = new System.Drawing.Size(92, 148);
             this.chkDoList.TabIndex = 1;
             this.chkDoList.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.chkDoList_ItemCheck);
             // 
@@ -231,10 +240,28 @@
             this.groupBox4.Controls.Add(this.label3);
             this.groupBox4.Location = new System.Drawing.Point(234, 215);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(172, 190);
+            this.groupBox4.Size = new System.Drawing.Size(172, 117);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "计时器";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(138, 58);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(17, 12);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Hz";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(138, 29);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(17, 12);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "秒";
             // 
             // label2
             // 
@@ -257,9 +284,10 @@
             // 
             // btnCntStop
             // 
-            this.btnCntStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCntStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCntStop.Enabled = false;
-            this.btnCntStop.Location = new System.Drawing.Point(91, 157);
+            this.btnCntStop.Location = new System.Drawing.Point(91, 84);
             this.btnCntStop.Name = "btnCntStop";
             this.btnCntStop.Size = new System.Drawing.Size(54, 23);
             this.btnCntStop.TabIndex = 4;
@@ -269,8 +297,9 @@
             // 
             // btnCntStart
             // 
-            this.btnCntStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCntStart.Location = new System.Drawing.Point(23, 157);
+            this.btnCntStart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCntStart.Location = new System.Drawing.Point(23, 84);
             this.btnCntStart.Name = "btnCntStart";
             this.btnCntStart.Size = new System.Drawing.Size(54, 23);
             this.btnCntStart.TabIndex = 3;
@@ -298,29 +327,90 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "频率：";
             // 
-            // label4
+            // groupBox5
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(138, 29);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 12);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "秒";
+            this.groupBox5.Controls.Add(this.btnAoSite);
+            this.groupBox5.Controls.Add(this.numAoVol1);
+            this.groupBox5.Controls.Add(this.numAoVol0);
+            this.groupBox5.Controls.Add(this.label6);
+            this.groupBox5.Controls.Add(this.label7);
+            this.groupBox5.Location = new System.Drawing.Point(235, 339);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(171, 85);
+            this.groupBox5.TabIndex = 8;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "模拟输出";
             // 
-            // label5
+            // label6
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(138, 58);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(17, 12);
-            this.label5.TabIndex = 7;
-            this.label5.Text = "Hz";
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 56);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(47, 12);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "通道1：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 27);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 12);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "通道0：";
+            // 
+            // numAoVol0
+            // 
+            this.numAoVol0.DecimalPlaces = 3;
+            this.numAoVol0.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numAoVol0.Location = new System.Drawing.Point(55, 25);
+            this.numAoVol0.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numAoVol0.Name = "numAoVol0";
+            this.numAoVol0.Size = new System.Drawing.Size(60, 21);
+            this.numAoVol0.TabIndex = 7;
+            // 
+            // numAoVol1
+            // 
+            this.numAoVol1.DecimalPlaces = 3;
+            this.numAoVol1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numAoVol1.Location = new System.Drawing.Point(55, 52);
+            this.numAoVol1.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numAoVol1.Name = "numAoVol1";
+            this.numAoVol1.Size = new System.Drawing.Size(60, 21);
+            this.numAoVol1.TabIndex = 7;
+            // 
+            // btnAoSite
+            // 
+            this.btnAoSite.Location = new System.Drawing.Point(121, 22);
+            this.btnAoSite.Name = "btnAoSite";
+            this.btnAoSite.Size = new System.Drawing.Size(44, 50);
+            this.btnAoSite.TabIndex = 8;
+            this.btnAoSite.Text = "设置";
+            this.btnAoSite.UseVisualStyleBackColor = true;
+            this.btnAoSite.Click += new System.EventHandler(this.btnAoSite_Click);
             // 
             // frmDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(419, 450);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -337,6 +427,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numAoVol0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAoVol1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -365,6 +459,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button btnAoSite;
+        private System.Windows.Forms.NumericUpDown numAoVol1;
+        private System.Windows.Forms.NumericUpDown numAoVol0;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
     }
 }
 
