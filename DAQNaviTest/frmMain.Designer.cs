@@ -50,10 +50,20 @@
             this.label2 = new System.Windows.Forms.Label();
             this.labelCnt = new System.Windows.Forms.Label();
             this.eventCounterCtrlUsb4704 = new Automation.BDaq.EventCounterCtrl(this.components);
+            this.instantAoCtrlUsb4704 = new Automation.BDaq.InstantAoCtrl(this.components);
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnAoSite = new System.Windows.Forms.Button();
+            this.numVol0 = new System.Windows.Forms.NumericUpDown();
+            this.numVol1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numVol0)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numVol1)).BeginInit();
             this.SuspendLayout();
             // 
             // waveformAiCtrlUsb4704
@@ -168,7 +178,7 @@
             this.groupBox4.Controls.Add(this.labelCnt);
             this.groupBox4.Location = new System.Drawing.Point(424, 301);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 250);
+            this.groupBox4.Size = new System.Drawing.Size(200, 129);
             this.groupBox4.TabIndex = 6;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "计时器";
@@ -203,7 +213,6 @@
             // 
             // btnCntStop
             // 
-            this.btnCntStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCntStop.Enabled = false;
             this.btnCntStop.Location = new System.Drawing.Point(140, 75);
             this.btnCntStop.Name = "btnCntStop";
@@ -215,7 +224,6 @@
             // 
             // btnCntStart
             // 
-            this.btnCntStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCntStart.Location = new System.Drawing.Point(72, 75);
             this.btnCntStart.Name = "btnCntStart";
             this.btnCntStart.Size = new System.Drawing.Size(54, 23);
@@ -248,11 +256,94 @@
             // 
             this.eventCounterCtrlUsb4704._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("eventCounterCtrlUsb4704._StateStream")));
             // 
+            // instantAoCtrlUsb4704
+            // 
+            this.instantAoCtrlUsb4704._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("instantAoCtrlUsb4704._StateStream")));
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.numVol1);
+            this.groupBox5.Controls.Add(this.numVol0);
+            this.groupBox5.Controls.Add(this.btnAoSite);
+            this.groupBox5.Controls.Add(this.label4);
+            this.groupBox5.Controls.Add(this.label3);
+            this.groupBox5.Location = new System.Drawing.Point(425, 437);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(199, 114);
+            this.groupBox5.TabIndex = 7;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "模拟输出";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 12);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "通道0：";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 55);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 12);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "通道1：";
+            // 
+            // btnAoSite
+            // 
+            this.btnAoSite.Location = new System.Drawing.Point(139, 85);
+            this.btnAoSite.Name = "btnAoSite";
+            this.btnAoSite.Size = new System.Drawing.Size(54, 23);
+            this.btnAoSite.TabIndex = 1;
+            this.btnAoSite.Text = "设置";
+            this.btnAoSite.UseVisualStyleBackColor = true;
+            this.btnAoSite.Click += new System.EventHandler(this.btnAoSite_Click);
+            // 
+            // numVol0
+            // 
+            this.numVol0.DecimalPlaces = 3;
+            this.numVol0.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numVol0.Location = new System.Drawing.Point(65, 30);
+            this.numVol0.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numVol0.Name = "numVol0";
+            this.numVol0.Size = new System.Drawing.Size(120, 21);
+            this.numVol0.TabIndex = 2;
+            // 
+            // numVol1
+            // 
+            this.numVol1.DecimalPlaces = 3;
+            this.numVol1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numVol1.Location = new System.Drawing.Point(65, 53);
+            this.numVol1.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numVol1.Name = "numVol1";
+            this.numVol1.Size = new System.Drawing.Size(120, 21);
+            this.numVol1.TabIndex = 2;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(832, 590);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -266,6 +357,10 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numVol0)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numVol1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -292,6 +387,13 @@
         private System.Windows.Forms.TextBox txtCnt;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkCnt;
+        private Automation.BDaq.InstantAoCtrl instantAoCtrlUsb4704;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.NumericUpDown numVol1;
+        private System.Windows.Forms.NumericUpDown numVol0;
+        private System.Windows.Forms.Button btnAoSite;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
     }
 }
 

@@ -40,6 +40,8 @@ namespace DAQNavi
 
             initEventCounterCtrlUsb4704();
 
+            initInstantAoCtrlUsb4704();
+
             timerTest = new System.Windows.Forms.Timer();
             timerTest.Tick += new EventHandler(TimerTest_Elapsed);
             timerTest.Interval = 10;
@@ -478,6 +480,30 @@ namespace DAQNavi
             txtCnt.Enabled = true;
         }
 
+        #endregion
+
+        #region 模拟输出
+        private void initInstantAoCtrlUsb4704(int deviceNumber = 1)
+        {
+            try
+            {
+                instantAoCtrlUsb4704.SelectedDevice = new DeviceInformation("USB-4704,BID#0");
+                instantAoCtrlUsb4704.Write(0, 0.123);
+                instantAoCtrlUsb4704.Write(1, 1.234);
+            }
+            catch (Exception error)
+            {
+                initError("InstantAoCtr:" + error.Message, "Usb4704初始化失败");
+                Application.Exit();
+                return;
+            }
+        }
+
+        private void btnAoSite_Click(object sender, EventArgs e)
+        {
+            instantAoCtrlUsb4704.Write(0, Convert.ToDouble(numVol0.Value));
+            instantAoCtrlUsb4704.Write(1, Convert.ToDouble(numVol1.Value));
+        }
         #endregion
     }
 }

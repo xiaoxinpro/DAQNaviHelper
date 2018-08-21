@@ -127,7 +127,7 @@
         b24uQkRhcS5EZXZpY2VTdGF0ZVN0cmVhbWVyBQAAAAxEZXZpY2VOdW1iZXILRGVzY3JpcHRpb24KRGV2
         aWNlTW9kZQtNb2R1bGVJbmRleAlQcm9kdWN0SUQAAgAABAgICBlBdXRvbWF0aW9uLkJEYXEuUHJvZHVj
         dElkAgAAAAIAAAD/////CgEAAAAAAAAABf3///8ZQXV0b21hdGlvbi5CRGFxLlByb2R1Y3RJZAEAAAAH
-        dmFsdWVfXwAIAgAAAGgc2SIL
+        dmFsdWVfXwAIAgAAAHhGZxEL
 </value>
   </data>
   <metadata name="instantDiCtrlUsb4704.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -140,7 +140,7 @@
         b24uQkRhcS5EZXZpY2VTdGF0ZVN0cmVhbWVyBQAAAAxEZXZpY2VOdW1iZXILRGVzY3JpcHRpb24KRGV2
         aWNlTW9kZQtNb2R1bGVJbmRleAlQcm9kdWN0SUQAAgAABAgICBlBdXRvbWF0aW9uLkJEYXEuUHJvZHVj
         dElkAgAAAAIAAAD/////CgEAAAAAAAAABf3///8ZQXV0b21hdGlvbi5CRGFxLlByb2R1Y3RJZAEAAAAH
-        dmFsdWVfXwAIAgAAABgh2SIL
+        dmFsdWVfXwAIAgAAAChLZxEL
 </value>
   </data>
   <metadata name="instantDoCtrlUsb4704.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -153,7 +153,7 @@
         b24uQkRhcS5EZXZpY2VTdGF0ZVN0cmVhbWVyBQAAAAxEZXZpY2VOdW1iZXILRGVzY3JpcHRpb24KRGV2
         aWNlTW9kZQtNb2R1bGVJbmRleAlQcm9kdWN0SUQAAgAABAgICBlBdXRvbWF0aW9uLkJEYXEuUHJvZHVj
         dElkAgAAAAIAAAD/////CgEAAAAAAAAABf3///8ZQXV0b21hdGlvbi5CRGFxLlByb2R1Y3RJZAEAAAAH
-        dmFsdWVfXwAIAgAAANAl2SIL
+        dmFsdWVfXwAIAgAAAGA7ZxEL
 </value>
   </data>
   <metadata name="eventCounterCtrlUsb4704.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -166,7 +166,20 @@
         b24uQkRhcS5EZXZpY2VTdGF0ZVN0cmVhbWVyBQAAAAxEZXZpY2VOdW1iZXILRGVzY3JpcHRpb24KRGV2
         aWNlTW9kZQtNb2R1bGVJbmRleAlQcm9kdWN0SUQAAgAABAgICBlBdXRvbWF0aW9uLkJEYXEuUHJvZHVj
         dElkAgAAAAIAAAD/////CgEAAAAAAAAABf3///8ZQXV0b21hdGlvbi5CRGFxLlByb2R1Y3RJZAEAAAAH
-        dmFsdWVfXwAIAgAAABAq2SIL
+        dmFsdWVfXwAIAgAAAIDaZxEL
+</value>
+  </data>
+  <metadata name="instantAoCtrlUsb4704.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>776, 17</value>
+  </metadata>
+  <data name="instantAoCtrlUsb4704._StateStream" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFNBdXRvbWF0aW9uLkJEYXE0LCBWZXJzaW9uPTQuMC4wLjAsIEN1
+        bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49NDYzZjU5MjhkNjAxODNhMAUBAAAAI0F1dG9tYXRp
+        b24uQkRhcS5EZXZpY2VTdGF0ZVN0cmVhbWVyBQAAAAxEZXZpY2VOdW1iZXILRGVzY3JpcHRpb24KRGV2
+        aWNlTW9kZQtNb2R1bGVJbmRleAlQcm9kdWN0SUQAAgAABAgICBlBdXRvbWF0aW9uLkJEYXEuUHJvZHVj
+        dElkAgAAAAIAAAD/////CgEAAAAAAAAABf3///8ZQXV0b21hdGlvbi5CRGFxLlByb2R1Y3RJZAEAAAAH
+        dmFsdWVfXwAIAgAAAOBPZxEL
 </value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
