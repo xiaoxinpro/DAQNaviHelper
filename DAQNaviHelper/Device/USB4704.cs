@@ -541,15 +541,29 @@ namespace DAQNavi.Device
         #endregion
 
         #region 模拟输出
+        /// <summary>
+        /// 设置模拟输出电压
+        /// </summary>
+        /// <param name="ch">通道号0-1</param>
+        /// <param name="data">电压值0-5V</param>
+        /// <returns>是否设置成功</returns>
         public bool SetAoMode(int ch, double data)
         {
-            ErrorCode err = instantAoCtrlUsb4704.Write(ch, data);
-            if (err != ErrorCode.Success)
+            if (ch < instantAoCtrlUsb4704.ChannelCount && data >= 0 && data <= 5) 
             {
-                ActiveEventError("设置模拟输出失败：" + err.ToString());
+                ErrorCode err = instantAoCtrlUsb4704.Write(ch, data);
+                if (err != ErrorCode.Success)
+                {
+                    ActiveEventError("设置模拟输出失败：" + err.ToString());
+                    return false;
+                }
+                return true;
+            }
+            else
+            {
                 return false;
             }
-            return true;
+
         }
         #endregion
 
