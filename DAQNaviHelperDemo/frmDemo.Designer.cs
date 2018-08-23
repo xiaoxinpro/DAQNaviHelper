@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnTest = new System.Windows.Forms.Button();
             this.btnGetAiData = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnAiStop = new System.Windows.Forms.Button();
@@ -51,30 +50,20 @@
             this.labelCnt = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.btnAoSite = new System.Windows.Forms.Button();
+            this.numAoVol1 = new System.Windows.Forms.NumericUpDown();
+            this.numAoVol0 = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.numAoVol0 = new System.Windows.Forms.NumericUpDown();
-            this.numAoVol1 = new System.Windows.Forms.NumericUpDown();
-            this.btnAoSite = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtAiInterval)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAoVol0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAoVol1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAoVol0)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnTest
-            // 
-            this.btnTest.Location = new System.Drawing.Point(12, 12);
-            this.btnTest.Name = "btnTest";
-            this.btnTest.Size = new System.Drawing.Size(75, 23);
-            this.btnTest.TabIndex = 0;
-            this.btnTest.Text = "Test";
-            this.btnTest.UseVisualStyleBackColor = true;
-            this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
             // 
             // btnGetAiData
             // 
@@ -94,7 +83,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtAiData);
             this.groupBox1.Controls.Add(this.btnGetAiData);
-            this.groupBox1.Location = new System.Drawing.Point(12, 41);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(394, 168);
             this.groupBox1.TabIndex = 2;
@@ -161,7 +150,7 @@
             // 
             this.groupBox2.Controls.Add(this.chkDiList);
             this.groupBox2.Controls.Add(this.btnDiSwitch);
-            this.groupBox2.Location = new System.Drawing.Point(12, 215);
+            this.groupBox2.Location = new System.Drawing.Point(12, 186);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(105, 209);
             this.groupBox2.TabIndex = 3;
@@ -196,7 +185,7 @@
             // 
             this.groupBox3.Controls.Add(this.chkDoList);
             this.groupBox3.Controls.Add(this.btnDoSwitch);
-            this.groupBox3.Location = new System.Drawing.Point(123, 215);
+            this.groupBox3.Location = new System.Drawing.Point(123, 186);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(105, 209);
             this.groupBox3.TabIndex = 4;
@@ -238,7 +227,7 @@
             this.groupBox4.Controls.Add(this.btnCntStart);
             this.groupBox4.Controls.Add(this.labelCnt);
             this.groupBox4.Controls.Add(this.label3);
-            this.groupBox4.Location = new System.Drawing.Point(234, 215);
+            this.groupBox4.Location = new System.Drawing.Point(234, 186);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(172, 117);
             this.groupBox4.TabIndex = 7;
@@ -334,50 +323,22 @@
             this.groupBox5.Controls.Add(this.numAoVol0);
             this.groupBox5.Controls.Add(this.label6);
             this.groupBox5.Controls.Add(this.label7);
-            this.groupBox5.Location = new System.Drawing.Point(235, 339);
+            this.groupBox5.Location = new System.Drawing.Point(235, 310);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(171, 85);
             this.groupBox5.TabIndex = 8;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "模拟输出";
             // 
-            // label6
+            // btnAoSite
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 56);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(47, 12);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "通道1：";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(7, 27);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(47, 12);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "通道0：";
-            // 
-            // numAoVol0
-            // 
-            this.numAoVol0.DecimalPlaces = 3;
-            this.numAoVol0.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.numAoVol0.Location = new System.Drawing.Point(55, 25);
-            this.numAoVol0.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numAoVol0.Name = "numAoVol0";
-            this.numAoVol0.Size = new System.Drawing.Size(60, 21);
-            this.numAoVol0.TabIndex = 7;
-            this.numAoVol0.Tag = "0";
-            this.numAoVol0.ValueChanged += new System.EventHandler(this.numAoVol_ValueChanged);
+            this.btnAoSite.Location = new System.Drawing.Point(121, 22);
+            this.btnAoSite.Name = "btnAoSite";
+            this.btnAoSite.Size = new System.Drawing.Size(44, 50);
+            this.btnAoSite.TabIndex = 8;
+            this.btnAoSite.Text = "设置";
+            this.btnAoSite.UseVisualStyleBackColor = true;
+            this.btnAoSite.Click += new System.EventHandler(this.btnAoSite_Click);
             // 
             // numAoVol1
             // 
@@ -399,27 +360,54 @@
             this.numAoVol1.Tag = "1";
             this.numAoVol1.ValueChanged += new System.EventHandler(this.numAoVol_ValueChanged);
             // 
-            // btnAoSite
+            // numAoVol0
             // 
-            this.btnAoSite.Location = new System.Drawing.Point(121, 22);
-            this.btnAoSite.Name = "btnAoSite";
-            this.btnAoSite.Size = new System.Drawing.Size(44, 50);
-            this.btnAoSite.TabIndex = 8;
-            this.btnAoSite.Text = "设置";
-            this.btnAoSite.UseVisualStyleBackColor = true;
-            this.btnAoSite.Click += new System.EventHandler(this.btnAoSite_Click);
+            this.numAoVol0.DecimalPlaces = 3;
+            this.numAoVol0.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numAoVol0.Location = new System.Drawing.Point(55, 25);
+            this.numAoVol0.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numAoVol0.Name = "numAoVol0";
+            this.numAoVol0.Size = new System.Drawing.Size(60, 21);
+            this.numAoVol0.TabIndex = 7;
+            this.numAoVol0.Tag = "0";
+            this.numAoVol0.ValueChanged += new System.EventHandler(this.numAoVol_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 56);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(47, 12);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "通道1：";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(7, 27);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(47, 12);
+            this.label7.TabIndex = 6;
+            this.label7.Text = "通道0：";
             // 
             // frmDemo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 450);
+            this.ClientSize = new System.Drawing.Size(419, 404);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnTest);
             this.Name = "frmDemo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DAQNavi Helper Demo";
@@ -433,15 +421,13 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numAoVol0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numAoVol1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAoVol0)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Button btnGetAiData;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtAiData;

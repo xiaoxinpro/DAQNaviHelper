@@ -51,11 +51,6 @@ namespace DAQNaviHelperDemo
             MessageBox.Show(message);
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            USB4704.Test("123456789");
-        }
-
         private void btnGetAiData_Click(object sender, EventArgs e)
         {
             double interval = Convert.ToDouble(txtAiInterval.Value);
