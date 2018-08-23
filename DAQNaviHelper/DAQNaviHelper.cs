@@ -166,11 +166,6 @@ namespace DAQNavi
             SetDeviceType(DeviceInformation.Description);
         }
 
-        public void Test(object e)
-        {
-            IDevice.Test(e);
-        }
-
         #endregion
 
         #region 静态函数

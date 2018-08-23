@@ -47,7 +47,5 @@ namespace DAQNavi.Device
         bool SetAoMode(int ch, double data);
         #endregion
 
-        void Test(object e);
-
     }
 }

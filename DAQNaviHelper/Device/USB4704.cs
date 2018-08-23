@@ -566,11 +566,5 @@ namespace DAQNavi.Device
 
         }
         #endregion
-
-        public void Test(object e)
-        {
-            ActiveEventError("测试异常事件：" + e.ToString());
-        }
-
     }
 }
