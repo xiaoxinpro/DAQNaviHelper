@@ -44,9 +44,9 @@
             // btnInitSwitch
             // 
             this.btnInitSwitch.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btnInitSwitch.Location = new System.Drawing.Point(108, 550);
+            this.btnInitSwitch.Location = new System.Drawing.Point(12, 12);
             this.btnInitSwitch.Name = "btnInitSwitch";
-            this.btnInitSwitch.Size = new System.Drawing.Size(134, 56);
+            this.btnInitSwitch.Size = new System.Drawing.Size(171, 65);
             this.btnInitSwitch.TabIndex = 0;
             this.btnInitSwitch.Text = "开启";
             this.btnInitSwitch.UseVisualStyleBackColor = true;
@@ -117,9 +117,9 @@
             this.btnTestStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTestStop.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btnTestStop.Location = new System.Drawing.Point(13, 12);
+            this.btnTestStop.Location = new System.Drawing.Point(189, 12);
             this.btnTestStop.Name = "btnTestStop";
-            this.btnTestStop.Size = new System.Drawing.Size(701, 65);
+            this.btnTestStop.Size = new System.Drawing.Size(525, 65);
             this.btnTestStop.TabIndex = 4;
             this.btnTestStop.Text = "强制停止";
             this.btnTestStop.UseVisualStyleBackColor = true;
@@ -145,13 +145,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(726, 543);
+            this.Controls.Add(this.btnInitSwitch);
             this.Controls.Add(this.labelTestNumber);
             this.Controls.Add(this.btnTestStop);
             this.Controls.Add(this.listViewStatus);
             this.Controls.Add(this.progressBarStatus);
             this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.btnRunSwitch);
-            this.Controls.Add(this.btnInitSwitch);
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(5);
             this.MinimumSize = new System.Drawing.Size(650, 450);
