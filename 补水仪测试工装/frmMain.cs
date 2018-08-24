@@ -427,6 +427,10 @@ namespace 补水仪测试工装
                 MessageBox.Show("测试设备无法访问，请检查测试工装是否断开连接，或是否被其他程序占用。", message, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
             }
+            else if (message.Contains("索引超出了数组界限"))
+            {
+                LogHelper.LogWarn("设备异常\t" + message);
+            }
             else
             {
                 LogHelper.LogWarn("设备异常\t" + message);
@@ -643,6 +647,7 @@ namespace 补水仪测试工装
         {
             isTestRun = false;
             timerTest.Enabled = false;
+            btnInitSwitch.Enabled = true;
             USB4704.IDevice.StopCntMode();
             USB4704.IDevice.StopAiMode();
             LogHelper.LogInfo("停止测试\r\n");
@@ -1109,7 +1114,8 @@ namespace 补水仪测试工装
         private void btnInitSwitch_Click(object sender, EventArgs e)
         {
             InitTest();
-            btnInitSwitch.Text = "重启";
+            //btnInitSwitch.Text = "重启";
+            btnInitSwitch.Enabled = false;
             btnRunSwitch.Text = "暂停";
             btnRunSwitch.Enabled = true;
         }
