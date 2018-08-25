@@ -492,12 +492,12 @@ namespace 补水仪测试工装
             {
                 this.Invoke(new Action(() =>
                 {
-                    Console.WriteLine("DI_P2 = " + Convert.ToBoolean(data));
-                    if (!Convert.ToBoolean(data) && isTestRun == false)
-                    {
-                        LogHelper.LogInfo("外部按钮触发");
-                        Common.CallOnClick(btnInitSwitch);
-                    }
+                    //Console.WriteLine("DI_P2 = " + Convert.ToBoolean(data));
+                    //if (!Convert.ToBoolean(data) && isTestRun == false)
+                    //{
+                    //    LogHelper.LogInfo("外部按钮触发");
+                    //    Common.CallOnClick(btnInitSwitch);
+                    //}
                 }));
             }
         }
