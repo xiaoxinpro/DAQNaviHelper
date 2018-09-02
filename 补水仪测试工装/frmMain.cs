@@ -935,7 +935,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (vol > 4.9) 
+                    if (vol > 4.0) //4.9
                     {
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
@@ -1018,7 +1018,7 @@ namespace 补水仪测试工装
             {
                 if (GetListViewItemStatus(listViewStatus, index) == enumTestStatus.Run)
                 {
-                    if (green > 3.1 && green < 3.3)
+                    if (green > 2.6 && green < 3.3) // 3.1-3.3
                     {
                         SelectChargingCurrent(enumTestChargingCurrent.Cur_0A);
                         USB4704.IDevice.StopAiMode();
@@ -1049,7 +1049,7 @@ namespace 补水仪测试工装
                 string log = string.Format("喷雾峰值电压AD6*11 = {0:0.000}\t蓝灯电压AD2 = {1:0.000}\t电池电压AD0-AD7 = {2:0.000}", vol, blue, bat);
                 Console.WriteLine(log);
                 LogHelper.LogInfo("\t\t" + log);
-                if ((vol < 35 && vol > 30) && (blue < 2.3 && blue > 2.0)) 
+                if ((vol < 35 && vol > 11) && (blue < 2.3 && blue > 1.0)) // 30 - 35 / 1.0 - 2.3
                 {
                     isTestCheckSprayVoltage = true;
                 }
