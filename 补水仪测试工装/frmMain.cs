@@ -678,7 +678,7 @@ namespace 补水仪测试工装
                         timerTest.Interval = 350;
                         SetInitStatus(nowTestItem);
                         SelectPower(enumTestPower.Discharging);
-                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_0);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_4);
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_4A);
                         USB4704.IDevice.StartAiMode(TestCheckShortUsbVoltage, 0.3, true);
                         LogHelper.LogInfo("开始测试1\t选择电池4V，放电电流4A，模拟电池短路，检查短路USB电压0V。");
@@ -686,6 +686,8 @@ namespace 补水仪测试工装
                     else if (CntTimes > 10)
                     {
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_0);
+                        SelectPower(enumTestPower.Charging);
                         USB4704.IDevice.StopAiMode();
                         SetFailStatus(nowTestItem);
                         LogHelper.LogWarn("结束测试1\t测试超时。");
@@ -883,6 +885,8 @@ namespace 补水仪测试工装
                     if (vol < 1.5)
                     {
                         SelectDichargingCurrent(enumTestDischargingCurrent.Cur_0A);
+                        SelectBatteryVoltage(enumTestBatteryVoltage.Vol4_0);
+                        SelectPower(enumTestPower.Charging);
                         USB4704.IDevice.StopAiMode();
                         SetSuccessStatus(nowTestItem);
                         LogHelper.LogInfo("结束测试" +(index + 1) + "\t通过。");
@@ -1049,7 +1053,7 @@ namespace 补水仪测试工装
                 string log = string.Format("喷雾峰值电压AD6*11 = {0:0.000}\t蓝灯电压AD2 = {1:0.000}\t电池电压AD0-AD7 = {2:0.000}", vol, blue, bat);
                 Console.WriteLine(log);
                 LogHelper.LogInfo("\t\t" + log);
-                if ((vol < 35 && vol > 11) && (blue < 2.3 && blue > 1.0)) // 30 - 35 / 1.0 - 2.3
+                if ((vol < 45 && vol > 11) && (blue < 2.3 && blue > 1.0)) // 30 - 45 / 1.0 - 2.3
                 {
                     isTestCheckSprayVoltage = true;
                 }
@@ -1072,7 +1076,7 @@ namespace 补水仪测试工装
             {
                 Console.WriteLine("喷雾频率P1 = " + freq);
                 LogHelper.LogInfo("\t\t喷雾频率P1 = " + freq);
-                if (freq < 118000 && freq > 109000)
+                if (freq < 118000 && freq > 106000) // 118K - 109K
                 {
                     isTestCheckSprayCoun = true;
                 }
