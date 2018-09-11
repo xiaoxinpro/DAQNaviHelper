@@ -17,6 +17,7 @@ namespace DAQNavi
         #region 字段
         private double[] m_dataScaled;
         private System.Windows.Forms.Timer timerTest;
+        private System.Windows.Forms.Timer timerOpen;
         private System.Timers.Timer timerAi;
         private System.Timers.Timer timerAo;
         private System.Timers.Timer timerCnt;
@@ -190,8 +191,8 @@ namespace DAQNavi
             try
             {
                 waveformAiCtrlUsb4704.SelectedDevice = new DeviceInformation("USB-4704,BID#0");
-                waveformAiCtrlUsb4704.Conversion.ClockRate = 4096;  //AD转换频率（32-47619）
-                waveformAiCtrlUsb4704.Record.SectionLength = 8;     //采样缓存区大小（保证通信间隔大于100us）
+                waveformAiCtrlUsb4704.Conversion.ClockRate = 5000;  //AD转换频率（32-47619）
+                waveformAiCtrlUsb4704.Record.SectionLength = 500;     //采样缓存区大小（保证通信间隔大于100us）
                 waveformAiCtrlUsb4704.Conversion.ChannelStart = 0;  //采样起始通道
                 waveformAiCtrlUsb4704.Conversion.ChannelCount = 8;  //采样通道数
             }
@@ -231,7 +232,7 @@ namespace DAQNavi
                 {
                     return;
                 }
-
+                Console.WriteLine("接收数据：" + e.Count.ToString());
                 if (m_dataScaled.Length < e.Count)
                 {
                     m_dataScaled = new double[e.Count];
@@ -274,6 +275,30 @@ namespace DAQNavi
             catch (Exception error)
             {
                 Console.WriteLine("DataReady错误：" + error.Message);
+            }
+        }
+
+
+        private void btnOpenTime_Click(object sender, EventArgs e)
+        {
+            timerOpen = new System.Windows.Forms.Timer();
+            timerOpen.Tick += TimerOpen_Tick;
+            timerOpen.Interval = 1050;
+            timerOpen.Enabled = true;
+            Common.CallOnClick(btnAiStart);
+        }
+
+        private void TimerOpen_Tick(object sender, EventArgs e)
+        {
+            timerOpen.Enabled = false;
+            Common.CallOnClick(btnAiStop);
+        }
+
+        private void btnAiClear_Click(object sender, EventArgs e)
+        {
+            if (btnAiStart.Enabled)
+            {
+                listViewAi.Items.Clear();
             }
         }
 
@@ -505,5 +530,6 @@ namespace DAQNavi
             instantAoCtrlUsb4704.Write(1, Convert.ToDouble(numVol1.Value));
         }
         #endregion
+
     }
 }
