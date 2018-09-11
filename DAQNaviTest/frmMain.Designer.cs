@@ -34,6 +34,7 @@
             this.btnAiStart = new System.Windows.Forms.Button();
             this.btnAiStop = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnOpenTime = new System.Windows.Forms.Button();
             this.listViewAi = new System.Windows.Forms.ListView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewDi = new System.Windows.Forms.ListView();
@@ -52,18 +53,19 @@
             this.eventCounterCtrlUsb4704 = new Automation.BDaq.EventCounterCtrl(this.components);
             this.instantAoCtrlUsb4704 = new Automation.BDaq.InstantAoCtrl(this.components);
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.btnAoSite = new System.Windows.Forms.Button();
-            this.numVol0 = new System.Windows.Forms.NumericUpDown();
             this.numVol1 = new System.Windows.Forms.NumericUpDown();
+            this.numVol0 = new System.Windows.Forms.NumericUpDown();
+            this.btnAoSite = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnAiClear = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numVol0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVol1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numVol0)).BeginInit();
             this.SuspendLayout();
             // 
             // waveformAiCtrlUsb4704
@@ -98,6 +100,8 @@
             // 
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Controls.Add(this.btnAiClear);
+            this.groupBox1.Controls.Add(this.btnOpenTime);
             this.groupBox1.Controls.Add(this.btnAiStop);
             this.groupBox1.Controls.Add(this.btnAiStart);
             this.groupBox1.Controls.Add(this.listViewAi);
@@ -107,6 +111,16 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "模拟输入";
+            // 
+            // btnOpenTime
+            // 
+            this.btnOpenTime.Location = new System.Drawing.Point(6, 253);
+            this.btnOpenTime.Name = "btnOpenTime";
+            this.btnOpenTime.Size = new System.Drawing.Size(75, 23);
+            this.btnOpenTime.TabIndex = 4;
+            this.btnOpenTime.Text = "开启1秒";
+            this.btnOpenTime.UseVisualStyleBackColor = true;
+            this.btnOpenTime.Click += new System.EventHandler(this.btnOpenTime_Click);
             // 
             // listViewAi
             // 
@@ -274,33 +288,23 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "模拟输出";
             // 
-            // label3
+            // numVol1
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 32);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 12);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "通道0：";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 55);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(47, 12);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "通道1：";
-            // 
-            // btnAoSite
-            // 
-            this.btnAoSite.Location = new System.Drawing.Point(139, 85);
-            this.btnAoSite.Name = "btnAoSite";
-            this.btnAoSite.Size = new System.Drawing.Size(54, 23);
-            this.btnAoSite.TabIndex = 1;
-            this.btnAoSite.Text = "设置";
-            this.btnAoSite.UseVisualStyleBackColor = true;
-            this.btnAoSite.Click += new System.EventHandler(this.btnAoSite_Click);
+            this.numVol1.DecimalPlaces = 3;
+            this.numVol1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numVol1.Location = new System.Drawing.Point(65, 53);
+            this.numVol1.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numVol1.Name = "numVol1";
+            this.numVol1.Size = new System.Drawing.Size(120, 21);
+            this.numVol1.TabIndex = 2;
             // 
             // numVol0
             // 
@@ -320,23 +324,43 @@
             this.numVol0.Size = new System.Drawing.Size(120, 21);
             this.numVol0.TabIndex = 2;
             // 
-            // numVol1
+            // btnAoSite
             // 
-            this.numVol1.DecimalPlaces = 3;
-            this.numVol1.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.numVol1.Location = new System.Drawing.Point(65, 53);
-            this.numVol1.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numVol1.Name = "numVol1";
-            this.numVol1.Size = new System.Drawing.Size(120, 21);
-            this.numVol1.TabIndex = 2;
+            this.btnAoSite.Location = new System.Drawing.Point(139, 85);
+            this.btnAoSite.Name = "btnAoSite";
+            this.btnAoSite.Size = new System.Drawing.Size(54, 23);
+            this.btnAoSite.TabIndex = 1;
+            this.btnAoSite.Text = "设置";
+            this.btnAoSite.UseVisualStyleBackColor = true;
+            this.btnAoSite.Click += new System.EventHandler(this.btnAoSite_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 55);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(47, 12);
+            this.label4.TabIndex = 0;
+            this.label4.Text = "通道1：";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 32);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(47, 12);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "通道0：";
+            // 
+            // btnAiClear
+            // 
+            this.btnAiClear.Location = new System.Drawing.Point(87, 253);
+            this.btnAiClear.Name = "btnAiClear";
+            this.btnAiClear.Size = new System.Drawing.Size(75, 23);
+            this.btnAiClear.TabIndex = 5;
+            this.btnAiClear.Text = "清空列表";
+            this.btnAiClear.UseVisualStyleBackColor = true;
+            this.btnAiClear.Click += new System.EventHandler(this.btnAiClear_Click);
             // 
             // frmMain
             // 
@@ -359,8 +383,8 @@
             this.groupBox4.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numVol0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numVol1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numVol0)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -394,6 +418,8 @@
         private System.Windows.Forms.Button btnAoSite;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnOpenTime;
+        private System.Windows.Forms.Button btnAiClear;
     }
 }
 
