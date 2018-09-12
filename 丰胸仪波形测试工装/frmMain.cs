@@ -359,9 +359,10 @@ namespace 丰胸仪波形测试工装
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Title = "";
+            sfd.Title = "数据输出";
             sfd.InitialDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
-            sfd.Filter = "表格文件| *.csv";
+            sfd.Filter = "表格文件|*.csv|所有文件|*.*";
+            sfd.OverwritePrompt = false;
             sfd.ShowDialog();
 
             string path = sfd.FileName;
