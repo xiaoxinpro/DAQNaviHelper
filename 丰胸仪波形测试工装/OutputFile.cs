@@ -113,6 +113,11 @@ namespace 丰胸仪波形测试工装
                     strFilePath = path;
                     break;
                 case EnumFileSplit.Size:
+                    if (!File.Exists(strFilePath))
+                    {
+                        strFilePath = path;
+                        break;
+                    }
                     long fileSize = new FileInfo(strFilePath).Length / 1024;
                     if (fileSize >= FileSplitSize)
                     {
@@ -146,13 +151,14 @@ namespace 丰胸仪波形测试工装
             else
             {
                 int numFileCnt = 0;
-                string strPath = Path.GetDirectoryName(path);
+                string strPath = Path.GetDirectoryName(path) + @"\";
                 string strName = Path.GetFileNameWithoutExtension(path);
                 string strType = Path.GetExtension(path);
                 string strBakName = strName;
                 while (File.Exists(strPath + strBakName + strType))
                 {
-                    strBakName = strName + numFileCnt.ToString("2d");
+                    numFileCnt++;
+                    strBakName = strName + "-" + numFileCnt.ToString();
                 }
                 return (strPath + strBakName + strType);
             }
