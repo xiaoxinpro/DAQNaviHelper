@@ -19,6 +19,8 @@ namespace 丰胸仪波形测试工装
         //private System.Timers.Timer timerAi;
         private MarkTimeHelper MarkTimeAi;
         private OutputFile OutputFileAi;
+        private Queue<double> DataQueue;
+        private decimal DataCount = 0;
         #endregion
 
         public frmMain()
@@ -28,6 +30,7 @@ namespace 丰胸仪波形测试工装
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+            DataQueue = new Queue<double>();
             OutputFileAi = new OutputFile();
             initListViewAi(listViewAi);
             initWaveformAiCtrlUsb4704();
@@ -167,6 +170,7 @@ namespace 丰胸仪波形测试工装
                     return;
                 }
 
+                //刷新列表显示
                 this.Invoke(new Action(() =>
                 {
                     double[] arrSumData = new double[chanCount];
@@ -190,11 +194,36 @@ namespace 丰胸仪波形测试工装
                     editListViewItems(listViewAi, 0, arrAvgData);
                     listViewAi.EndUpdate();
                 }));
+
+                //添加到输出与数据处理
+                string[] outputData = new string[sectionLength];
+                for (int i = 0; i < sectionLength; i++)
+                {
+                    int cnt = i * chanCount + 0; //定位到指定通道
+                    //DataQueue.Enqueue(m_dataScaled[cnt]);
+                    string[] arrData = new string[chanCount];
+                    for (int j = 0; j < chanCount; j++)
+                    {
+                        cnt = i * chanCount + j;
+                        arrData[j] = m_dataScaled[cnt].ToString("f4");
+                    }
+                    outputData[i] = string.Join(",", arrData);
+                }
+                OutputFileAi.AddWriteLine(outputData);
             }
             catch (Exception error)
             {
                 Console.WriteLine("DataReady错误：" + error.Message);
             }
+        }
+
+        /// <summary>
+        /// 接收数据分解
+        /// </summary>
+        /// <param name="arrData">接收数据数组</param>
+        private void DataProcess(double[] arrData)
+        {
+
         }
 
         private void btnAiClear_Click(object sender, EventArgs e)
@@ -305,7 +334,7 @@ namespace 丰胸仪波形测试工装
             RadioButton radioButton = (RadioButton)sender;
             if (radioButton.Checked)
             {
-                Console.WriteLine("单选框：" + radioButton.Tag);
+                //Console.WriteLine("单选框：" + radioButton.Tag);
                 switch (radioButton.Tag.ToString())
                 {
                     case "0":
@@ -314,10 +343,12 @@ namespace 丰胸仪波形测试工装
                     case "1":
                         panelFileSplit.Visible = true;
                         labFileSplitUnit.Text = "KB";
+                        numFileSplitValue.Value = OutputFileAi.FileSplitSize;
                         break;
                     case "2":
                         panelFileSplit.Visible = true;
                         labFileSplitUnit.Text = "个";
+                        numFileSplitValue.Value = OutputFileAi.FileSplitNumber;
                         break;
                     default:
                         break;
@@ -330,7 +361,7 @@ namespace 丰胸仪波形测试工装
             SaveFileDialog sfd = new SaveFileDialog();
             sfd.Title = "";
             sfd.InitialDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
-            sfd.Filter = "表格文件| *.cvs";
+            sfd.Filter = "表格文件| *.csv";
             sfd.ShowDialog();
 
             string path = sfd.FileName;
