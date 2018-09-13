@@ -71,7 +71,8 @@ namespace 丰胸仪波形测试工装
             {
                 if (Enable)
                 {
-                    if (!Directory.Exists(Path.GetDirectoryName(CheckStrFilePath(FilePath))))
+                    CheckStrFilePath(FilePath);
+                    if (!Directory.Exists(Path.GetDirectoryName(strFilePath)))
                     {
                         Directory.CreateDirectory(Path.GetDirectoryName(strFilePath));
                     }
@@ -84,6 +85,10 @@ namespace 丰胸仪波形测试工装
                         Monitor.Exit(WriteQueue);
                         fileStreamWriter.WriteLine(msg);
                         numFileSplitCount++;
+                        if (CheckStrFilePath(strFilePath, false)) 
+                        {
+                            break;
+                        }
                     }
                     fileStreamWriter.Flush();
                     fileStreamWriter.Close();
@@ -104,9 +109,10 @@ namespace 丰胸仪波形测试工装
         /// 检验文件路径
         /// </summary>
         /// <param name="path">源设定路径</param>
-        /// <returns>可用路径地址</returns>
-        private string CheckStrFilePath(string path)
+        /// <returns>返回路径是否变化，路径改变返回True，路径不变返回False</returns>
+        private bool CheckStrFilePath(string path, bool isUpdata = true)
         {
+            bool ret = false;
             switch (FileSplit)
             {
                 case EnumFileSplit.None:
@@ -121,20 +127,33 @@ namespace 丰胸仪波形测试工装
                     long fileSize = new FileInfo(strFilePath).Length / 1024;
                     if (fileSize >= FileSplitSize)
                     {
-                        strFilePath = GetNextFilePath(path);
+                        ret = true;
+                        if (isUpdata)
+                        {
+                            strFilePath = GetNextFilePath(path);
+                        }
                     }
                     break;
                 case EnumFileSplit.Number:
+                    if (!File.Exists(strFilePath))
+                    {
+                        strFilePath = path;
+                        break;
+                    }
                     if (numFileSplitCount >= FileSplitNumber)
                     {
-                        strFilePath = GetNextFilePath(path);
-                        numFileSplitCount = 0;
+                        ret = true;
+                        if (isUpdata)
+                        {
+                            strFilePath = GetNextFilePath(path);
+                            numFileSplitCount = 0;
+                        }
                     }
                     break;
                 default:
                     break;
             }
-            return strFilePath;
+            return ret;
         }
 
         /// <summary>
