@@ -157,7 +157,7 @@ namespace 丰胸仪波形测试工装
                 {
                     return;
                 }
-                Console.WriteLine("接收数据：" + e.Count.ToString());
+                //Console.WriteLine("接收数据：" + e.Count.ToString());
                 if (m_dataScaled.Length < e.Count)
                 {
                     m_dataScaled = new double[e.Count];
@@ -165,13 +165,15 @@ namespace 丰胸仪波形测试工装
                 }
 
                 int chanCount = waveformAiCtrlUsb4704.Conversion.ChannelCount;
-                int sectionLength = waveformAiCtrlUsb4704.Record.SectionLength;
+                int sectionLength = e.Count / chanCount; //sectionLength = waveformAiCtrlUsb4704.Record.SectionLength;
                 ErrorCode err = waveformAiCtrlUsb4704.GetData(e.Count, m_dataScaled);
                 if (err != ErrorCode.Success && err != ErrorCode.WarningRecordEnd)
                 {
                     Console.WriteLine("错误：" + err);
                     return;
                 }
+                
+                Console.WriteLine("接收数据：" + e.Count.ToString() + " chanCount:" + chanCount.ToString() + " sectionLength" + sectionLength.ToString());
 
                 //刷新列表显示
                 this.Invoke(new Action(() =>
