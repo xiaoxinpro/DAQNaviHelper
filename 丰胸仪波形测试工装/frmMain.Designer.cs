@@ -42,6 +42,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.numCycleVoltage = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.numCycleLength = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.panelFileSplit = new System.Windows.Forms.Panel();
@@ -57,17 +59,15 @@
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
             this.groupFunction.SuspendLayout();
             this.panelCycle.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCycleVoltage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCycleLength)).BeginInit();
             this.panelFileSplit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numFileSplitValue)).BeginInit();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -223,6 +223,38 @@
             this.label6.TabIndex = 3;
             this.label6.Text = "判定阈值电压：";
             // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(435, 4);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(70, 21);
+            this.numericUpDown1.TabIndex = 2;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(377, 6);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "阈值长度：";
+            // 
             // numCycleLength
             // 
             this.numCycleLength.Location = new System.Drawing.Point(95, 4);
@@ -270,11 +302,11 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(22, 9);
+            this.label3.Location = new System.Drawing.Point(52, 9);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(89, 12);
+            this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 7;
-            this.label3.Text = "文件拆分参数：";
+            this.label3.Text = "拆分参数：";
             // 
             // numFileSplitValue
             // 
@@ -410,38 +442,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "数据输出：";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(377, 6);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(65, 12);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "阈值长度：";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(435, 4);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            100000,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(70, 21);
-            this.numericUpDown1.TabIndex = 2;
-            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -460,13 +460,13 @@
             this.panelCycle.ResumeLayout(false);
             this.panelCycle.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numCycleVoltage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numCycleLength)).EndInit();
             this.panelFileSplit.ResumeLayout(false);
             this.panelFileSplit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numFileSplitValue)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
