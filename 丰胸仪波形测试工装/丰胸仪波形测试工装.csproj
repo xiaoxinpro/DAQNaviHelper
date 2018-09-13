@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
+    <Compile Include="CycleJudge.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
