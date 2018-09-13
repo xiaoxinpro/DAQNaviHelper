@@ -26,6 +26,9 @@ namespace 丰胸仪波形测试工装
         #endregion
 
         #region 构造函数
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public CycleJudge()
         {
             //字段初始化
@@ -42,6 +45,15 @@ namespace 丰胸仪波形测试工装
             JudgeThread.IsBackground = true;
             JudgeThread.Start();
 
+        }
+
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="e">周期判定完成事件</param>
+        public CycleJudge(DelegateCycleJudgeDone e) : this()
+        {
+            EventCycleJudgeDone += e;
         }
         #endregion
 
@@ -72,12 +84,15 @@ namespace 丰胸仪波形测试工装
                     //判定周期完成
                     if (cntCycleThresholdLength++ > CycleThresholdLength && isCycleData == true)
                     {
-                        //触发周期处理事件
-                        double[] arrData = CycleQueue.ToArray();
-                        double maxData = arrData.Max();
-                        double minData = arrData.Min();
-                        double numLenght = arrData.Length;
+                        //触发周期判定完成事件
+                        ActiveEventCycleJudgeDone(CycleQueue.ToArray());
 
+                        //复位周期队列
+                        CycleQueue.Clear();
+                        cntCycleThresholdLength = 0;
+                        bakCycleData = 0;
+                        isCycleData = false;
+                        continue;
                     }
 
                     //判定队列满
@@ -99,6 +114,28 @@ namespace 丰胸仪波形测试工装
             }
         }
 
+        #endregion
+
+        #region 周期判定完成事件
+        /// <summary>
+        /// 定义周期判定完成委托
+        /// </summary>
+        /// <param name="arrData"></param>
+        public delegate void DelegateCycleJudgeDone(double[] arrData);
+
+        /// <summary>
+        /// 定义周期判定完成事件
+        /// </summary>
+        public event DelegateCycleJudgeDone EventCycleJudgeDone;
+
+        /// <summary>
+        /// 触发周期判定完成事件
+        /// </summary>
+        /// <param name="arrData"></param>
+        private void ActiveEventCycleJudgeDone(double[] arrData)
+        {
+            EventCycleJudgeDone?.Invoke(arrData);
+        }
         #endregion
 
         #region 公共函数
