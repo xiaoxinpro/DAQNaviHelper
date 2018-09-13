@@ -36,7 +36,14 @@
             this.btnAiStart = new System.Windows.Forms.Button();
             this.listViewAi = new System.Windows.Forms.ListView();
             this.waveformAiCtrlUsb4704 = new Automation.BDaq.WaveformAiCtrl(this.components);
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupFunction = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panelCycle = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.numCycleVoltage = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numCycleLength = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
             this.panelFileSplit = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.numFileSplitValue = new System.Windows.Forms.NumericUpDown();
@@ -46,14 +53,21 @@
             this.radioFileSplit1 = new System.Windows.Forms.RadioButton();
             this.radioFileSplit2 = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboCycleChannelSelect = new System.Windows.Forms.ComboBox();
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupFunction.SuspendLayout();
+            this.panelCycle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCycleVoltage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCycleLength)).BeginInit();
             this.panelFileSplit.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numFileSplitValue)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -65,9 +79,9 @@
             this.groupBox1.Controls.Add(this.btnAiStop);
             this.groupBox1.Controls.Add(this.btnAiStart);
             this.groupBox1.Controls.Add(this.listViewAi);
-            this.groupBox1.Location = new System.Drawing.Point(12, 116);
+            this.groupBox1.Location = new System.Drawing.Point(12, 143);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(740, 407);
+            this.groupBox1.Size = new System.Drawing.Size(740, 380);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据显示";
@@ -75,7 +89,7 @@
             // btnAiClear
             // 
             this.btnAiClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAiClear.Location = new System.Drawing.Point(6, 377);
+            this.btnAiClear.Location = new System.Drawing.Point(6, 350);
             this.btnAiClear.Name = "btnAiClear";
             this.btnAiClear.Size = new System.Drawing.Size(75, 23);
             this.btnAiClear.TabIndex = 5;
@@ -87,7 +101,7 @@
             // 
             this.btnAiStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAiStop.Enabled = false;
-            this.btnAiStop.Location = new System.Drawing.Point(656, 377);
+            this.btnAiStop.Location = new System.Drawing.Point(656, 350);
             this.btnAiStop.Name = "btnAiStop";
             this.btnAiStop.Size = new System.Drawing.Size(75, 23);
             this.btnAiStop.TabIndex = 2;
@@ -98,7 +112,7 @@
             // btnAiStart
             // 
             this.btnAiStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAiStart.Location = new System.Drawing.Point(575, 377);
+            this.btnAiStart.Location = new System.Drawing.Point(575, 350);
             this.btnAiStart.Name = "btnAiStart";
             this.btnAiStart.Size = new System.Drawing.Size(75, 23);
             this.btnAiStart.TabIndex = 1;
@@ -113,7 +127,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewAi.Location = new System.Drawing.Point(6, 20);
             this.listViewAi.Name = "listViewAi";
-            this.listViewAi.Size = new System.Drawing.Size(725, 351);
+            this.listViewAi.Size = new System.Drawing.Size(725, 324);
             this.listViewAi.TabIndex = 3;
             this.listViewAi.UseCompatibleStateImageBehavior = false;
             this.listViewAi.Resize += new System.EventHandler(this.listViewAi_Resize);
@@ -123,22 +137,123 @@
             this.waveformAiCtrlUsb4704._StateStream = ((Automation.BDaq.DeviceStateStreamer)(resources.GetObject("waveformAiCtrlUsb4704._StateStream")));
             this.waveformAiCtrlUsb4704.DataReady += new System.EventHandler<Automation.BDaq.BfdAiEventArgs>(this.waveformAiCtrlUsb4704_DataReady);
             // 
-            // groupBox2
+            // groupFunction
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupFunction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.panelFileSplit);
-            this.groupBox2.Controls.Add(this.panel1);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.btnSelectFile);
-            this.groupBox2.Controls.Add(this.txtFilePath);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Location = new System.Drawing.Point(12, 12);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(740, 98);
-            this.groupBox2.TabIndex = 5;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "功能更设置";
+            this.groupFunction.Controls.Add(this.label4);
+            this.groupFunction.Controls.Add(this.panelCycle);
+            this.groupFunction.Controls.Add(this.panelFileSplit);
+            this.groupFunction.Controls.Add(this.panel1);
+            this.groupFunction.Controls.Add(this.label2);
+            this.groupFunction.Controls.Add(this.comboCycleChannelSelect);
+            this.groupFunction.Controls.Add(this.btnSelectFile);
+            this.groupFunction.Controls.Add(this.txtFilePath);
+            this.groupFunction.Controls.Add(this.label1);
+            this.groupFunction.Location = new System.Drawing.Point(12, 12);
+            this.groupFunction.Name = "groupFunction";
+            this.groupFunction.Size = new System.Drawing.Size(740, 125);
+            this.groupFunction.TabIndex = 5;
+            this.groupFunction.TabStop = false;
+            this.groupFunction.Text = "功能更设置";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(4, 92);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "周期判定：";
+            // 
+            // panelCycle
+            // 
+            this.panelCycle.Controls.Add(this.label7);
+            this.panelCycle.Controls.Add(this.numCycleVoltage);
+            this.panelCycle.Controls.Add(this.label6);
+            this.panelCycle.Controls.Add(this.numericUpDown1);
+            this.panelCycle.Controls.Add(this.label8);
+            this.panelCycle.Controls.Add(this.numCycleLength);
+            this.panelCycle.Controls.Add(this.label5);
+            this.panelCycle.Location = new System.Drawing.Point(140, 86);
+            this.panelCycle.Name = "panelCycle";
+            this.panelCycle.Size = new System.Drawing.Size(591, 32);
+            this.panelCycle.TabIndex = 12;
+            this.panelCycle.Visible = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(347, 6);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(11, 12);
+            this.label7.TabIndex = 5;
+            this.label7.Text = "V";
+            // 
+            // numCycleVoltage
+            // 
+            this.numCycleVoltage.DecimalPlaces = 3;
+            this.numCycleVoltage.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numCycleVoltage.Location = new System.Drawing.Point(271, 4);
+            this.numCycleVoltage.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numCycleVoltage.Name = "numCycleVoltage";
+            this.numCycleVoltage.Size = new System.Drawing.Size(70, 21);
+            this.numCycleVoltage.TabIndex = 4;
+            this.numCycleVoltage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCycleVoltage.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(188, 6);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(89, 12);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "判定阈值电压：";
+            // 
+            // numCycleLength
+            // 
+            this.numCycleLength.Location = new System.Drawing.Point(95, 4);
+            this.numCycleLength.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numCycleLength.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numCycleLength.Name = "numCycleLength";
+            this.numCycleLength.Size = new System.Drawing.Size(70, 21);
+            this.numCycleLength.TabIndex = 2;
+            this.numCycleLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numCycleLength.Value = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 6);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(89, 12);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "最大周期长度：";
             // 
             // panelFileSplit
             // 
@@ -148,7 +263,7 @@
             this.panelFileSplit.Controls.Add(this.labFileSplitUnit);
             this.panelFileSplit.Location = new System.Drawing.Point(465, 52);
             this.panelFileSplit.Name = "panelFileSplit";
-            this.panelFileSplit.Size = new System.Drawing.Size(266, 34);
+            this.panelFileSplit.Size = new System.Drawing.Size(266, 32);
             this.panelFileSplit.TabIndex = 11;
             this.panelFileSplit.Visible = false;
             // 
@@ -195,7 +310,7 @@
             this.panel1.Controls.Add(this.radioFileSplit2);
             this.panel1.Location = new System.Drawing.Point(75, 52);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(384, 34);
+            this.panel1.Size = new System.Drawing.Size(384, 32);
             this.panel1.TabIndex = 10;
             // 
             // radioFileSplit0
@@ -245,6 +360,26 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "文件拆分：";
             // 
+            // comboCycleChannelSelect
+            // 
+            this.comboCycleChannelSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCycleChannelSelect.FormattingEnabled = true;
+            this.comboCycleChannelSelect.Items.AddRange(new object[] {
+            "关闭",
+            "通道0",
+            "通道1",
+            "通道2",
+            "通道3",
+            "通道4",
+            "通道5",
+            "通道6",
+            "通道7"});
+            this.comboCycleChannelSelect.Location = new System.Drawing.Point(75, 89);
+            this.comboCycleChannelSelect.Name = "comboCycleChannelSelect";
+            this.comboCycleChannelSelect.Size = new System.Drawing.Size(59, 20);
+            this.comboCycleChannelSelect.TabIndex = 0;
+            this.comboCycleChannelSelect.SelectedIndexChanged += new System.EventHandler(this.comboCycleChannelSelect_SelectedIndexChanged);
+            // 
             // btnSelectFile
             // 
             this.btnSelectFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -275,12 +410,44 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "数据输出：";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(377, 6);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(65, 12);
+            this.label8.TabIndex = 1;
+            this.label8.Text = "阈值长度：";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(435, 4);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            100000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(70, 21);
+            this.numericUpDown1.TabIndex = 2;
+            this.numericUpDown1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(764, 542);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupFunction);
             this.Controls.Add(this.groupBox1);
             this.MinimumSize = new System.Drawing.Size(780, 380);
             this.Name = "frmMain";
@@ -288,13 +455,18 @@
             this.Text = "丰胸仪波形测试工装";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.groupFunction.ResumeLayout(false);
+            this.groupFunction.PerformLayout();
+            this.panelCycle.ResumeLayout(false);
+            this.panelCycle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numCycleVoltage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numCycleLength)).EndInit();
             this.panelFileSplit.ResumeLayout(false);
             this.panelFileSplit.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numFileSplitValue)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -307,7 +479,7 @@
         private System.Windows.Forms.Button btnAiStart;
         private System.Windows.Forms.ListView listViewAi;
         private Automation.BDaq.WaveformAiCtrl waveformAiCtrlUsb4704;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupFunction;
         private System.Windows.Forms.Label labFileSplitUnit;
         private System.Windows.Forms.NumericUpDown numFileSplitValue;
         private System.Windows.Forms.Label label3;
@@ -320,6 +492,16 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panelFileSplit;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panelCycle;
+        private System.Windows.Forms.ComboBox comboCycleChannelSelect;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.NumericUpDown numCycleVoltage;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numCycleLength;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Label label8;
     }
 }
 

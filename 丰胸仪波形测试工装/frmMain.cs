@@ -32,6 +32,9 @@ namespace 丰胸仪波形测试工装
         {
             DataQueue = new Queue<double>();
             OutputFileAi = new OutputFile();
+
+            comboCycleChannelSelect.SelectedIndex = 0;
+
             initListViewAi(listViewAi);
             initWaveformAiCtrlUsb4704();
         }
@@ -273,6 +276,7 @@ namespace 丰胸仪波形测试工装
 
             btnAiStart.Enabled = false;
             btnAiStop.Enabled = true;
+            Common.GroupEnable(groupFunction, false);
         }
 
         private void OpenOutputFileAi()
@@ -305,6 +309,7 @@ namespace 丰胸仪波形测试工装
             }
             btnAiStart.Enabled = true;
             btnAiStop.Enabled = false;
+            Common.GroupEnable(groupFunction, true);
         }
         #endregion
 
@@ -372,6 +377,16 @@ namespace 丰胸仪波形测试工装
             }
 
             txtFilePath.Text = path;
+        }
+
+        /// <summary>
+        /// 周期判定选择框事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboCycleChannelSelect_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            panelCycle.Visible = (comboCycleChannelSelect.SelectedIndex > 0);
         }
         #endregion
 
