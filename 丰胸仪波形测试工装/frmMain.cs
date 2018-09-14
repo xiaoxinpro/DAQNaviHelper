@@ -56,6 +56,7 @@ namespace 丰胸仪波形测试工装
         private void initListViewAi(ListView listView)
         {
             listView.Clear();
+            DataCount = 0;
 
             //基本属性设置
             listView.FullRowSelect = true;
@@ -74,16 +75,27 @@ namespace 丰胸仪波形测试工装
             listView.Columns.Add("通道6", 80, HorizontalAlignment.Center);
             listView.Columns.Add("通道7", 80, HorizontalAlignment.Center);
 
-            //添加数据
+            //初始化列表数据
+            clearListViewAi(listView);
+        }
+
+        private void clearListViewAi(ListView listView)
+        {
+            //清空列表内容
+            listView.Items.Clear();
+            //顶部数据数据
             addListViewItems(listViewAi, new string[] { "0", "0", "0", "0", "0", "0", "0", "0" });
             listViewAi.Items[0].Text = "实时";
-
         }
 
         private void addListViewItems(ListView listView, params string[] arrData)
         {
+            if (listView.Items.Count > 10000)
+            {
+                clearListViewAi(listView);
+            }
             ListViewItem listViewItem = new ListViewItem();
-            listViewItem.Text = listView.Items.Count.ToString();
+            listViewItem.Text = (DataCount++).ToString();//listView.Items.Count.ToString();
             foreach (string item in arrData)
             {
                 listViewItem.SubItems.Add(item);
