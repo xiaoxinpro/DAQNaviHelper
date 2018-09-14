@@ -117,10 +117,7 @@ namespace 丰胸仪波形测试工装
             try
             {
                 waveformAiCtrlUsb4704.SelectedDevice = new DeviceInformation("USB-4704,BID#0");
-                waveformAiCtrlUsb4704.Conversion.ClockRate = 5000;  //AD转换频率（32-47619）
-                waveformAiCtrlUsb4704.Record.SectionLength = 500;     //采样缓存区大小（保证通信间隔大于100us）
-                waveformAiCtrlUsb4704.Conversion.ChannelStart = 0;  //采样起始通道
-                waveformAiCtrlUsb4704.Conversion.ChannelCount = 8;  //采样通道数
+                SetWaveformAiCtrlUsb4704();
             }
             catch (Exception error)
             {
@@ -129,18 +126,47 @@ namespace 丰胸仪波形测试工装
                 return;
             }
 
-            Console.WriteLine("设备号：" + waveformAiCtrlUsb4704.SelectedDevice.DeviceNumber);
-            Console.WriteLine("设备描述：" + waveformAiCtrlUsb4704.SelectedDevice.Description);
-            Console.WriteLine("设备模式：" + waveformAiCtrlUsb4704.SelectedDevice.DeviceMode);
-            Console.WriteLine("设备采样频率：" + waveformAiCtrlUsb4704.Conversion.ClockRate);
-            Console.WriteLine("设备通道数：" + waveformAiCtrlUsb4704.Conversion.ChannelCount);
-
             if (!waveformAiCtrlUsb4704.Initialized)
             {
                 MessageBox.Show("Usb4704驱动不存在！", "加载失败", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
                 return;
             }
+        }
+
+        /// <summary>
+        /// 设置模拟输入配置
+        /// </summary>
+        /// <param name="clock"></param>
+        /// <param name="bufferLength"></param>
+        /// <param name="isDifferential"></param>
+        private void SetWaveformAiCtrlUsb4704(int clock = 5000, bool isDifferential = false)
+        {
+            //约束参数
+            if (clock < 50)
+            {
+                clock = 50;
+            }
+            if (clock > 5000)
+            {
+                clock = 5000;
+            }
+
+            //写入配置
+            waveformAiCtrlUsb4704.Conversion.ClockRate = clock;  //AD转换频率（32-47619）
+            waveformAiCtrlUsb4704.Record.SectionLength = 8;     //采样缓存区大小（保证通信间隔大于100us）
+            waveformAiCtrlUsb4704.Conversion.ChannelStart = 0;  //采样起始通道
+            waveformAiCtrlUsb4704.Conversion.ChannelCount = 8;  //采样通道数
+            foreach (AiChannel item in waveformAiCtrlUsb4704.Channels)
+            {
+                item.SignalType = isDifferential ? AiSignalType.Differential : AiSignalType.SingleEnded;
+            }
+
+            Console.WriteLine("设备号：" + waveformAiCtrlUsb4704.SelectedDevice.DeviceNumber);
+            Console.WriteLine("设备描述：" + waveformAiCtrlUsb4704.SelectedDevice.Description);
+            Console.WriteLine("设备模式：" + waveformAiCtrlUsb4704.SelectedDevice.DeviceMode);
+            Console.WriteLine("设备采样频率：" + waveformAiCtrlUsb4704.Conversion.ClockRate);
+            Console.WriteLine("设备通道数：" + waveformAiCtrlUsb4704.Conversion.ChannelCount);
 
             //初始化缓存空间
             int chanCount = waveformAiCtrlUsb4704.Conversion.ChannelCount;
@@ -263,10 +289,15 @@ namespace 丰胸仪波形测试工装
                 return;
             }
 
+            //写入新配置参数
+            SetWaveformAiCtrlUsb4704(Convert.ToInt32(numFrequency.Value), Convert.ToInt32(txtChannalCount.Text) == 4);
             ErrorCode err = waveformAiCtrlUsb4704.Prepare();
             if (err == ErrorCode.Success)
             {
+                //二次写入配置参数
+                SetWaveformAiCtrlUsb4704(Convert.ToInt32(numFrequency.Value), Convert.ToInt32(txtChannalCount.Text) == 4);
                 MarkTimeAi = new MarkTimeHelper("采样");
+                //启动采样
                 err = waveformAiCtrlUsb4704.Start();
             }
 
@@ -309,6 +340,7 @@ namespace 丰胸仪波形测试工装
                 Console.WriteLine("错误：" + err);
                 return;
             }
+            waveformAiCtrlUsb4704.Release();
             btnAiStart.Enabled = true;
             btnAiStop.Enabled = false;
             Common.GroupEnable(groupFunction, true);
@@ -390,6 +422,28 @@ namespace 丰胸仪波形测试工装
         {
             panelCycle.Visible = (comboCycleChannelSelect.SelectedIndex > 0);
         }
+
+        /// <summary>
+        /// 采样方式选择
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void radioConnectionType_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (radioButton.Checked)
+            {
+                if (radioButton.Tag.ToString() == "0")
+                {
+                    txtChannalCount.Text = "8";
+                }
+                else
+                {
+                    txtChannalCount.Text = "4";
+                }
+            }
+        }
+
         #endregion
 
     }
