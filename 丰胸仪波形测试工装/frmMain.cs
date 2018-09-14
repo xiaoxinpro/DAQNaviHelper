@@ -55,6 +55,8 @@ namespace 丰胸仪波形测试工装
         #region 列表操作
         private void initListViewAi(ListView listView)
         {
+            listView.Clear();
+
             //基本属性设置
             listView.FullRowSelect = true;
             listView.GridLines = true;
@@ -261,7 +263,7 @@ namespace 丰胸仪波形测试工装
         {
             if (btnAiStart.Enabled)
             {
-                listViewAi.Items.Clear();
+                initListViewAi(listViewAi);
             }
             //GC.Collect(); //强制清理内存
         }
