@@ -37,6 +37,13 @@
             this.listViewAi = new System.Windows.Forms.ListView();
             this.waveformAiCtrlUsb4704 = new Automation.BDaq.WaveformAiCtrl(this.components);
             this.groupFunction = new System.Windows.Forms.GroupBox();
+            this.panelChannelMath = new System.Windows.Forms.Panel();
+            this.btnChannelMathReset = new System.Windows.Forms.Button();
+            this.btnChannelMathSave = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtChannelMath = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.numFrequency = new System.Windows.Forms.NumericUpDown();
@@ -64,12 +71,14 @@
             this.radioFileSplit1 = new System.Windows.Forms.RadioButton();
             this.radioFileSplit2 = new System.Windows.Forms.RadioButton();
             this.label2 = new System.Windows.Forms.Label();
+            this.comboChannelMath = new System.Windows.Forms.ComboBox();
             this.comboCycleChannelSelect = new System.Windows.Forms.ComboBox();
             this.btnSelectFile = new System.Windows.Forms.Button();
             this.txtFilePath = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupFunction.SuspendLayout();
+            this.panelChannelMath.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numFrequency)).BeginInit();
             this.panelCycle.SuspendLayout();
@@ -90,9 +99,9 @@
             this.groupBox1.Controls.Add(this.btnAiStop);
             this.groupBox1.Controls.Add(this.btnAiStart);
             this.groupBox1.Controls.Add(this.listViewAi);
-            this.groupBox1.Location = new System.Drawing.Point(12, 182);
+            this.groupBox1.Location = new System.Drawing.Point(12, 175);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(740, 341);
+            this.groupBox1.Size = new System.Drawing.Size(740, 348);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "数据显示";
@@ -100,7 +109,7 @@
             // btnAiClear
             // 
             this.btnAiClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAiClear.Location = new System.Drawing.Point(6, 311);
+            this.btnAiClear.Location = new System.Drawing.Point(6, 318);
             this.btnAiClear.Name = "btnAiClear";
             this.btnAiClear.Size = new System.Drawing.Size(75, 23);
             this.btnAiClear.TabIndex = 5;
@@ -112,7 +121,7 @@
             // 
             this.btnAiStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAiStop.Enabled = false;
-            this.btnAiStop.Location = new System.Drawing.Point(656, 311);
+            this.btnAiStop.Location = new System.Drawing.Point(656, 318);
             this.btnAiStop.Name = "btnAiStop";
             this.btnAiStop.Size = new System.Drawing.Size(75, 23);
             this.btnAiStop.TabIndex = 2;
@@ -123,7 +132,7 @@
             // btnAiStart
             // 
             this.btnAiStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAiStart.Location = new System.Drawing.Point(575, 311);
+            this.btnAiStart.Location = new System.Drawing.Point(575, 318);
             this.btnAiStart.Name = "btnAiStart";
             this.btnAiStart.Size = new System.Drawing.Size(75, 23);
             this.btnAiStart.TabIndex = 1;
@@ -138,7 +147,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewAi.Location = new System.Drawing.Point(6, 20);
             this.listViewAi.Name = "listViewAi";
-            this.listViewAi.Size = new System.Drawing.Size(725, 285);
+            this.listViewAi.Size = new System.Drawing.Size(725, 292);
             this.listViewAi.TabIndex = 3;
             this.listViewAi.UseCompatibleStateImageBehavior = false;
             this.listViewAi.Resize += new System.EventHandler(this.listViewAi_Resize);
@@ -152,6 +161,8 @@
             // 
             this.groupFunction.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupFunction.Controls.Add(this.panelChannelMath);
+            this.groupFunction.Controls.Add(this.label13);
             this.groupFunction.Controls.Add(this.panel2);
             this.groupFunction.Controls.Add(this.label9);
             this.groupFunction.Controls.Add(this.label4);
@@ -159,16 +170,92 @@
             this.groupFunction.Controls.Add(this.panelFileSplit);
             this.groupFunction.Controls.Add(this.panel1);
             this.groupFunction.Controls.Add(this.label2);
+            this.groupFunction.Controls.Add(this.comboChannelMath);
             this.groupFunction.Controls.Add(this.comboCycleChannelSelect);
             this.groupFunction.Controls.Add(this.btnSelectFile);
             this.groupFunction.Controls.Add(this.txtFilePath);
             this.groupFunction.Controls.Add(this.label1);
             this.groupFunction.Location = new System.Drawing.Point(12, 12);
             this.groupFunction.Name = "groupFunction";
-            this.groupFunction.Size = new System.Drawing.Size(740, 164);
+            this.groupFunction.Size = new System.Drawing.Size(740, 157);
             this.groupFunction.TabIndex = 5;
             this.groupFunction.TabStop = false;
             this.groupFunction.Text = "功能更设置";
+            // 
+            // panelChannelMath
+            // 
+            this.panelChannelMath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelChannelMath.Controls.Add(this.btnChannelMathReset);
+            this.panelChannelMath.Controls.Add(this.btnChannelMathSave);
+            this.panelChannelMath.Controls.Add(this.label15);
+            this.panelChannelMath.Controls.Add(this.txtChannelMath);
+            this.panelChannelMath.Controls.Add(this.label14);
+            this.panelChannelMath.Location = new System.Drawing.Point(140, 121);
+            this.panelChannelMath.Name = "panelChannelMath";
+            this.panelChannelMath.Size = new System.Drawing.Size(590, 32);
+            this.panelChannelMath.TabIndex = 17;
+            this.panelChannelMath.Visible = false;
+            // 
+            // btnChannelMathReset
+            // 
+            this.btnChannelMathReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnChannelMathReset.Location = new System.Drawing.Point(532, 5);
+            this.btnChannelMathReset.Name = "btnChannelMathReset";
+            this.btnChannelMathReset.Size = new System.Drawing.Size(55, 23);
+            this.btnChannelMathReset.TabIndex = 3;
+            this.btnChannelMathReset.Text = "重置";
+            this.btnChannelMathReset.UseVisualStyleBackColor = true;
+            // 
+            // btnChannelMathSave
+            // 
+            this.btnChannelMathSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnChannelMathSave.Location = new System.Drawing.Point(471, 5);
+            this.btnChannelMathSave.Name = "btnChannelMathSave";
+            this.btnChannelMathSave.Size = new System.Drawing.Size(55, 23);
+            this.btnChannelMathSave.TabIndex = 3;
+            this.btnChannelMathSave.Text = "保存";
+            this.btnChannelMathSave.UseVisualStyleBackColor = true;
+            this.btnChannelMathSave.Click += new System.EventHandler(this.btnChannelMathSave_Click);
+            // 
+            // label15
+            // 
+            this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label15.Location = new System.Drawing.Point(323, 10);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(142, 12);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "使用c表示当前通道参数";
+            // 
+            // txtChannelMath
+            // 
+            this.txtChannelMath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtChannelMath.Location = new System.Drawing.Point(82, 7);
+            this.txtChannelMath.Name = "txtChannelMath";
+            this.txtChannelMath.Size = new System.Drawing.Size(237, 21);
+            this.txtChannelMath.TabIndex = 1;
+            this.txtChannelMath.Text = "c";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(12, 10);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(77, 12);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "运算表达式：";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(4, 131);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(65, 12);
+            this.label13.TabIndex = 16;
+            this.label13.Text = "通道运算：";
             // 
             // panel2
             // 
@@ -282,11 +369,12 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(4, 125);
+            this.label4.Location = new System.Drawing.Point(4, 225);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 13;
             this.label4.Text = "周期判定：";
+            this.label4.Visible = false;
             // 
             // panelCycle
             // 
@@ -297,7 +385,7 @@
             this.panelCycle.Controls.Add(this.label8);
             this.panelCycle.Controls.Add(this.numCycleLength);
             this.panelCycle.Controls.Add(this.label5);
-            this.panelCycle.Location = new System.Drawing.Point(140, 119);
+            this.panelCycle.Location = new System.Drawing.Point(140, 219);
             this.panelCycle.Name = "panelCycle";
             this.panelCycle.Size = new System.Drawing.Size(591, 32);
             this.panelCycle.TabIndex = 12;
@@ -424,7 +512,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(52, 9);
+            this.label3.Location = new System.Drawing.Point(52, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 7;
@@ -432,7 +520,7 @@
             // 
             // numFileSplitValue
             // 
-            this.numFileSplitValue.Location = new System.Drawing.Point(117, 7);
+            this.numFileSplitValue.Location = new System.Drawing.Point(117, 9);
             this.numFileSplitValue.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -451,7 +539,7 @@
             // labFileSplitUnit
             // 
             this.labFileSplitUnit.AutoSize = true;
-            this.labFileSplitUnit.Location = new System.Drawing.Point(244, 9);
+            this.labFileSplitUnit.Location = new System.Drawing.Point(244, 11);
             this.labFileSplitUnit.Name = "labFileSplitUnit";
             this.labFileSplitUnit.Size = new System.Drawing.Size(17, 12);
             this.labFileSplitUnit.TabIndex = 9;
@@ -471,7 +559,7 @@
             // 
             this.radioFileSplit0.AutoSize = true;
             this.radioFileSplit0.Checked = true;
-            this.radioFileSplit0.Location = new System.Drawing.Point(4, 7);
+            this.radioFileSplit0.Location = new System.Drawing.Point(4, 9);
             this.radioFileSplit0.Name = "radioFileSplit0";
             this.radioFileSplit0.Size = new System.Drawing.Size(59, 16);
             this.radioFileSplit0.TabIndex = 4;
@@ -484,7 +572,7 @@
             // radioFileSplit1
             // 
             this.radioFileSplit1.AutoSize = true;
-            this.radioFileSplit1.Location = new System.Drawing.Point(69, 7);
+            this.radioFileSplit1.Location = new System.Drawing.Point(69, 9);
             this.radioFileSplit1.Name = "radioFileSplit1";
             this.radioFileSplit1.Size = new System.Drawing.Size(107, 16);
             this.radioFileSplit1.TabIndex = 5;
@@ -496,7 +584,7 @@
             // radioFileSplit2
             // 
             this.radioFileSplit2.AutoSize = true;
-            this.radioFileSplit2.Location = new System.Drawing.Point(182, 7);
+            this.radioFileSplit2.Location = new System.Drawing.Point(182, 9);
             this.radioFileSplit2.Name = "radioFileSplit2";
             this.radioFileSplit2.Size = new System.Drawing.Size(107, 16);
             this.radioFileSplit2.TabIndex = 6;
@@ -508,15 +596,36 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(4, 94);
+            this.label2.Location = new System.Drawing.Point(4, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 3;
             this.label2.Text = "文件拆分：";
             // 
+            // comboChannelMath
+            // 
+            this.comboChannelMath.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboChannelMath.FormattingEnabled = true;
+            this.comboChannelMath.Items.AddRange(new object[] {
+            "关闭",
+            "通道0",
+            "通道1",
+            "通道2",
+            "通道3",
+            "通道4",
+            "通道5",
+            "通道6",
+            "通道7"});
+            this.comboChannelMath.Location = new System.Drawing.Point(75, 128);
+            this.comboChannelMath.Name = "comboChannelMath";
+            this.comboChannelMath.Size = new System.Drawing.Size(59, 20);
+            this.comboChannelMath.TabIndex = 0;
+            this.comboChannelMath.SelectedIndexChanged += new System.EventHandler(this.comboChannelMath_SelectedIndexChanged);
+            // 
             // comboCycleChannelSelect
             // 
             this.comboCycleChannelSelect.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboCycleChannelSelect.Enabled = false;
             this.comboCycleChannelSelect.FormattingEnabled = true;
             this.comboCycleChannelSelect.Items.AddRange(new object[] {
             "关闭",
@@ -528,10 +637,11 @@
             "通道5",
             "通道6",
             "通道7"});
-            this.comboCycleChannelSelect.Location = new System.Drawing.Point(75, 122);
+            this.comboCycleChannelSelect.Location = new System.Drawing.Point(75, 222);
             this.comboCycleChannelSelect.Name = "comboCycleChannelSelect";
             this.comboCycleChannelSelect.Size = new System.Drawing.Size(59, 20);
             this.comboCycleChannelSelect.TabIndex = 0;
+            this.comboCycleChannelSelect.Visible = false;
             this.comboCycleChannelSelect.SelectedIndexChanged += new System.EventHandler(this.comboCycleChannelSelect_SelectedIndexChanged);
             // 
             // btnSelectFile
@@ -579,6 +689,8 @@
             this.groupBox1.ResumeLayout(false);
             this.groupFunction.ResumeLayout(false);
             this.groupFunction.PerformLayout();
+            this.panelChannelMath.ResumeLayout(false);
+            this.panelChannelMath.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numFrequency)).EndInit();
@@ -636,6 +748,14 @@
         private System.Windows.Forms.RadioButton radioDifferential;
         private System.Windows.Forms.RadioButton radioSingleEnded;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panelChannelMath;
+        private System.Windows.Forms.Button btnChannelMathReset;
+        private System.Windows.Forms.Button btnChannelMathSave;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox txtChannelMath;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.ComboBox comboChannelMath;
     }
 }
 
