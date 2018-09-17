@@ -21,6 +21,7 @@ namespace 丰胸仪波形测试工装
         private OutputFile OutputFileAi;
         private Queue<double> DataQueue;
         private decimal DataCount = 0;
+        private string[] StrChannelMath;
         #endregion
 
         public frmMain()
@@ -32,7 +33,9 @@ namespace 丰胸仪波形测试工装
         {
             DataQueue = new Queue<double>();
             OutputFileAi = new OutputFile();
+            StrChannelMath = new string[] { "c", "c", "c", "c", "c", "c", "c", "c" };
 
+            comboChannelMath.SelectedIndex = 0;
             comboCycleChannelSelect.SelectedIndex = 0;
 
             initListViewAi(listViewAi);
@@ -84,8 +87,20 @@ namespace 丰胸仪波形测试工装
             //清空列表内容
             listView.Items.Clear();
             //顶部数据数据
-            addListViewItems(listViewAi, new string[] { "0", "0", "0", "0", "0", "0", "0", "0" });
-            listViewAi.Items[0].Text = "实时";
+            setListViewItem0("实时", listViewAi, new string[] { "0", "0", "0", "0", "0", "0", "0", "0" });
+        }
+
+        private void setListViewItem0(string name, ListView listView, params string[] arrData)
+        {
+            if (listView.Items.Count > 0)
+            {
+                editListViewItems(listView, 0, arrData);
+            }
+            else
+            {
+                addListViewItems(listView, arrData);
+            }
+            listViewAi.Items[0].Text = name;
         }
 
         private void addListViewItems(ListView listView, params string[] arrData)
@@ -236,7 +251,7 @@ namespace 丰胸仪波形测试工装
                     {
                         arrAvgData[i] = (arrSumData[i] / sectionLength).ToString("f4");
                     }
-                    editListViewItems(listViewAi, 0, arrAvgData);
+                    setListViewItem0("实时", listViewAi, arrAvgData);
                     listViewAi.EndUpdate();
                 }));
 
@@ -460,5 +475,51 @@ namespace 丰胸仪波形测试工装
 
         #endregion
 
+        /// <summary>
+        /// 通道运算选择框
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboChannelMath_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+            panelChannelMath.Visible = (comboBox.SelectedIndex > 0);
+            int ch = comboBox.SelectedIndex - 1;
+            if (ch >= 0 && ch <= 7)
+            {
+                setListViewItem0("表达式", listViewAi, StrChannelMath);
+                txtChannelMath.Text = StrChannelMath[ch];
+            }
+            else
+            {
+                setListViewItem0("实时", listViewAi, new string[] { "0", "0", "0", "0", "0", "0", "0", "0" });
+            }
+        }
+
+        private void btnChannelMathSave_Click(object sender, EventArgs e)
+        {
+            int ch = comboChannelMath.SelectedIndex - 1;
+            string strMath = txtChannelMath.Text;
+            if (ch >= 0 && ch <= 7)
+            {
+                string tmp = strMath.Replace("c", "1.23");
+                try
+                {
+                    string vMath = new DataTable().Compute(tmp, null).ToString();
+                    if (!double.TryParse(vMath,out double x))
+                    {
+                        throw new Exception("运算结果”" + vMath + "“不是一个数值。");
+                    }
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err.Message);
+                    MessageBox.Show(err.Message, "表达式不合法", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                StrChannelMath[ch] = strMath;
+                setListViewItem0("表达式", listViewAi, StrChannelMath);
+            }
+        }
     }
 }
