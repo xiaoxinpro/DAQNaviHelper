@@ -90,7 +90,7 @@ namespace 丰胸仪波形测试工装
 
         private void addListViewItems(ListView listView, params string[] arrData)
         {
-            if (listView.Items.Count > 10000)
+            if (listView.Items.Count > 100000)
             {
                 clearListViewAi(listView);
             }
