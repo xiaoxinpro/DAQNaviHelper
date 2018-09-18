@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAQNaviHelperDemo", "DAQNav
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "补水仪测试工装", "补水仪测试工装\补水仪测试工装.csproj", "{FB72B3E5-205F-4F03-8BB2-88F40C9BFA29}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "丰胸仪波形测试工装", "丰胸仪波形测试工装\丰胸仪波形测试工装.csproj", "{C6FB96B5-8D1A-49C5-9AB8-99EB7CB76CDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "丰胸仪波形采集工装", "丰胸仪波形测试工装\丰胸仪波形采集工装.csproj", "{C6FB96B5-8D1A-49C5-9AB8-99EB7CB76CDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

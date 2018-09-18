@@ -685,7 +685,7 @@
             this.MinimumSize = new System.Drawing.Size(780, 380);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "丰胸仪波形测试工装";
+            this.Text = "丰胸仪波形采集工装";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupFunction.ResumeLayout(false);
