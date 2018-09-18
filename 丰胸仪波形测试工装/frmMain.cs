@@ -406,7 +406,7 @@ namespace 丰胸仪波形测试工装
 
             if (err != ErrorCode.Success)
             {
-                Console.WriteLine("错误：" + err);
+                MessageBox.Show("错误：" + err);
                 return;
             }
 
@@ -444,7 +444,7 @@ namespace 丰胸仪波形测试工装
             ErrorCode err = waveformAiCtrlUsb4704.Stop();
             if (err != ErrorCode.Success)
             {
-                Console.WriteLine("错误：" + err);
+                MessageBox.Show("错误：" + err);
                 return;
             }
             waveformAiCtrlUsb4704.Release();
