@@ -607,6 +607,14 @@ namespace 丰胸仪波形测试工装
                 appConfig.SetConfig("StrChannelMath" + ch.ToString(), strMath);
             }
         }
+
+        private void label1_DoubleClick(object sender, EventArgs e)
+        {
+            if (File.Exists(txtFilePath.Text))
+            {
+                System.Diagnostics.Process.Start("Explorer", "/select," + txtFilePath.Text);
+            }
+        }
         #endregion
 
     }
