@@ -16,7 +16,7 @@ namespace 丰胸仪波形测试工装
     {
         #region 字段
         private double[] m_dataScaled;
-        //private System.Timers.Timer timerAi;
+        private AppConfig appConfig;
         private MarkTimeHelper MarkTimeAi;
         private OutputFile OutputFileAi;
         private Queue<double> DataQueue;
@@ -36,11 +36,58 @@ namespace 丰胸仪波形测试工装
             OutputFileAi = new OutputFile();
             StrChannelMath = new string[] { "c", "c", "c", "c", "c", "c", "c", "c" };
 
-            comboChannelMath.SelectedIndex = 0;
-            comboCycleChannelSelect.SelectedIndex = 0;
+            initConfig();
 
             initListViewAi(listViewAi);
             initWaveformAiCtrlUsb4704();
+        }
+
+        private void initConfig()
+        {
+            appConfig = new AppConfig();
+            //采样方式配置
+            numFrequency.Value = Convert.ToDecimal(appConfig.GetConfig("numFrequency", "1000"));
+            switch (Convert.ToInt32(appConfig.GetConfig("radioConnectionType","0")))
+            {
+                case 1:
+                    radioDifferential.Checked = true;
+                    break;
+                case 0:
+                default:
+                    radioSingleEnded.Checked = true;
+                    break;
+            }
+
+            //数据输出配置
+            txtFilePath.Text = appConfig.GetConfig("txtFilePath", "");
+
+            //文件拆分配置
+            OutputFileAi.FileSplitSize = Convert.ToDecimal(appConfig.GetConfig("FileSplitSize", OutputFileAi.FileSplitSize.ToString()));
+            OutputFileAi.FileSplitNumber = Convert.ToDecimal(appConfig.GetConfig("FileSplitNumber", OutputFileAi.FileSplitNumber.ToString()));
+            switch (Convert.ToInt32(appConfig.GetConfig("radioFileSplit", "0")))
+            {
+                case 1:
+                    radioFileSplit1.Checked = true;
+                    break;
+                case 2:
+                    radioFileSplit2.Checked = true;
+                    break;
+                case 0:
+                default:
+                    radioFileSplit0.Checked = true;
+                    break;
+            }
+
+            //通道运算配置
+            comboChannelMath.SelectedIndex = Convert.ToInt32(appConfig.GetConfig("comboChannelMath", "0"));
+            for (int i = 0; i < StrChannelMath.Length; i++)
+            {
+                StrChannelMath[i] = appConfig.GetConfig("StrChannelMath" + i.ToString(), StrChannelMath[i]);
+            }
+            txtChannelMath.Text = comboChannelMath.SelectedIndex > 0 ? StrChannelMath[comboChannelMath.SelectedIndex - 1] : "";
+
+            //周期判定配置
+            comboCycleChannelSelect.SelectedIndex = Convert.ToInt32(appConfig.GetConfig("comboCycleChannelSelect", "0"));
         }
 
         private void initError(string message, string title)
@@ -366,6 +413,10 @@ namespace 丰胸仪波形测试工装
             btnAiStart.Enabled = false;
             btnAiStop.Enabled = true;
             Common.GroupEnable(groupFunction, false);
+
+            appConfig.SetConfig("numFrequency", numFrequency.Value.ToString());
+            appConfig.SetConfig("FileSplitNumber", OutputFileAi.FileSplitNumber.ToString());
+            appConfig.SetConfig("FileSplitSize", OutputFileAi.FileSplitSize.ToString());
         }
 
         private void OpenOutputFileAi()
@@ -430,6 +481,7 @@ namespace 丰胸仪波形测试工装
             if (radioButton.Checked)
             {
                 //Console.WriteLine("单选框：" + radioButton.Tag);
+                appConfig.SetConfig("radioFileSplit", radioButton.Tag.ToString());
                 switch (radioButton.Tag.ToString())
                 {
                     case "0":
@@ -467,6 +519,7 @@ namespace 丰胸仪波形测试工装
             }
 
             txtFilePath.Text = path;
+            appConfig.SetConfig("txtFilePath", path);
         }
 
         /// <summary>
@@ -489,6 +542,7 @@ namespace 丰胸仪波形测试工装
             RadioButton radioButton = (RadioButton)sender;
             if (radioButton.Checked)
             {
+                appConfig.SetConfig("radioConnectionType", radioButton.Tag.ToString());
                 if (radioButton.Tag.ToString() == "0")
                 {
                     txtChannalCount.Text = "8";
@@ -509,6 +563,7 @@ namespace 丰胸仪波形测试工装
         {
             ComboBox comboBox = (ComboBox)sender;
             panelChannelMath.Visible = (comboBox.SelectedIndex > 0);
+            appConfig.SetConfig("comboChannelMath", comboBox.SelectedIndex.ToString());
             int ch = comboBox.SelectedIndex - 1;
             if (ch >= 0 && ch <= 7)
             {
@@ -549,6 +604,7 @@ namespace 丰胸仪波形测试工装
                 }
                 StrChannelMath[ch] = strMath;
                 setListViewItem0("表达式", listViewAi, StrChannelMath);
+                appConfig.SetConfig("StrChannelMath" + ch.ToString(), strMath);
             }
         }
         #endregion
