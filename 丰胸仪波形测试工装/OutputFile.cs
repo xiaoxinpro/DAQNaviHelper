@@ -49,8 +49,8 @@ namespace 丰胸仪波形测试工装
             //初始化属性
             Enable = false;
             FilePath = "";
-            FileSplitSize = 10000;
-            FileSplitNumber = 1000000;
+            FileSplitSize = 10240;
+            FileSplitNumber = 1020000;
             FileSplit = EnumFileSplit.None;
 
             //初始化字段
