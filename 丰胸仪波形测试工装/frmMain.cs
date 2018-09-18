@@ -24,6 +24,7 @@ namespace 丰胸仪波形测试工装
         private string[] StrChannelMath;
         #endregion
 
+        #region 初始化
         public frmMain()
         {
             InitializeComponent();
@@ -54,6 +55,7 @@ namespace 丰胸仪波形测试工装
             }
             Application.Exit();
         }
+        #endregion
 
         #region 列表操作
         private void initListViewAi(ListView listView)
@@ -141,6 +143,10 @@ namespace 丰胸仪波形测试工装
         #endregion
 
         #region USB4704
+        /// <summary>
+        /// 初始化设备驱动
+        /// </summary>
+        /// <param name="deviceNumber">驱动号</param>
         private void initWaveformAiCtrlUsb4704(int deviceNumber = 1)
         {
             try
@@ -203,6 +209,11 @@ namespace 丰胸仪波形测试工装
             m_dataScaled = new double[chanCount * sectionLength];
         }
 
+        /// <summary>
+        /// 模拟数据接收处理函数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void waveformAiCtrlUsb4704_DataReady(object sender, Automation.BDaq.BfdAiEventArgs e)
         {
             Console.WriteLine(MarkTimeAi.MarkName + " = " + MarkTimeAi.StrMarkTime());
@@ -234,6 +245,7 @@ namespace 丰胸仪波形测试工装
                 this.Invoke(new Action(() =>
                 {
                     double[] arrSumData = new double[chanCount];
+                    string[] outputData = new string[sectionLength];
                     listViewAi.BeginUpdate();
                     for (int i = 0; i < sectionLength; i++)
                     {
@@ -241,11 +253,14 @@ namespace 丰胸仪波形测试工装
                         for (int j = 0; j < chanCount; j++)
                         {
                             int cnt = i * chanCount + j;
-                            arrData[j] = m_dataScaled[cnt].ToString("f4");
-                            arrSumData[j] += m_dataScaled[cnt];
+                            double value = AiDataMathProcess(j, m_dataScaled[cnt]);
+                            arrData[j] = value.ToString("f4");
+                            arrSumData[j] += value;
                         }
                         addListViewItems(listViewAi, arrData);
+                        outputData[i] = string.Join(",", arrData);
                     }
+                    OutputFileAi.AddWriteLine(outputData);
                     string[] arrAvgData = new string[arrSumData.Length];
                     for (int i = 0; i < arrSumData.Length; i++)
                     {
@@ -254,22 +269,6 @@ namespace 丰胸仪波形测试工装
                     setListViewItem0("实时", listViewAi, arrAvgData);
                     listViewAi.EndUpdate();
                 }));
-
-                //添加到输出与数据处理
-                string[] outputData = new string[sectionLength];
-                for (int i = 0; i < sectionLength; i++)
-                {
-                    int cnt = i * chanCount + 0; //定位到指定通道
-                    //DataQueue.Enqueue(m_dataScaled[cnt]);
-                    string[] arrData = new string[chanCount];
-                    for (int j = 0; j < chanCount; j++)
-                    {
-                        cnt = i * chanCount + j;
-                        arrData[j] = m_dataScaled[cnt].ToString("f4");
-                    }
-                    outputData[i] = string.Join(",", arrData);
-                }
-                OutputFileAi.AddWriteLine(outputData);
             }
             catch (Exception error)
             {
@@ -278,12 +277,40 @@ namespace 丰胸仪波形测试工装
         }
 
         /// <summary>
-        /// 接收数据分解
+        /// 接收数据运算
         /// </summary>
-        /// <param name="arrData">接收数据数组</param>
-        private void DataProcess(double[] arrData)
+        /// <param name="arrData">基本数据数组</param>
+        private void AiDataMathProcess(ref double[] arrData)
         {
+            if (comboChannelMath.SelectedIndex > 0 && arrData.Length <= StrChannelMath.Length)
+            {
+                for (int i = 0; i < arrData.Length; i++)
+                {
+                    arrData[i] = AiDataMathProcess(i, arrData[i]);
+                }
+            }
+        }
 
+        private double AiDataMathProcess(int ch, double valData)
+        {
+            if (comboChannelMath.SelectedIndex > 0 && ch <= StrChannelMath.Length)
+            {
+                try
+                {
+                    string strMath = StrChannelMath[ch].Replace("c", valData.ToString());
+                    string strResult = new DataTable().Compute(strMath, null).ToString();
+                    return Convert.ToDouble(strResult);
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine("通道" + ch.ToString() + "运算错误：" + err.Message);
+                    return 0;
+                }
+            }
+            else
+            {
+                return valData;
+            }
         }
 
         private void btnAiClear_Click(object sender, EventArgs e)
@@ -473,8 +500,6 @@ namespace 丰胸仪波形测试工装
             }
         }
 
-        #endregion
-
         /// <summary>
         /// 通道运算选择框
         /// </summary>
@@ -496,6 +521,11 @@ namespace 丰胸仪波形测试工装
             }
         }
 
+        /// <summary>
+        /// 保存通道运算表达式按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnChannelMathSave_Click(object sender, EventArgs e)
         {
             int ch = comboChannelMath.SelectedIndex - 1;
@@ -506,7 +536,7 @@ namespace 丰胸仪波形测试工装
                 try
                 {
                     string vMath = new DataTable().Compute(tmp, null).ToString();
-                    if (!double.TryParse(vMath,out double x))
+                    if (!double.TryParse(vMath, out double x))
                     {
                         throw new Exception("运算结果”" + vMath + "“不是一个数值。");
                     }
@@ -521,5 +551,7 @@ namespace 丰胸仪波形测试工装
                 setListViewItem0("表达式", listViewAi, StrChannelMath);
             }
         }
+        #endregion
+
     }
 }
