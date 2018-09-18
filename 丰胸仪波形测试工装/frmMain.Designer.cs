@@ -223,7 +223,7 @@
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label15.Location = new System.Drawing.Point(323, 10);
+            this.label15.Location = new System.Drawing.Point(311, 10);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(142, 12);
             this.label15.TabIndex = 2;
@@ -235,7 +235,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtChannelMath.Location = new System.Drawing.Point(82, 7);
             this.txtChannelMath.Name = "txtChannelMath";
-            this.txtChannelMath.Size = new System.Drawing.Size(237, 21);
+            this.txtChannelMath.Size = new System.Drawing.Size(223, 21);
             this.txtChannelMath.TabIndex = 1;
             this.txtChannelMath.Text = "c";
             // 
@@ -274,7 +274,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(422, 6);
+            this.label12.Location = new System.Drawing.Point(429, 6);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(17, 12);
             this.label12.TabIndex = 6;
@@ -294,7 +294,7 @@
             0,
             0});
             this.numFrequency.Name = "numFrequency";
-            this.numFrequency.Size = new System.Drawing.Size(50, 21);
+            this.numFrequency.Size = new System.Drawing.Size(57, 21);
             this.numFrequency.TabIndex = 5;
             this.numFrequency.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.numFrequency.Value = new decimal(new int[] {
@@ -673,6 +673,7 @@
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
             this.label1.Text = "数据输出：";
+            this.label1.DoubleClick += new System.EventHandler(this.label1_DoubleClick);
             // 
             // frmMain
             // 
