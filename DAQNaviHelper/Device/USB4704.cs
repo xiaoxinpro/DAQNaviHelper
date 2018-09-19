@@ -189,7 +189,7 @@ namespace DAQNavi.Device
         /// </summary>
         private void InitWaveformAiCtrlUsb4704()
         {
-            waveformAiCtrlUsb4704.Conversion.ClockRate = 38400; //AD转换频率（32-47619）
+            waveformAiCtrlUsb4704.Conversion.ClockRate = 5000; //AD转换频率（32-47619）
             waveformAiCtrlUsb4704.Record.SectionLength = 512;    //采样缓存区大小（保证通信间隔大于100us）
             waveformAiCtrlUsb4704.Conversion.ChannelStart = 0;  //采样起始通道
             waveformAiCtrlUsb4704.Conversion.ChannelCount = 8;  //采样通道数
@@ -229,7 +229,7 @@ namespace DAQNavi.Device
                 }
 
                 int chanCount = waveformAiCtrlUsb4704.Conversion.ChannelCount;
-                int sectionLength = waveformAiCtrlUsb4704.Record.SectionLength;
+                int sectionLength = e.Count / chanCount;
                 ErrorCode err = waveformAiCtrlUsb4704.GetData(e.Count, arrAiData);
                 if (err == ErrorCode.WarningFuncStopped || err == ErrorCode.WarningFuncTimeout)
                 {
