@@ -206,6 +206,7 @@
             this.btnChannelMathReset.TabIndex = 3;
             this.btnChannelMathReset.Text = "重置";
             this.btnChannelMathReset.UseVisualStyleBackColor = true;
+            this.btnChannelMathReset.Click += new System.EventHandler(this.btnChannelMathReset_Click);
             // 
             // btnChannelMathSave
             // 

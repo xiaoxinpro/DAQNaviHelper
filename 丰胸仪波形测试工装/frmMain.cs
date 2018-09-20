@@ -608,6 +608,17 @@ namespace 丰胸仪波形测试工装
             }
         }
 
+        /// <summary>
+        /// 重置通道运算表达式
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnChannelMathReset_Click(object sender, EventArgs e)
+        {
+            txtChannelMath.Text = "c";
+            Common.CallOnClick(btnChannelMathSave);
+        }
+
         private void label1_DoubleClick(object sender, EventArgs e)
         {
             if (File.Exists(txtFilePath.Text))
