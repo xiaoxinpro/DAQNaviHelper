@@ -71,6 +71,9 @@ namespace 补水仪测试工装
         public frmMain()
         {
             InitializeComponent();
+
+            //版本号显示
+            this.Text += @" V" + Application.ProductVersion.ToString();
         }
 
         private void frmMain_Load(object sender, EventArgs e)
@@ -199,6 +202,15 @@ namespace 补水仪测试工装
         {
             SetProgressStatus(progressBarStatus, nowTestItem * 10);
         }
+
+        /// <summary>
+        /// 设置进度条是否完成
+        /// </summary>
+        /// <param name="isDone"></param>
+        private void SetProgressStatus(bool isDone)
+        {
+            progressBarStatus.Value = isDone ? progressBarStatus.Maximum : progressBarStatus.Minimum;
+        }
         #endregion
 
         #region 状态列表
@@ -293,6 +305,24 @@ namespace 补水仪测试工装
                 return (enumTestStatus)listView.Items[item].ImageIndex;
             }
             return enumTestStatus.Fail;
+        }
+
+        /// <summary>
+        /// 双击列表单独测试子项目
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listViewStatus_DoubleClick(object sender, EventArgs e)
+        {
+            ListView listView = (ListView)sender;
+            ListViewItem listViewItem = listView.SelectedItems[0];
+            if (listViewItem.Index >= 0)
+            {
+                Console.WriteLine("触发单独测试项目：" + listViewItem.SubItems[1].Text);
+                StopTest();
+                SetTest(listViewItem.Index);
+                StartTest();
+            }
         }
         #endregion
 
@@ -634,7 +664,6 @@ namespace 补水仪测试工装
         private void StartTest()
         {
             string strTestNumber = GetTestNumber();
-            isTestRun = true;
             timerTest.Enabled = true;
             LogHelper.LogInfo("测试开始\t测试编码：" + strTestNumber);
             labelTestNumber.Text = strTestNumber;
@@ -658,7 +687,28 @@ namespace 补水仪测试工装
         /// </summary>
         private void NextTest()
         {
-            nowTestItem++;
+            if (isTestRun)
+            {
+                SetProgressStatus(true);
+                DetectDoneLabelStatus(labelStatus, listViewStatus);
+                StopTest();
+            }
+            else
+            {
+                nowTestItem++;
+                CntTimes = 0;
+                timerTest.Interval = 400;
+            }
+        }
+
+        /// <summary>
+        /// 指定测试项目
+        /// </summary>
+        /// <param name="index"></param>
+        private void SetTest(int index)
+        {
+            isTestRun = true;
+            nowTestItem = index;
             CntTimes = 0;
             timerTest.Interval = 400;
         }

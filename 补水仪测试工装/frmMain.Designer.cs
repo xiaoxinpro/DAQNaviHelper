@@ -97,6 +97,7 @@
             this.listViewStatus.Size = new System.Drawing.Size(701, 323);
             this.listViewStatus.TabIndex = 3;
             this.listViewStatus.UseCompatibleStateImageBehavior = false;
+            this.listViewStatus.DoubleClick += new System.EventHandler(this.listViewStatus_DoubleClick);
             // 
             // imageListStatus
             // 
