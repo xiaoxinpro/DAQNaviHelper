@@ -115,7 +115,7 @@ namespace 丰胸仪测试工装
         /// </summary>
         private void InitToolTipMain(ToolTip toolTip)
         {
-            toolTip.SetToolTip(checkAutoLinkBle, "搜索到可以用蓝牙信号后自动连接");
+            toolTip.SetToolTip(checkAutoLinkBle, "搜索到可用蓝牙后自动连接");
         }
 
         /// <summary>
@@ -151,6 +151,7 @@ namespace 丰胸仪测试工装
         {
             serialBle = new SerialBle(toolComboBle, new SerialBle.DelegateBleSerialWrite(AddSerialWrite));
             serialBle.EventBleLog += OutputBleLog;
+            serialBle.IsAutoLink = checkAutoLinkBle.Checked;
         }
         #endregion
 
@@ -1386,7 +1387,7 @@ namespace 丰胸仪测试工装
                 else
                 {
                     Console.WriteLine("开启{0}端口成功。", configCom.PortName);
-                    toolBleWrite.Enabled = true;
+                    toolBleWrite.Enabled = !checkAutoLinkBle.Checked;
                     btnSerialPortSwitch.Text = "关闭";
                     //ClearListViewSerialReceviedValue();
                     AddSerialWrite("AT");
@@ -1418,6 +1419,26 @@ namespace 丰胸仪测试工装
         {
             Console.WriteLine("选择蓝牙命令：" + e.ClickedItem.Text);
             serialBle.WriteBleCmd((enumBleCmd)Convert.ToInt32(e.ClickedItem.Tag));
+        }
+
+        /// <summary>
+        /// 自动连接蓝牙开关
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkAutoLinkBle_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox checkBox = (CheckBox)sender;
+            if (checkBox.Checked)
+            {
+                toolBleWrite.Enabled = false;
+                serialBle.IsAutoLink = true;
+            }
+            else
+            {
+                toolBleWrite.Enabled = (btnSerialPortSwitch.Text == "关闭");
+                serialBle.IsAutoLink = false;
+            }
         }
         #endregion
 

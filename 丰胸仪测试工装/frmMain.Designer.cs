@@ -285,6 +285,7 @@
             this.checkAutoLinkBle.TabIndex = 11;
             this.checkAutoLinkBle.Text = "自动连接";
             this.checkAutoLinkBle.UseVisualStyleBackColor = true;
+            this.checkAutoLinkBle.CheckedChanged += new System.EventHandler(this.checkAutoLinkBle_CheckedChanged);
             // 
             // frmMain
             // 
