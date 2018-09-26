@@ -320,6 +320,7 @@ namespace 补水仪测试工装
             {
                 Console.WriteLine("触发单独测试项目：" + listViewItem.SubItems[1].Text);
                 StopTest();
+                InitIO();
                 SetTest(listViewItem.Index);
                 StartTest();
             }
