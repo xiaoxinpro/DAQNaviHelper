@@ -87,6 +87,10 @@
       <Project>{13a0effa-2164-43a6-afe0-25ba5ed8623e}</Project>
       <Name>DAQNaviHelper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SerialPortHelperLib\SerialPortHelperLib.csproj">
+      <Project>{33045ba2-c192-4a1a-8a96-31500719341b}</Project>
+      <Name>SerialPortHelperLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
