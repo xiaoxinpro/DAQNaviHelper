@@ -24,6 +24,9 @@ namespace 丰胸仪测试工装
             ComboBle = comboBox;
             DicListBle = new Dictionary<string, string>();
             DicListBleRssi = new Dictionary<string, int>();
+            DicBleBlackListConfig = new Dictionary<string, string>();
+            DicBleNameReplaceConfig = new Dictionary<string, string>();
+            DicBleNameFilterConfig = new Dictionary<string, string>();
             initTimBleWrite();
         }
 
