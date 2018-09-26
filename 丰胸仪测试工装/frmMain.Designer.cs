@@ -50,7 +50,8 @@
             this.toolBtnBleFind = new System.Windows.Forms.ToolStripButton();
             this.toolComboBle = new System.Windows.Forms.ToolStripComboBox();
             this.toolBtnBleLink = new System.Windows.Forms.ToolStripButton();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkAutoLinkBle = new System.Windows.Forms.CheckBox();
+            this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
             this.gbBleConfig.SuspendLayout();
             this.toolBleWrite.SuspendLayout();
             this.SuspendLayout();
@@ -132,7 +133,7 @@
             // 
             this.gbBleConfig.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbBleConfig.Controls.Add(this.checkBox1);
+            this.gbBleConfig.Controls.Add(this.checkAutoLinkBle);
             this.gbBleConfig.Controls.Add(this.toolBleWrite);
             this.gbBleConfig.Controls.Add(this.labelBleStatus);
             this.gbBleConfig.Controls.Add(this.btnSerialPortSwitch);
@@ -207,6 +208,7 @@
             // toolBleWrite
             // 
             this.toolBleWrite.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.toolBleWrite.Enabled = false;
             this.toolBleWrite.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.toolBleWrite.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolBleWrite.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -270,17 +272,19 @@
             this.toolBtnBleLink.Tag = "2";
             this.toolBtnBleLink.Text = "连接";
             // 
-            // checkBox1
+            // checkAutoLinkBle
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.checkBox1.Location = new System.Drawing.Point(611, 69);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(84, 24);
-            this.checkBox1.TabIndex = 11;
-            this.checkBox1.Text = "自动连接";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkAutoLinkBle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkAutoLinkBle.AutoSize = true;
+            this.checkAutoLinkBle.Checked = true;
+            this.checkAutoLinkBle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkAutoLinkBle.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.checkAutoLinkBle.Location = new System.Drawing.Point(611, 69);
+            this.checkAutoLinkBle.Name = "checkAutoLinkBle";
+            this.checkAutoLinkBle.Size = new System.Drawing.Size(84, 24);
+            this.checkAutoLinkBle.TabIndex = 11;
+            this.checkAutoLinkBle.Text = "自动连接";
+            this.checkAutoLinkBle.UseVisualStyleBackColor = true;
             // 
             // frmMain
             // 
@@ -329,7 +333,8 @@
         private System.Windows.Forms.ToolStripButton toolBtnBleFind;
         private System.Windows.Forms.ToolStripComboBox toolComboBle;
         private System.Windows.Forms.ToolStripButton toolBtnBleLink;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkAutoLinkBle;
+        private System.Windows.Forms.ToolTip toolTipMain;
     }
 }
 

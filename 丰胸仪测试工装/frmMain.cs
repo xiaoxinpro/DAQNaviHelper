@@ -98,6 +98,7 @@ namespace 丰胸仪测试工装
             InitLabelStatus(labelStatus);
             InitProgressStatus(progressBarStatus);
             InitListViewStatus(listViewStatus);
+            InitToolTipMain(toolTipMain);
 
             //初始化串口配置控件
             InitSerialBle();
@@ -107,6 +108,14 @@ namespace 丰胸仪测试工装
 
             //初始化硬件驱动
             InitUsb4704();
+        }
+
+        /// <summary>
+        /// 初始化浮动文字框
+        /// </summary>
+        private void InitToolTipMain(ToolTip toolTip)
+        {
+            toolTip.SetToolTip(checkAutoLinkBle, "搜索到可以用蓝牙信号后自动连接");
         }
 
         /// <summary>
