@@ -78,5 +78,11 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAQNaviHelper\DAQNaviHelper.csproj">
+      <Project>{13a0effa-2164-43a6-afe0-25ba5ed8623e}</Project>
+      <Name>DAQNaviHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
