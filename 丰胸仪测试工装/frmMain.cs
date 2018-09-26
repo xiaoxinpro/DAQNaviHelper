@@ -70,6 +70,9 @@ namespace 丰胸仪测试工装
         //定义AppConfig类
         private AppConfig appConfig;
 
+        //定义ConfigCom类
+        private ConfigCom configCom;
+
         //定义串口蓝牙类
         private SerialBle serialBle;
 
@@ -97,10 +100,10 @@ namespace 丰胸仪测试工装
             InitListViewStatus(listViewStatus);
 
             //初始化串口配置控件
-            initSerialBle();
+            InitSerialBle();
 
             //初始化串口助手
-            initSerialPortHelper();
+            InitSerialPortHelper();
 
             //初始化硬件驱动
             InitUsb4704();
@@ -109,16 +112,22 @@ namespace 丰胸仪测试工装
         /// <summary>
         /// 初始化串口助手
         /// </summary>
-        private void initSerialPortHelper()
+        private void InitSerialPortHelper()
         {
-            ConfigComType configCom;
+            //实例化串口配置
+            configCom = new ConfigCom(comboSerial);
             configCom.PortName = comboSerial.Text;
             configCom.BaudRate = 115200;
             configCom.DataBits = 8;
             configCom.StopBits = StopBits.One;
             configCom.Parity = Parity.None;
 
-            serialPortHelper = new SerialPortHelper(configCom);
+            //设置串口搜索默认值
+            configCom.SetSerialPortDefaultInfo("USB 串行设备"); //TI CC2540 USB CDC Serial Port
+            configCom.AddSerialPortDefaultInfo("TI CC2540 USB CDC Serial Port");
+
+            //实例化串口助手
+            serialPortHelper = new SerialPortHelper(configCom.GetConfigComData());
             serialPortHelper.BindSerialPortDataReceivedProcessEvent(new SerialPortHelper.DelegateSerialPortDataReceivedProcessEvent(SerialPortDataReceivedProcess));
             serialPortHelper.BindSerialPortErrorEvent(new SerialPortHelper.DelegateSerialPortErrorEvent(SerialPortErrorProcess));
             serialPortHelper.SerialReceviedTimeInterval = 40;
@@ -129,10 +138,10 @@ namespace 丰胸仪测试工装
         /// <summary>
         /// 初始化串口配置控件
         /// </summary>
-        private void initSerialBle()
+        private void InitSerialBle()
         {
-            //serialBle = new SerialBle(toolComboBle, new SerialBle.DelegateBleSerialWrite(AddSerialWrite));
-            //serialBle.EventBleLog += OutputBleLog;
+            serialBle = new SerialBle(toolComboBle, new SerialBle.DelegateBleSerialWrite(AddSerialWrite));
+            serialBle.EventBleLog += OutputBleLog;
         }
         #endregion
 
@@ -479,6 +488,67 @@ namespace 丰胸仪测试工装
                     }
                 }
             }));
+        }
+        #endregion
+
+        #region 串口方法
+
+        /// <summary>
+        /// 添加发送数据
+        /// </summary>
+        /// <param name="arrData">byte数组数据</param>
+        private void AddSerialWrite(byte[] arrData)
+        {
+            try
+            {
+                if (arrData.Length < 1 || !serialPortHelper.IsOpen)
+                {
+                    return;
+                }
+            }
+            catch (Exception)
+            {
+                return;
+            }
+
+            serialPortHelper.Write(arrData);
+        }
+
+        /// <summary>
+        /// 添加发送数据
+        /// </summary>
+        /// <param name="strData">字符串数据</param>
+        private void AddSerialWrite(string strData)
+        {
+            if (strData.Length > 0)
+            {
+                AddSerialWrite(SerialData.ToByteArray(strData));
+            }
+        }
+
+        /// <summary>
+        /// 添加发送数据
+        /// </summary>
+        /// <param name="arrData">数组数据</param>
+        private void AddSerialWrite(string[] arrData)
+        {
+            foreach (string item in arrData)
+            {
+                AddSerialWrite(item);
+            }
+        }
+
+        /// <summary>
+        /// 蓝牙输出时间
+        /// </summary>
+        /// <param name="strLog"></param>
+        private void OutputBleLog(string strLog)
+        {
+            Console.WriteLine("蓝牙日志：" + strLog);
+            if (labelBleStatus.Text != strLog)
+            {
+                labelBleStatus.Text = strLog;
+            }
         }
         #endregion
 
@@ -1288,6 +1358,57 @@ namespace 丰胸仪测试工装
         private void labelTestNumber_DoubleClick(object sender, EventArgs e)
         {
             LogHelper.OpenLogFilePath();
+        }
+
+        /// <summary>
+        /// 打开/关闭串口按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnSerialPortSwitch_Click(object sender, EventArgs e)
+        {
+            if (btnSerialPortSwitch.Text == "打开")
+            {
+                serialPortHelper.OpenCom(configCom.GetConfigComData(), out string strError);
+                if (strError != "null")
+                {
+                    MessageBox.Show(strError);
+                }
+                else
+                {
+                    Console.WriteLine("开启{0}端口成功。", configCom.PortName);
+                    toolBleWrite.Enabled = true;
+                    btnSerialPortSwitch.Text = "关闭";
+                    //ClearListViewSerialReceviedValue();
+                    AddSerialWrite("AT");
+                    //SaveSerialConfig(configCom.GetConfigComData());
+                }
+            }
+            else
+            {
+                serialPortHelper.CloseCom(out string strError);
+                if (strError != "null")
+                {
+                    MessageBox.Show(strError);
+                }
+                else
+                {
+                    Console.WriteLine("关闭端口成功。");
+                    toolBleWrite.Enabled = false;
+                    btnSerialPortSwitch.Text = "打开";
+                }
+            }
+        }
+
+        /// <summary>
+        /// 蓝牙命令发送
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void toolBleWrite_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            Console.WriteLine("选择蓝牙命令：" + e.ClickedItem.Text);
+            serialBle.WriteBleCmd((enumBleCmd)Convert.ToInt32(e.ClickedItem.Tag));
         }
         #endregion
 
