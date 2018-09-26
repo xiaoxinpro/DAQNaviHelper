@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.btnInitSwitch = new System.Windows.Forms.Button();
             this.labelTestNumber = new System.Windows.Forms.Label();
             this.btnTestStop = new System.Windows.Forms.Button();
@@ -35,10 +37,12 @@
             this.progressBarStatus = new System.Windows.Forms.ProgressBar();
             this.labelStatus = new System.Windows.Forms.Label();
             this.gbBleConfig = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.comboSerial = new System.Windows.Forms.ComboBox();
-            this.btnOpenSerial = new System.Windows.Forms.Button();
             this.labelBleStatus = new System.Windows.Forms.Label();
+            this.btnOpenSerial = new System.Windows.Forms.Button();
+            this.comboSerial = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.imageListStatus = new System.Windows.Forms.ImageList(this.components);
+            this.timerTest = new System.Windows.Forms.Timer(this.components);
             this.gbBleConfig.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,6 +56,7 @@
             this.btnInitSwitch.TabIndex = 6;
             this.btnInitSwitch.Text = "开启";
             this.btnInitSwitch.UseVisualStyleBackColor = true;
+            this.btnInitSwitch.Click += new System.EventHandler(this.btnInitSwitch_Click);
             // 
             // labelTestNumber
             // 
@@ -66,6 +71,7 @@
             this.labelTestNumber.TabIndex = 11;
             this.labelTestNumber.Text = "测试编码";
             this.labelTestNumber.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelTestNumber.DoubleClick += new System.EventHandler(this.labelTestNumber_DoubleClick);
             // 
             // btnTestStop
             // 
@@ -77,12 +83,14 @@
             this.btnTestStop.TabIndex = 10;
             this.btnTestStop.Text = "强制停止";
             this.btnTestStop.UseVisualStyleBackColor = true;
+            this.btnTestStop.Click += new System.EventHandler(this.btnTestStop_Click);
             // 
             // listViewStatus
             // 
             this.listViewStatus.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewStatus.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.listViewStatus.Location = new System.Drawing.Point(13, 180);
             this.listViewStatus.Name = "listViewStatus";
             this.listViewStatus.Size = new System.Drawing.Size(701, 323);
@@ -127,32 +135,6 @@
             this.gbBleConfig.TabStop = false;
             this.gbBleConfig.Text = "蓝牙配置";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 21);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "串口号：";
-            // 
-            // comboSerial
-            // 
-            this.comboSerial.FormattingEnabled = true;
-            this.comboSerial.Location = new System.Drawing.Point(72, 27);
-            this.comboSerial.Name = "comboSerial";
-            this.comboSerial.Size = new System.Drawing.Size(93, 29);
-            this.comboSerial.TabIndex = 1;
-            // 
-            // btnOpenSerial
-            // 
-            this.btnOpenSerial.Location = new System.Drawing.Point(171, 27);
-            this.btnOpenSerial.Name = "btnOpenSerial";
-            this.btnOpenSerial.Size = new System.Drawing.Size(66, 29);
-            this.btnOpenSerial.TabIndex = 2;
-            this.btnOpenSerial.Text = "打开";
-            this.btnOpenSerial.UseVisualStyleBackColor = true;
-            // 
             // labelBleStatus
             // 
             this.labelBleStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -164,6 +146,46 @@
             this.labelBleStatus.TabIndex = 3;
             this.labelBleStatus.Text = "蓝牙状态";
             this.labelBleStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnOpenSerial
+            // 
+            this.btnOpenSerial.Location = new System.Drawing.Point(171, 27);
+            this.btnOpenSerial.Name = "btnOpenSerial";
+            this.btnOpenSerial.Size = new System.Drawing.Size(66, 29);
+            this.btnOpenSerial.TabIndex = 2;
+            this.btnOpenSerial.Text = "打开";
+            this.btnOpenSerial.UseVisualStyleBackColor = true;
+            // 
+            // comboSerial
+            // 
+            this.comboSerial.FormattingEnabled = true;
+            this.comboSerial.Location = new System.Drawing.Point(72, 27);
+            this.comboSerial.Name = "comboSerial";
+            this.comboSerial.Size = new System.Drawing.Size(93, 29);
+            this.comboSerial.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 21);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "串口号：";
+            // 
+            // imageListStatus
+            // 
+            this.imageListStatus.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListStatus.ImageStream")));
+            this.imageListStatus.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListStatus.Images.SetKeyName(0, "TestTool_Status_0.png");
+            this.imageListStatus.Images.SetKeyName(1, "TestTool_Status_1.png");
+            this.imageListStatus.Images.SetKeyName(2, "TestTool_Status_2.png");
+            this.imageListStatus.Images.SetKeyName(3, "TestTool_Status_3.png");
+            this.imageListStatus.Images.SetKeyName(4, "TestTool_Status_4.png");
+            // 
+            // timerTest
+            // 
+            this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
             // 
             // frmMain
             // 
@@ -181,6 +203,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "丰胸仪测试工装";
+            this.Load += new System.EventHandler(this.frmMain_Load);
             this.gbBleConfig.ResumeLayout(false);
             this.gbBleConfig.PerformLayout();
             this.ResumeLayout(false);
@@ -200,6 +223,8 @@
         private System.Windows.Forms.ComboBox comboSerial;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelBleStatus;
+        private System.Windows.Forms.ImageList imageListStatus;
+        private System.Windows.Forms.Timer timerTest;
     }
 }
 
