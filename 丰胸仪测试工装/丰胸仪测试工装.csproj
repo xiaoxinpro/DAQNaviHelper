@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConfig.cs" />
+    <Compile Include="BreastBle.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>
