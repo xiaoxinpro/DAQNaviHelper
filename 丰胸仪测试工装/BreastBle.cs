@@ -63,10 +63,10 @@ namespace 丰胸仪测试工装
             listView.View = View.Details;
 
             //创建列表头
-            listView.Columns.Add("序号", 40, HorizontalAlignment.Center);
-            listView.Columns.Add("名称", 90, HorizontalAlignment.Center);
-            listView.Columns.Add("值", 90, HorizontalAlignment.Center);
-            listView.Columns.Add("备注", 190, HorizontalAlignment.Left);
+            listView.Columns.Add("序号", 50, HorizontalAlignment.Center);
+            listView.Columns.Add("名称", 100, HorizontalAlignment.Center);
+            listView.Columns.Add("值", 100, HorizontalAlignment.Center);
+            listView.Columns.Add("备注", 200, HorizontalAlignment.Left);
 
             //添加数据
             listView.BeginUpdate();
@@ -89,7 +89,7 @@ namespace 丰胸仪测试工装
         /// <param name="value">值</param>
         private void EditListViewSerialReceviedValue(int line, string value, bool flag = false)
         {
-            if ((ListViewSerialReceived != null) && line >= 0 && line < ListViewSerialReceived.Items.Count)
+            if (line >= 0 && line < ListViewSerialReceived.Items.Count)
             {
                 if (ListViewSerialReceived.Items[line].SubItems[2].Text != value)
                 {
