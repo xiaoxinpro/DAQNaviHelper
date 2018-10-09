@@ -37,12 +37,7 @@
             this.progressBarStatus = new System.Windows.Forms.ProgressBar();
             this.labelStatus = new System.Windows.Forms.Label();
             this.gbBleConfig = new System.Windows.Forms.GroupBox();
-            this.labelBleStatus = new System.Windows.Forms.Label();
-            this.btnSerialPortSwitch = new System.Windows.Forms.Button();
-            this.comboSerial = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.imageListStatus = new System.Windows.Forms.ImageList(this.components);
-            this.timerTest = new System.Windows.Forms.Timer(this.components);
+            this.checkAutoLinkBle = new System.Windows.Forms.CheckBox();
             this.toolBleWrite = new System.Windows.Forms.ToolStrip();
             this.toolStripLabelBle = new System.Windows.Forms.ToolStripLabel();
             this.toolBtnBleInit = new System.Windows.Forms.ToolStripButton();
@@ -50,10 +45,22 @@
             this.toolBtnBleFind = new System.Windows.Forms.ToolStripButton();
             this.toolComboBle = new System.Windows.Forms.ToolStripComboBox();
             this.toolBtnBleLink = new System.Windows.Forms.ToolStripButton();
-            this.checkAutoLinkBle = new System.Windows.Forms.CheckBox();
+            this.labelBleStatus = new System.Windows.Forms.Label();
+            this.btnSerialPortSwitch = new System.Windows.Forms.Button();
+            this.comboSerial = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.imageListStatus = new System.Windows.Forms.ImageList(this.components);
+            this.timerTest = new System.Windows.Forms.Timer(this.components);
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
+            this.tabControlListView = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.listViewReceiveData = new System.Windows.Forms.ListView();
             this.gbBleConfig.SuspendLayout();
             this.toolBleWrite.SuspendLayout();
+            this.tabControlListView.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnInitSwitch
@@ -101,9 +108,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewStatus.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.listViewStatus.Location = new System.Drawing.Point(13, 260);
+            this.listViewStatus.Location = new System.Drawing.Point(6, 6);
             this.listViewStatus.Name = "listViewStatus";
-            this.listViewStatus.Size = new System.Drawing.Size(701, 262);
+            this.listViewStatus.Size = new System.Drawing.Size(681, 224);
             this.listViewStatus.TabIndex = 9;
             this.listViewStatus.UseCompatibleStateImageBehavior = false;
             // 
@@ -147,63 +154,20 @@
             this.gbBleConfig.TabStop = false;
             this.gbBleConfig.Text = "蓝牙配置";
             // 
-            // labelBleStatus
+            // checkAutoLinkBle
             // 
-            this.labelBleStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelBleStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.labelBleStatus.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.labelBleStatus.ForeColor = System.Drawing.Color.Blue;
-            this.labelBleStatus.Location = new System.Drawing.Point(243, 27);
-            this.labelBleStatus.Name = "labelBleStatus";
-            this.labelBleStatus.Size = new System.Drawing.Size(452, 29);
-            this.labelBleStatus.TabIndex = 3;
-            this.labelBleStatus.Text = "蓝牙状态";
-            this.labelBleStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnSerialPortSwitch
-            // 
-            this.btnSerialPortSwitch.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSerialPortSwitch.Location = new System.Drawing.Point(171, 27);
-            this.btnSerialPortSwitch.Name = "btnSerialPortSwitch";
-            this.btnSerialPortSwitch.Size = new System.Drawing.Size(66, 29);
-            this.btnSerialPortSwitch.TabIndex = 2;
-            this.btnSerialPortSwitch.Text = "打开";
-            this.btnSerialPortSwitch.UseVisualStyleBackColor = true;
-            this.btnSerialPortSwitch.Click += new System.EventHandler(this.btnSerialPortSwitch_Click);
-            // 
-            // comboSerial
-            // 
-            this.comboSerial.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.comboSerial.FormattingEnabled = true;
-            this.comboSerial.Location = new System.Drawing.Point(72, 27);
-            this.comboSerial.Name = "comboSerial";
-            this.comboSerial.Size = new System.Drawing.Size(93, 28);
-            this.comboSerial.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(6, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "串口号：";
-            // 
-            // imageListStatus
-            // 
-            this.imageListStatus.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListStatus.ImageStream")));
-            this.imageListStatus.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageListStatus.Images.SetKeyName(0, "TestTool_Status_0.png");
-            this.imageListStatus.Images.SetKeyName(1, "TestTool_Status_1.png");
-            this.imageListStatus.Images.SetKeyName(2, "TestTool_Status_2.png");
-            this.imageListStatus.Images.SetKeyName(3, "TestTool_Status_3.png");
-            this.imageListStatus.Images.SetKeyName(4, "TestTool_Status_4.png");
-            // 
-            // timerTest
-            // 
-            this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
+            this.checkAutoLinkBle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkAutoLinkBle.AutoSize = true;
+            this.checkAutoLinkBle.Checked = true;
+            this.checkAutoLinkBle.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkAutoLinkBle.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.checkAutoLinkBle.Location = new System.Drawing.Point(611, 69);
+            this.checkAutoLinkBle.Name = "checkAutoLinkBle";
+            this.checkAutoLinkBle.Size = new System.Drawing.Size(84, 24);
+            this.checkAutoLinkBle.TabIndex = 11;
+            this.checkAutoLinkBle.Text = "自动连接";
+            this.checkAutoLinkBle.UseVisualStyleBackColor = true;
+            this.checkAutoLinkBle.CheckedChanged += new System.EventHandler(this.checkAutoLinkBle_CheckedChanged);
             // 
             // toolBleWrite
             // 
@@ -272,31 +236,121 @@
             this.toolBtnBleLink.Tag = "2";
             this.toolBtnBleLink.Text = "连接";
             // 
-            // checkAutoLinkBle
+            // labelBleStatus
             // 
-            this.checkAutoLinkBle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkAutoLinkBle.AutoSize = true;
-            this.checkAutoLinkBle.Checked = true;
-            this.checkAutoLinkBle.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAutoLinkBle.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.checkAutoLinkBle.Location = new System.Drawing.Point(611, 69);
-            this.checkAutoLinkBle.Name = "checkAutoLinkBle";
-            this.checkAutoLinkBle.Size = new System.Drawing.Size(84, 24);
-            this.checkAutoLinkBle.TabIndex = 11;
-            this.checkAutoLinkBle.Text = "自动连接";
-            this.checkAutoLinkBle.UseVisualStyleBackColor = true;
-            this.checkAutoLinkBle.CheckedChanged += new System.EventHandler(this.checkAutoLinkBle_CheckedChanged);
+            this.labelBleStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelBleStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelBleStatus.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelBleStatus.ForeColor = System.Drawing.Color.Blue;
+            this.labelBleStatus.Location = new System.Drawing.Point(243, 27);
+            this.labelBleStatus.Name = "labelBleStatus";
+            this.labelBleStatus.Size = new System.Drawing.Size(452, 29);
+            this.labelBleStatus.TabIndex = 3;
+            this.labelBleStatus.Text = "蓝牙状态";
+            this.labelBleStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSerialPortSwitch
+            // 
+            this.btnSerialPortSwitch.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSerialPortSwitch.Location = new System.Drawing.Point(171, 27);
+            this.btnSerialPortSwitch.Name = "btnSerialPortSwitch";
+            this.btnSerialPortSwitch.Size = new System.Drawing.Size(66, 29);
+            this.btnSerialPortSwitch.TabIndex = 2;
+            this.btnSerialPortSwitch.Text = "打开";
+            this.btnSerialPortSwitch.UseVisualStyleBackColor = true;
+            this.btnSerialPortSwitch.Click += new System.EventHandler(this.btnSerialPortSwitch_Click);
+            // 
+            // comboSerial
+            // 
+            this.comboSerial.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboSerial.FormattingEnabled = true;
+            this.comboSerial.Location = new System.Drawing.Point(72, 27);
+            this.comboSerial.Name = "comboSerial";
+            this.comboSerial.Size = new System.Drawing.Size(93, 28);
+            this.comboSerial.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(6, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "串口号：";
+            // 
+            // imageListStatus
+            // 
+            this.imageListStatus.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListStatus.ImageStream")));
+            this.imageListStatus.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListStatus.Images.SetKeyName(0, "TestTool_Status_0.png");
+            this.imageListStatus.Images.SetKeyName(1, "TestTool_Status_1.png");
+            this.imageListStatus.Images.SetKeyName(2, "TestTool_Status_2.png");
+            this.imageListStatus.Images.SetKeyName(3, "TestTool_Status_3.png");
+            this.imageListStatus.Images.SetKeyName(4, "TestTool_Status_4.png");
+            // 
+            // timerTest
+            // 
+            this.timerTest.Tick += new System.EventHandler(this.timerTest_Tick);
+            // 
+            // tabControlListView
+            // 
+            this.tabControlListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControlListView.Controls.Add(this.tabPage1);
+            this.tabControlListView.Controls.Add(this.tabPage2);
+            this.tabControlListView.Location = new System.Drawing.Point(13, 260);
+            this.tabControlListView.Name = "tabControlListView";
+            this.tabControlListView.SelectedIndex = 0;
+            this.tabControlListView.Size = new System.Drawing.Size(701, 262);
+            this.tabControlListView.TabIndex = 13;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.listViewStatus);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(693, 236);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "测试流程";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.listViewReceiveData);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(693, 236);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "数据解析";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // listViewReceiveData
+            // 
+            this.listViewReceiveData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewReceiveData.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.listViewReceiveData.Location = new System.Drawing.Point(6, 6);
+            this.listViewReceiveData.Name = "listViewReceiveData";
+            this.listViewReceiveData.Size = new System.Drawing.Size(681, 224);
+            this.listViewReceiveData.TabIndex = 0;
+            this.listViewReceiveData.UseCompatibleStateImageBehavior = false;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(726, 562);
+            this.Controls.Add(this.tabControlListView);
             this.Controls.Add(this.gbBleConfig);
             this.Controls.Add(this.btnInitSwitch);
             this.Controls.Add(this.labelTestNumber);
             this.Controls.Add(this.btnTestStop);
-            this.Controls.Add(this.listViewStatus);
             this.Controls.Add(this.progressBarStatus);
             this.Controls.Add(this.labelStatus);
             this.MinimumSize = new System.Drawing.Size(650, 450);
@@ -308,6 +362,9 @@
             this.gbBleConfig.PerformLayout();
             this.toolBleWrite.ResumeLayout(false);
             this.toolBleWrite.PerformLayout();
+            this.tabControlListView.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -336,6 +393,10 @@
         private System.Windows.Forms.ToolStripButton toolBtnBleLink;
         private System.Windows.Forms.CheckBox checkAutoLinkBle;
         private System.Windows.Forms.ToolTip toolTipMain;
+        private System.Windows.Forms.TabControl tabControlListView;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.ListView listViewReceiveData;
     }
 }
 

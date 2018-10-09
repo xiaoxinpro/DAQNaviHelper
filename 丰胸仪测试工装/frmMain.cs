@@ -78,6 +78,9 @@ namespace 丰胸仪测试工装
 
         //定义SerialPortHelper类
         private SerialPortHelper serialPortHelper;
+
+        //定义丰胸仪蓝牙类
+        private BreastBle breastBle;
         #endregion
 
         #region 初始化
@@ -105,6 +108,9 @@ namespace 丰胸仪测试工装
 
             //初始化串口助手
             InitSerialPortHelper();
+
+            //初始化丰胸仪蓝牙模块
+            InitBreastBle();
 
             //初始化硬件驱动
             InitUsb4704();
@@ -153,6 +159,17 @@ namespace 丰胸仪测试工装
             serialBle.EventBleLog += OutputBleLog;
             serialBle.IsAutoLink = checkAutoLinkBle.Checked;
         }
+
+        /// <summary>
+        /// 初始化丰胸仪蓝牙类
+        /// </summary>
+        private void InitBreastBle()
+        {
+            breastBle = new BreastBle(listViewReceiveData);
+            breastBle.EventAddCmdWrite += BreastBle_EventAddCmdWrite;
+            breastBle.EventChangeReceivedData += BreastBle_EventChangeReceivedData;
+        }
+
         #endregion
 
         #region 状态栏
@@ -487,6 +504,7 @@ namespace 丰胸仪测试工装
                 if (!SerialData.IsBytesToString(arrData))
                 {
                     Console.WriteLine("接收数据：" + SerialData.ToHexString(arrData));
+                    breastBle.BytesReceviedDataProcess(arrData);
                 }
                 else
                 {
@@ -559,6 +577,26 @@ namespace 丰胸仪测试工装
             {
                 labelBleStatus.Text = strLog;
             }
+        }
+        #endregion
+
+        #region 丰胸仪蓝牙函数
+        /// <summary>
+        /// 丰胸仪蓝牙接收数据发生改变
+        /// </summary>
+        /// <param name="arrData"></param>
+        private void BreastBle_EventChangeReceivedData(byte[] arrData)
+        {
+            //throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// 丰胸仪蓝牙发送数据
+        /// </summary>
+        /// <param name="arrData"></param>
+        private void BreastBle_EventAddCmdWrite(byte[] arrData)
+        {
+            AddSerialWrite(arrData);
         }
         #endregion
 
