@@ -9,7 +9,7 @@ namespace 丰胸仪测试工装
     public class BreastBle
     {
         #region 字段
-
+        private bool IsChangeReceiveData = false;
         #endregion
 
         #region 属性
@@ -17,10 +17,9 @@ namespace 丰胸仪测试工装
         #endregion
 
         #region 构造函数
-        public BreastBle(ListView listViewSerialReceived, DelegateAddCmdWrite eAddCmdWrite)
+        public BreastBle(ListView listViewSerialReceived)
         {
             ListViewSerialReceived = listViewSerialReceived;
-            EventAddCmdWrite += eAddCmdWrite;
             InitListViewSerialReceived(ListViewSerialReceived);
         }
         #endregion
@@ -36,6 +35,17 @@ namespace 丰胸仪测试工装
         /// 发送命令数据事件
         /// </summary>
         public event DelegateAddCmdWrite EventAddCmdWrite;
+
+        /// <summary>
+        /// 定义接收数据改变委托
+        /// </summary>
+        /// <param name="arrData"></param>
+        public delegate void DelegateChangeReceivedData(byte[] arrData);
+
+        /// <summary>
+        /// 接收数据改变事件
+        /// </summary>
+        public event DelegateChangeReceivedData EventChangeReceivedData;
         #endregion
 
         #region 串口列表函数
@@ -83,6 +93,7 @@ namespace 丰胸仪测试工装
             {
                 if (ListViewSerialReceived.Items[line].SubItems[2].Text != value)
                 {
+                    IsChangeReceiveData = true;
                     ListViewSerialReceived.Items[line].SubItems[2].Text = value;
                     ListViewSerialReceived.Items[line].BackColor = flag ? System.Drawing.Color.Red : System.Drawing.Color.White;
                 }
@@ -119,6 +130,7 @@ namespace 丰胸仪测试工装
                 if (arrData[2] == 0x00 && arrData[3] == 0x08)
                 {
                     int index = Convert.ToInt32(arrData[4]);
+                    IsChangeReceiveData = false;
                     //模式
                     string[] arrMode = { "关机", "振动模式", "电疗模式", "振动电疗模式", "综合模式" };
                     if (index < arrMode.Length)
@@ -215,6 +227,12 @@ namespace 丰胸仪测试工装
                     //发送应答位
                     byte[] buffer = { 0x52, 0x03, 0x02, 0x08, 0x00, 0x60 };
                     EventAddCmdWrite(CheckWriteData(buffer));
+
+                    //检查是否改变数据
+                    if (IsChangeReceiveData)
+                    {
+                        EventChangeReceivedData(arrData);
+                    }
                 }
             }
 
