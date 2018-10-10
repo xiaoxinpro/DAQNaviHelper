@@ -180,7 +180,7 @@
             this.groupFunction.Size = new System.Drawing.Size(740, 157);
             this.groupFunction.TabIndex = 5;
             this.groupFunction.TabStop = false;
-            this.groupFunction.Text = "功能更设置";
+            this.groupFunction.Text = "功能设置";
             // 
             // panelChannelMath
             // 
