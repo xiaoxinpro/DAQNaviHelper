@@ -14,6 +14,7 @@ namespace 丰胸仪测试工装
 
         #region 属性
         public ListView ListViewSerialReceived { get; set; }
+        public TypeReceiveData ReceiveData = new TypeReceiveData();
         #endregion
 
         #region 构造函数
@@ -136,14 +137,17 @@ namespace 丰胸仪测试工装
                     if (index < arrMode.Length)
                     {
                         EditListViewSerialReceviedValue(0, arrMode[index]);
+                        ReceiveData.Mode = (EnumReceiveDataMode)index;
                     }
                     else
                     {
                         EditListViewSerialReceviedValue(0, "未知：0x" + index.ToString("x2"));
+                        ReceiveData.Mode = EnumReceiveDataMode.Error;
                     }
 
                     //强度
                     EditListViewSerialReceviedValue(1, Convert.ToInt32(arrData[5]).ToString());
+                    ReceiveData.Value = Convert.ToInt32(arrData[5]);
 
                     //状态
                     index = Convert.ToInt32(arrData[6]);
@@ -151,15 +155,18 @@ namespace 丰胸仪测试工装
                     if (index < arrStatus.Length)
                     {
                         EditListViewSerialReceviedValue(2, arrStatus[index]);
+                        ReceiveData.Status = (EnumReceiveDataStatus)index;
                     }
                     else
                     {
                         EditListViewSerialReceviedValue(2, "未知：0x" + index.ToString("x2"));
+                        ReceiveData.Status = EnumReceiveDataStatus.Error;
                     }
 
                     //剩余时间
                     index = (arrData[7] << 8) | arrData[8];
                     EditListViewSerialReceviedValue(3, index.ToString());
+                    ReceiveData.Retime = index;
 
                     //加热
                     index = arrData[9];
@@ -169,23 +176,29 @@ namespace 丰胸仪测试工装
                     {
                         case 0x00:
                             strTmp = "关闭加热";
+                            ReceiveData.Hot = EnumReceiveDataHot.Close;
                             break;
                         case 0x10:
                             strTmp = "低档加热中";
+                            ReceiveData.Hot = EnumReceiveDataHot.HotLow;
                             break;
                         case 0x20:
                             strTmp = "高档加热中";
+                            ReceiveData.Hot = EnumReceiveDataHot.HotHigh;
                             break;
                         case 0x11:
                             strTmp = "低档加热温度到达";
+                            ReceiveData.Hot = EnumReceiveDataHot.DoneLow;
                             isFlag = true;
                             break;
                         case 0x21:
                             strTmp = "高档加热温度到达";
+                            ReceiveData.Hot = EnumReceiveDataHot.DoneHigh;
                             isFlag = true;
                             break;
                         default:
                             strTmp = "未知：0x" + index.ToString("x2");
+                            ReceiveData.Hot = EnumReceiveDataHot.Error;
                             break;
                     }
                     EditListViewSerialReceviedValue(4, strTmp, isFlag);
@@ -196,30 +209,39 @@ namespace 丰胸仪测试工装
                     {
                         case 0x00:
                             strTmp = "无电量";
+                            ReceiveData.Power = EnumReceiveDataPower.Void;
                             break;
                         case 0x01:
                             strTmp = "20%电量";
+                            ReceiveData.Power = EnumReceiveDataPower.Gear1;
                             break;
                         case 0x02:
                             strTmp = "40%电量";
+                            ReceiveData.Power = EnumReceiveDataPower.Gear2;
                             break;
                         case 0x03:
                             strTmp = "60%电量";
+                            ReceiveData.Power = EnumReceiveDataPower.Gear3;
                             break;
                         case 0x04:
                             strTmp = "80%电量";
+                            ReceiveData.Power = EnumReceiveDataPower.Gear4;
                             break;
                         case 0x05:
                             strTmp = "100%电量";
+                            ReceiveData.Power = EnumReceiveDataPower.Gear5;
                             break;
                         case 0x06:
                             strTmp = "充电中";
+                            ReceiveData.Power = EnumReceiveDataPower.Charging;
                             break;
                         case 0x07:
                             strTmp = "充电完成";
+                            ReceiveData.Power = EnumReceiveDataPower.ChargeDone;
                             break;
                         default:
                             strTmp = "未知:0x" + index.ToString("X2");
+                            ReceiveData.Power = EnumReceiveDataPower.Error;
                             break;
                     }
                     EditListViewSerialReceviedValue(5, strTmp);
@@ -236,6 +258,61 @@ namespace 丰胸仪测试工装
                 }
             }
 
+        }
+
+        /// <summary>
+        /// 数据发送函数
+        /// </summary>
+        public void WriteCmd(EnumCmdWrite enumCmdWrite)
+        {
+            byte[] buffer = { 0x52, 0x03, 0x01, 0x01, 0x00, 0x58 };
+            switch (enumCmdWrite)
+            {
+                case EnumCmdWrite.OpenFan:
+                    //开启振动
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Cmd)] = 0x01;
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Data)] = 0x01;
+                    EventAddCmdWrite(CheckWriteData(buffer));
+                    break;
+                case EnumCmdWrite.OpenElect:
+                    //开启电疗
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Cmd)] = 0x02;
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Data)] = 10;
+                    EventAddCmdWrite(CheckWriteData(buffer));
+                    break;
+                case EnumCmdWrite.OpenFanAndElect:
+                    //开启综合
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Cmd)] = 0x03;
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Data)] = 10;
+                    EventAddCmdWrite(CheckWriteData(buffer));
+                    break;
+                case EnumCmdWrite.OpenHotHigh:
+                    //开启加热
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Cmd)] = 0x05;
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Data)] = 0x02;
+                    EventAddCmdWrite(CheckWriteData(buffer));
+                    break;
+                case EnumCmdWrite.OpenHotLow:
+                    //开启加热
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Cmd)] = 0x05;
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Data)] = 0x01;
+                    EventAddCmdWrite(CheckWriteData(buffer));
+                    break;
+                case EnumCmdWrite.CloseHot:
+                    //关闭加热
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Cmd)] = 0x05;
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Data)] = 0x00;
+                    EventAddCmdWrite(CheckWriteData(buffer));
+                    break;
+                case EnumCmdWrite.Stop:
+                    //停止
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Cmd)] = 0x07;
+                    buffer[Convert.ToInt32(enumSerialWriteFormat.Data)] = 0x00;
+                    EventAddCmdWrite(CheckWriteData(buffer));
+                    break;
+                default:
+                    break;
+            }
         }
         #endregion
 
@@ -285,4 +362,92 @@ namespace 丰胸仪测试工装
         }
         #endregion
     }
+
+    #region 枚举
+    /// <summary>
+    /// 串口帧定义
+    /// </summary>
+    public enum enumSerialWriteFormat
+    {
+        Start = 0,  //起始字节
+        Flag = 1,   //标记字节
+        Type = 2,   //类型字节
+        Cmd = 3,    //命令字节
+        Data = 4,   //数据字节
+        Check = 5   //校验字节
+    }
+
+    /// <summary>
+    /// 发送命令类型
+    /// </summary>
+    public enum EnumCmdWrite
+    {
+        OpenFan,
+        OpenElect,
+        OpenFanAndElect,
+        OpenHotHigh,
+        OpenHotLow,
+        CloseHot,
+        Stop,
+    }
+
+    //"关机", "振动模式", "电疗模式", "振动电疗模式", "综合模式"
+    public enum EnumReceiveDataMode
+    {
+        OFF,
+        Fan,
+        Elect,
+        FanAndElect,
+        ALL,
+        Error
+    }
+
+    //"停止", "运行", "暂停"
+    public enum EnumReceiveDataStatus
+    {
+        Stop,
+        Run,
+        Pause,
+        Error
+    }
+
+    //加热
+    public enum EnumReceiveDataHot
+    {
+        Close,
+        HotLow,
+        HotHigh,
+        DoneLow,
+        DoneHigh,
+        Error
+    }
+
+    //电量
+    public enum EnumReceiveDataPower
+    {
+        Void,
+        Gear1,
+        Gear2,
+        Gear3,
+        Gear4,
+        Gear5,
+        Charging,
+        ChargeDone,
+        Error
+    }
+
+    #endregion
+
+    #region 结构体
+    public struct TypeReceiveData
+    {
+        public EnumReceiveDataMode Mode;
+        public int Value;
+        public EnumReceiveDataStatus Status;
+        public int Retime;
+        public EnumReceiveDataHot Hot;
+        public EnumReceiveDataPower Power;
+    }
+    #endregion
+
 }
