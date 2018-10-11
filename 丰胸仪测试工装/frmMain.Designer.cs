@@ -68,7 +68,7 @@
             this.btnInitSwitch.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnInitSwitch.Location = new System.Drawing.Point(13, 108);
             this.btnInitSwitch.Name = "btnInitSwitch";
-            this.btnInitSwitch.Size = new System.Drawing.Size(165, 57);
+            this.btnInitSwitch.Size = new System.Drawing.Size(237, 57);
             this.btnInitSwitch.TabIndex = 6;
             this.btnInitSwitch.Text = "开启";
             this.btnInitSwitch.UseVisualStyleBackColor = true;
@@ -94,9 +94,9 @@
             this.btnTestStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTestStop.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btnTestStop.Location = new System.Drawing.Point(184, 108);
+            this.btnTestStop.Location = new System.Drawing.Point(256, 108);
             this.btnTestStop.Name = "btnTestStop";
-            this.btnTestStop.Size = new System.Drawing.Size(530, 57);
+            this.btnTestStop.Size = new System.Drawing.Size(458, 57);
             this.btnTestStop.TabIndex = 10;
             this.btnTestStop.Text = "强制停止";
             this.btnTestStop.UseVisualStyleBackColor = true;
