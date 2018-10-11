@@ -588,6 +588,14 @@ namespace 丰胸仪测试工装
         private void BreastBle_EventChangeReceivedData(byte[] arrData)
         {
             //throw new NotImplementedException();
+            //if (breastBle.ReceiveData.Mode == EnumReceiveDataMode.OFF)
+            //{
+            //    breastBle.WriteCmd(EnumCmdWrite.OpenFan);
+            //}
+            //else if (breastBle.ReceiveData.Mode == EnumReceiveDataMode.Fan)
+            //{
+            //    breastBle.WriteCmd(EnumCmdWrite.Stop);
+            //}
         }
 
         /// <summary>
@@ -1379,6 +1387,16 @@ namespace 丰胸仪测试工装
         /// <param name="e"></param>
         private void btnInitSwitch_Click(object sender, EventArgs e)
         {
+            if (serialPortHelper.IsOpen == false)
+            {
+                MessageBox.Show("请先开启蓝牙串口并连接丰胸仪蓝牙。", "无法开启", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (serialBle.SerialBleStatus != enumBleStatus.Run)
+            {
+                MessageBox.Show("请先连接丰胸仪蓝牙。", "无法开启", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             InitTest();
             btnInitSwitch.Enabled = false;
         }
@@ -1441,6 +1459,7 @@ namespace 丰胸仪测试工装
                 }
                 else
                 {
+                    OutputBleLog("蓝牙串口已关闭");
                     Console.WriteLine("关闭端口成功。");
                     toolBleWrite.Enabled = false;
                     btnSerialPortSwitch.Text = "打开";
@@ -1471,6 +1490,10 @@ namespace 丰胸仪测试工装
             {
                 toolBleWrite.Enabled = false;
                 serialBle.IsAutoLink = true;
+                if (serialPortHelper.IsOpen && serialBle.SerialBleStatus != enumBleStatus.Run && serialBle.SerialBleStatus != enumBleStatus.Link)
+                {
+                    serialBle.WriteBleCmd(enumBleCmd.Find);
+                }
             }
             else
             {
