@@ -122,6 +122,10 @@ namespace 丰胸仪测试工装
         private void InitToolTipMain(ToolTip toolTip)
         {
             toolTip.SetToolTip(checkAutoLinkBle, "搜索到可用蓝牙后自动连接");
+            toolTip.SetToolTip(btnSerialPortSwitch, "打开蓝牙模块串口");
+            toolTip.SetToolTip(comboSerial, "选择蓝牙模块串口号");
+            toolTip.SetToolTip(labelBleStatus, "蓝牙状态指示栏");
+            toolTip.SetToolTip(labelTestNumber, "双击打开测试日志目录");
         }
 
         /// <summary>
@@ -1502,7 +1506,6 @@ namespace 丰胸仪测试工装
             }
         }
         #endregion
-
     }
     #region 枚举类型
     /// <summary>
