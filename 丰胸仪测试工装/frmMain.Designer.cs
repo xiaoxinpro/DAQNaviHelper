@@ -68,7 +68,7 @@
             this.btnInitSwitch.Font = new System.Drawing.Font("微软雅黑", 16F);
             this.btnInitSwitch.Location = new System.Drawing.Point(13, 108);
             this.btnInitSwitch.Name = "btnInitSwitch";
-            this.btnInitSwitch.Size = new System.Drawing.Size(237, 57);
+            this.btnInitSwitch.Size = new System.Drawing.Size(214, 57);
             this.btnInitSwitch.TabIndex = 6;
             this.btnInitSwitch.Text = "开启";
             this.btnInitSwitch.UseVisualStyleBackColor = true;
@@ -94,9 +94,9 @@
             this.btnTestStop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btnTestStop.Font = new System.Drawing.Font("微软雅黑", 16F);
-            this.btnTestStop.Location = new System.Drawing.Point(256, 108);
+            this.btnTestStop.Location = new System.Drawing.Point(233, 108);
             this.btnTestStop.Name = "btnTestStop";
-            this.btnTestStop.Size = new System.Drawing.Size(458, 57);
+            this.btnTestStop.Size = new System.Drawing.Size(481, 57);
             this.btnTestStop.TabIndex = 10;
             this.btnTestStop.Text = "强制停止";
             this.btnTestStop.UseVisualStyleBackColor = true;
@@ -243,9 +243,9 @@
             this.labelBleStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.labelBleStatus.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelBleStatus.ForeColor = System.Drawing.Color.Blue;
-            this.labelBleStatus.Location = new System.Drawing.Point(243, 27);
+            this.labelBleStatus.Location = new System.Drawing.Point(220, 27);
             this.labelBleStatus.Name = "labelBleStatus";
-            this.labelBleStatus.Size = new System.Drawing.Size(452, 29);
+            this.labelBleStatus.Size = new System.Drawing.Size(475, 29);
             this.labelBleStatus.TabIndex = 3;
             this.labelBleStatus.Text = "蓝牙状态";
             this.labelBleStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -253,7 +253,7 @@
             // btnSerialPortSwitch
             // 
             this.btnSerialPortSwitch.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSerialPortSwitch.Location = new System.Drawing.Point(171, 27);
+            this.btnSerialPortSwitch.Location = new System.Drawing.Point(148, 27);
             this.btnSerialPortSwitch.Name = "btnSerialPortSwitch";
             this.btnSerialPortSwitch.Size = new System.Drawing.Size(66, 29);
             this.btnSerialPortSwitch.TabIndex = 2;
@@ -267,7 +267,7 @@
             this.comboSerial.FormattingEnabled = true;
             this.comboSerial.Location = new System.Drawing.Point(72, 27);
             this.comboSerial.Name = "comboSerial";
-            this.comboSerial.Size = new System.Drawing.Size(93, 28);
+            this.comboSerial.Size = new System.Drawing.Size(70, 28);
             this.comboSerial.TabIndex = 1;
             // 
             // label1
