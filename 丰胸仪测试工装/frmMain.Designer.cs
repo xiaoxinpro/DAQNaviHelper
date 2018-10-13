@@ -56,6 +56,7 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.listViewReceiveData = new System.Windows.Forms.ListView();
+            this.checkAutoOpenTest = new System.Windows.Forms.CheckBox();
             this.gbBleConfig.SuspendLayout();
             this.toolBleWrite.SuspendLayout();
             this.tabControlListView.SuspendLayout();
@@ -140,6 +141,7 @@
             // 
             this.gbBleConfig.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbBleConfig.Controls.Add(this.checkAutoOpenTest);
             this.gbBleConfig.Controls.Add(this.checkAutoLinkBle);
             this.gbBleConfig.Controls.Add(this.toolBleWrite);
             this.gbBleConfig.Controls.Add(this.labelBleStatus);
@@ -161,7 +163,7 @@
             this.checkAutoLinkBle.Checked = true;
             this.checkAutoLinkBle.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkAutoLinkBle.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            this.checkAutoLinkBle.Location = new System.Drawing.Point(611, 69);
+            this.checkAutoLinkBle.Location = new System.Drawing.Point(521, 29);
             this.checkAutoLinkBle.Name = "checkAutoLinkBle";
             this.checkAutoLinkBle.Size = new System.Drawing.Size(84, 24);
             this.checkAutoLinkBle.TabIndex = 11;
@@ -245,7 +247,7 @@
             this.labelBleStatus.ForeColor = System.Drawing.Color.Blue;
             this.labelBleStatus.Location = new System.Drawing.Point(220, 27);
             this.labelBleStatus.Name = "labelBleStatus";
-            this.labelBleStatus.Size = new System.Drawing.Size(475, 29);
+            this.labelBleStatus.Size = new System.Drawing.Size(295, 29);
             this.labelBleStatus.TabIndex = 3;
             this.labelBleStatus.Text = "蓝牙状态";
             this.labelBleStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -341,6 +343,21 @@
             this.listViewReceiveData.TabIndex = 0;
             this.listViewReceiveData.UseCompatibleStateImageBehavior = false;
             // 
+            // checkAutoOpenTest
+            // 
+            this.checkAutoOpenTest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkAutoOpenTest.AutoSize = true;
+            this.checkAutoOpenTest.Checked = true;
+            this.checkAutoOpenTest.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkAutoOpenTest.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            this.checkAutoOpenTest.Location = new System.Drawing.Point(611, 29);
+            this.checkAutoOpenTest.Name = "checkAutoOpenTest";
+            this.checkAutoOpenTest.Size = new System.Drawing.Size(84, 24);
+            this.checkAutoOpenTest.TabIndex = 11;
+            this.checkAutoOpenTest.Text = "自动测试";
+            this.checkAutoOpenTest.UseVisualStyleBackColor = true;
+            this.checkAutoOpenTest.CheckedChanged += new System.EventHandler(this.checkAutoLinkBle_CheckedChanged);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -397,6 +414,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ListView listViewReceiveData;
+        private System.Windows.Forms.CheckBox checkAutoOpenTest;
     }
 }
 
