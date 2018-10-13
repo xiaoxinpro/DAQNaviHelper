@@ -509,6 +509,7 @@ namespace 丰胸仪测试工装
                 {
                     Console.WriteLine("接收数据：" + SerialData.ToHexString(arrData));
                     breastBle.BytesReceviedDataProcess(arrData);
+                    OutputBleLog("蓝牙连接成功");
                 }
                 else
                 {
