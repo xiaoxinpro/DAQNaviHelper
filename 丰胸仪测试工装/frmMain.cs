@@ -576,10 +576,17 @@ namespace 丰胸仪测试工装
         /// <param name="strLog"></param>
         private void OutputBleLog(string strLog)
         {
-            Console.WriteLine("蓝牙日志：" + strLog);
             if (labelBleStatus.Text != strLog)
             {
+                Console.WriteLine("蓝牙日志：" + strLog);
                 labelBleStatus.Text = strLog;
+                if(strLog == "连接蓝牙成功" && checkAutoOpenTest.Checked)
+                {
+                    if (btnInitSwitch.Enabled)
+                    {
+                        Common.CallOnClick(btnInitSwitch);
+                    }
+                }
             }
         }
         #endregion
